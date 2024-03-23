@@ -10,7 +10,7 @@
 *Plugin Name: Ms-Org Template
 *Plugin URI: http://vtupress.com
 *Description: This add Ms-Org template into your vtu website
-*Version: 1.6.5
+*Version: 1.6.6
 *Author: Akor Victor
 *Author URI: https://facebook.com/vtupressceo
 Requires PHP: 7.4
@@ -47,7 +47,7 @@ require __DIR__.'/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://github.com/bikendi-tech-solutions-ceo/msorg_template',
+	'https://github.com/bikendi-tech-solutions/msorg_template',
 	__FILE__,
 	'msorg_template'
 );
