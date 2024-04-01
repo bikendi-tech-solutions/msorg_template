@@ -77,7 +77,7 @@ else{
             }
         break;
         case"bvn":
-            if( vp_option_array($option_array,"setbvn") == "checked" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+            if( vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
                 echo "<div class='container'>";
                 include_once(__DIR__."/sections/bvn.php");
                 echo "</div>";

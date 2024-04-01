@@ -1,12 +1,8 @@
 <?php
-if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array,"setbvn") == "checked" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
 			echo'
 			<!-- bvn -->
-<div class="mb-2 row" style="height:fit-content;">
-       <span style="float:left;" class="col"> Wallet: '.$bal.'</span>
-<span style="float:right;" class="col"><a href="?vend=wallet" style="text-decoration:none; float:right;" class="white btn-primary btn-sm">Fund Wallet</a></span>
 
-</div>
 		<div class="user-vends">
 ';
 ?>
@@ -30,21 +26,21 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                 <input id="vvalue" class="value form-control" type="number" placeholder="Please enter value"/>
 
             <label for="amount">Charge</label>
-                <input id="amount" class="form-control" readonly>
+                <input id="amount" class="form-control" type="number" readonly>
 
-            <button class="btn vverify p-2 text-xs font-bold text-white uppercase bg-gray-600 rounded shadow data-proceed-cancled btn-danger">Verify</button>
+            <button class="btn vverify p-2 text-xs font-bold text-white uppercase bg-gray-600 rounded shadow data-proceed-cancled btn-success">Verify</button>
 
             <script>
                 jQuery("#vtype").on("change",function(){
                     var amt = jQuery("#amount");
-                    var type = jQuery("#.vtype").val();
+                    var type = jQuery("#vtype").val();
 
                     switch(type){
                         case"bvn":
-                            amt.val(parseInt("<?php echo vp_getoption('bvn_verification_charge');?>"));
+                            amt.val(parseInt("<?php echo vp_getoption('u_bvn_verification_charge');?>"));
                             break;
                         case"nin":
-                            amt.val(parseInt("<?php echo vp_getoption('nin_verification_charge');?>"));
+                            amt.val(parseInt("<?php echo vp_getoption('u_nin_verification_charge');?>"));
                             break;
                         default:
                             amt.val(0);
@@ -73,12 +69,101 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                             url:"<?php echo plugins_url('vtupress');?>/bvn_verification.php",
                             method:"POST",
                             data:obj,
+                            error: function (jqXHR, exception) {
+                                    jQuery.LoadingOverlay("hide");
+                                        var msg = "";
+                                        if (jqXHR.status === 0) {
+                                            msg = "No Connection.\n Verify Network.";
+                                    swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                
+                                        } else if (jqXHR.status == 404) {
+                                            msg = "Requested page not found. [404]";
+                                            swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        } else if (jqXHR.status == 500) {
+                                            msg = "Internal Server Error [500].";
+                                            swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        } else if (exception === "parsererror") {
+                                            msg = "Requested JSON parse failed.";
+                                            swal({
+                                title: msg,
+                                text: jqXHR.responseText,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        } else if (exception === "timeout") {
+                                            msg = "Time out error.";
+                                            swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        } else if (exception === "abort") {
+                                            msg = "Ajax request aborted.";
+                                            swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        } else {
+                                            msg = "Uncaught Error.\n" + jqXHR.responseText;
+                                            swal({
+                                title: "Error!",
+                                text: msg,
+                                icon: "error",
+                                button: "Okay",
+                                }).then((value) => {
+                                    location.reload();
+                                }); 
+                                        }
+                                    },
+                                
                             success:function(data){
                                 jQuery.LoadingOverlay("hide");
                                 if(data == "success"){
-
+                                    swal({
+                                    title: "Verification Successful!",
+                                    text: "Please check history for verification information!",
+                                    icon: "success",
+                                    button: "Okay",
+                                    }).then((value) => {
+                                        location.reload();
+                                    });
                                 }else{
-                                    
+                                    swal({
+                                    title: "Verification Failed!",
+                                    text: data,
+                                    icon: "danger",
+                                    button: "Okay",
+                                    });
                                 }
                             }
                         });

@@ -168,12 +168,12 @@ if(is_plugin_active("vpsms/vpsms.php") && vp_option_array($option_array,"smscont
     </li>
 <?php
 }
-if( vp_option_array($option_array,"setbvn") == "checked" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+if( vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
     ?>
     <li class="nav-item <?php make_active("bvn");?>">
         
         <a href="?vend=bvn">
-        <i class="fas fa-sms"></i>
+        <i class="fas fa-search"></i>
             <p>Bvn/Nin Verification</p>
         </a>
     </li>
@@ -263,11 +263,18 @@ if(vp_option_array($option_array,"setcable") == "checked"){
                 <?php
 }
 if(vp_option_array($option_array,"setbill") == "checked"){
-               ?>
-                <li>
-                    <a href="?vend=history&for=transactions&type=bill"> <span class="sub-item">Utilities</span> </a>
-                </li>
-                <?php
+    ?>
+     <li>
+         <a href="?vend=history&for=transactions&type=bill"> <span class="sub-item">Utilities</span> </a>
+     </li>
+     <?php
+}
+if(vp_option_array($option_array,"setbvn") == "yes"){
+    ?>
+     <li>
+         <a href="?vend=history&for=transactions&type=verification"> <span class="sub-item">Verification</span> </a>
+     </li>
+     <?php
 }
 if(is_plugin_active("vpepin/vpepin.php") && vp_option_array($option_array,"epinscontrol") == "checked" && vp_option_array($option_array,"resell") == "yes"){ 
                 ?>

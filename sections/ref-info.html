@@ -50,7 +50,7 @@ $total_uplines = $total_up;
 <div class="container">
 <div class="row mb-2 ">
 <div class="col overflow-auto">
-<h2 class="font-bold">Bonus Percentage Level You Will Get If Your Referee Upgrades To Any Of These Levels</h2>
+<h2 class="font-bold">Commission Level You Will Get If Your Referee Upgrades To Any Of These Levels</h2>
 <br>
 <table class="table table-responsive table-stripped ">
 <thead>
@@ -80,14 +80,14 @@ echo"<tr>
 ";
 for($lev = 1; $lev <= $total_uplines; $lev++){
 if($lev == 1){
-$you = $this_level->{"level_".$lev."_upgrade"};
+$you = intval($this_level->{"level_".$lev."_upgrade"});
 echo"
-<td>$you%</td>
+<td>₦$you</td>
 ";
 }
 else{
-$upline = isset($this_level->{"level_".$lev."_upgrade"}) ? $upline = $this_level->{"level_".$lev."_upgrade"} :  $upline = "";
- echo"<td>$upline% </td>";
+$upline = isset($this_level->{"level_".$lev."_upgrade"}) ? intval($this_level->{"level_".$lev."_upgrade"}) :  $upline = "0";
+ echo"<td>₦$upline</td>";
 }
 
 
@@ -106,7 +106,7 @@ echo"</tr>";
 
 <div class="row mt-5">
 <div class="col overflow-auto">
-<h2 class="font-bold">Bonus Percentage Level You Will Get If Your Referee Performs Any Transaction</h2>
+<h2 class="font-bold">Max. Bonus Percentage Level You Will Get If Your Referee Performs Any Transaction</h2>
 <br>
 <table class="table table-responsive table-stripped">
 <thead>
@@ -138,13 +138,23 @@ echo"<tr>
 ";
 for($lev = 1; $lev <= $total_uplines; $lev++){
 if($lev == 1){
-$you = $this_level->{"level_".$lev};
+$arr = [$this_level->{"level_".$lev},$this_level->{"level_".$lev."_data"},$this_level->{"level_".$lev."_cable"},$this_level->{"level_".$lev."_bill"}];
+
+$you = floatval(max($arr));
+
 echo"
 <td>$you%</td>
 ";
 }
 else{
-$upline = isset($this_level->{"level_".$lev}) ? $upline = $this_level->{"level_".$lev} :  $upline =  "";
+
+	if(isset($this_level->{"level_".$lev})){
+		$arr = [$this_level->{"level_".$lev},$this_level->{"level_".$lev."_data"},$this_level->{"level_".$lev."_cable"},$this_level->{"level_".$lev."_bill"}];	
+	}
+	else{
+
+	}
+$upline = floatval(max($arr));
  echo"<td>$upline% </td>";
 }
 
