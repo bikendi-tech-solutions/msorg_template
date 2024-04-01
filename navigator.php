@@ -168,6 +168,17 @@ if(is_plugin_active("vpsms/vpsms.php") && vp_option_array($option_array,"smscont
     </li>
 <?php
 }
+if( vp_option_array($option_array,"setbvn") == "checked" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+    ?>
+    <li class="nav-item <?php make_active("bvn");?>">
+        
+        <a href="?vend=bvn">
+        <i class="fas fa-sms"></i>
+            <p>Bvn/Nin Verification</p>
+        </a>
+    </li>
+<?php
+}
 
 
 if(is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes" && (vp_option_array($option_array,"allow_crypto") == "yes" || vp_option_array($option_array,"allow_cards") == "yes")){

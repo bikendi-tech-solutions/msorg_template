@@ -76,6 +76,13 @@ else{
             echo "</div>";
             }
         break;
+        case"bvn":
+            if( vp_option_array($option_array,"setbvn") == "checked" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+                echo "<div class='container'>";
+                include_once(__DIR__."/sections/bvn.php");
+                echo "</div>";
+            }
+        break;
         case"wallet":
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
