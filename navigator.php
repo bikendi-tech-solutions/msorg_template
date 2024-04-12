@@ -522,12 +522,19 @@ if( vp_getoption('enablevpay') == "yes" ){
                     </li>
 <?php
 }
+if( vp_getoption('enable_ncwallet') == "yes" ){
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="ncwallet"> <span class="sub-item">Generate Ncwallet Africa</span> </a>
+                        </li>
+    <?php
+}
 if( vp_getoption('enable_monnify') == "yes" ){
-?>
-                    <li>
-                        <a href="#" class="generate_account" for="monnify"> <span class="sub-item">Generate Monnify</span> </a>
-                    </li>
-<?php
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="monnify"> <span class="sub-item">Generate Monnify</span> </a>
+                        </li>
+    <?php
 }
 ?>
 <?php

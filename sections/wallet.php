@@ -67,7 +67,7 @@ $user_email = get_userdata($id)->user_email;
 
 $bvn = vp_getuser($id,"myBvn",true);
 $nin = vp_getuser($id,"myNin",true);
-if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
+if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
 
   
   if(vp_getoption("charge_method") == "fixed"){
@@ -263,17 +263,46 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 
                   <?php } 
-                  if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){
+                      if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){
                     
-                                  $vpay = "Vpay / Vfd";
-                                  $vpayAccountName = vp_getuser($id,"vpayAccountName");
-                                  $vpayAccountNumber = vp_getuser($id,"vpayAccountNumber");
+                                      $vpay = "Vpay / Vfd";
+                                      $vpayAccountName = vp_getuser($id,"vpayAccountName");
+                                      $vpayAccountNumber = vp_getuser($id,"vpayAccountNumber");
+    
+                                      if(vp_getoption("vpay_charge_method") == "fixed"){
+                                        $vpay_chargef =  "₦".floatval(vp_getoption("vpay_charge_back"));
+                                        }
+                                        else{
+                                         $vpay_chargef =  floatval(vp_getoption("vpay_charge_back"))."%";
+                                        }
+                      ?>
+                                      
+                  
+                                    <li class="nav-item">
+                                      <a
+                                        class="nav-link <?php echo banksbtn();?>"
+                                        data-bs-toggle="tab"
+                                        href="#vpay"
+                                        role="tab"
+                                        ><span class="hidden-sm-up"></span>
+                                        <span class="hidden-xs-down"><?php echo $vpay;?></span></a
+                                      >
+                                    </li>
+                  
+                  
+                  
+                    <?php } 
+                  if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
+                    
+                                  $ncwallet = "Safehaven";
+                                  $ncwallet_accountname = vp_getuser($id,"ncwallet_accountname");
+                                  $ncwallet_accountnumber = vp_getuser($id,"ncwallet_accountnumber");
 
-                                  if(vp_getoption("vpay_charge_method") == "fixed"){
-                                    $vpay_chargef =  "₦".floatval(vp_getoption("vpay_charge_back"));
+                                  if(vp_getoption("ncwallet_charge_method") == "fixed"){
+                                      $ncwallet_chargef =  "₦".floatval(vp_getoption("ncwallet_charge_back"));
                                     }
                                     else{
-                                     $vpay_chargef =  floatval(vp_getoption("vpay_charge_back"))."%";
+                                      $ncwallet_chargef =  floatval(vp_getoption("ncwallet_charge_back"))."%";
                                     }
                   ?>
                                   
@@ -282,10 +311,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                                   <a
                                     class="nav-link <?php echo banksbtn();?>"
                                     data-bs-toggle="tab"
-                                    href="#vpay"
+                                    href="#ncwallet"
                                     role="tab"
                                     ><span class="hidden-sm-up"></span>
-                                    <span class="hidden-xs-down"><?php echo $vpay;?></span></a
+                                    <span class="hidden-xs-down"><?php echo $ncwallet;?></span></a
                                   >
                                 </li>
               
@@ -463,6 +492,58 @@ if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") 
     </div>
   
   <?php } 
+if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){?>
+
+  <div class="tab-pane <?php echo banksmodal();?>" id="ncwallet" role="tabpanel">
+      <div class="p-md-20">
+  
+      <!-------------CONTENT----------->
+  <div class="Wrap mb-2 cdebit-card   position-relative">
+  <div class="Base">
+  <div class="Inner-wrap">
+  
+  <div class=" container text-white p-4 roundeds">
+  
+  <div class="row mb-3">
+  <div class="col Logo-name fs-3">
+    Safehaven
+  </div>
+  </div>
+  
+  <div class="row mb-3">
+  <div class="col card-number text-center">
+  <p><?php echo $ncwallet_accountnumber;?></p>
+  </div>
+  </div>
+  
+  <div class="row mb-3">
+  <div class="col Name white  text-center">
+  <p><?php echo $ncwallet_accountname;?></p>
+  </div>
+  </div>
+  
+  
+  <div class="row">
+  <div class="col fs-5">
+  VISA
+  </div>
+  <div class="col flex justify-content-end  fs-5">
+  <?php echo $ncwallet_chargef;?> Charge Applied
+  </div>
+  </div>
+  
+  </div>
+  
+  </div>
+  </div>
+  </div>
+  
+  
+      <!------------------>
+      </div>
+    </div>
+  
+  <?php }
 
 if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){?>
 

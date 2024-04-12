@@ -171,15 +171,15 @@ function banksmodal(){
 				<?php 
 				$bvn = vp_getuser($id,"myBvn",true);
 				$nin = vp_getuser($id,"myNin",true);
-				if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enablesquadco') == "yes"  || vp_getoption('enablekuda') == "yes" || vp_getoption('enablevpay') == "yes" && ($bvn != 'false' || $nin != 'false' || vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin) || vp_getoption('enablevpay') == "yes" ) && (mb_strlen($bvn) > 10 || mb_strlen($nin) > 10 || vp_getoption('enablevpay') == "yes" )){
+				if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes"  || vp_getoption('enablesquadco') == "yes"  || vp_getoption('enablekuda') == "yes" || vp_getoption('enablevpay') == "yes" && ($bvn != 'false' || $nin != 'false' || vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin) || vp_getoption('enablevpay') == "yes" ) && (mb_strlen($bvn) > 10 || mb_strlen($nin) > 10 || vp_getoption('enablevpay') == "yes" )){
 
 
 					if(vp_getoption("charge_method") == "fixed"){
 						$chargef =  "₦".floatval(vp_getoption("charge_back"));
-						}
-						else{
+					}
+					else{
 						 $chargef =  floatval(vp_getoption("charge_back"))."%";
-						}
+					}
 					   
 						
 
@@ -202,6 +202,9 @@ function banksmodal(){
 						elseif(strtolower($name) == "vpay"){
 							echo plugins_url('msorg_template')."/msorg_template/vpay.jpg";
 						}
+						elseif(strtolower($name) == "ncwallet"){
+							echo plugins_url('msorg_template')."/msorg_template/safe.svg";
+						}
 						
 						else{
 							echo plugins_url('msorg_template')."/msorg_template/bank.png";
@@ -217,11 +220,18 @@ function banksmodal(){
 								   
 								</li>
 							<?php }
+
 							if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){?>
 									<li class="nav-item">
-										<a class="nav-link <?php echo banksbtn();?>" id="vpay-tab" data-bs-toggle="tab" href="#vpay" role="tab" aria-controls="vpay" aria-selected="true">Vpay</a>
+										<a class="nav-link <?php echo banksbtn();?>" id="vpay-tab" data-bs-toggle="tab" href="#vpay" role="tab" aria-controls="vpay" aria-selected="true">VPAY</a>
 									   
 									</li>
+							<?php }
+							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){?>
+								<li class="nav-item">
+									<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab" data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet" aria-selected="true">SAFEHAVEN</a>
+								   
+								</li>
 							<?php }
 							if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){?>
 								<li class="nav-item">
@@ -285,6 +295,55 @@ function banksmodal(){
 												</div>
 												<div class="col-4 pl-0 text-right">
 													<h3 class="fw-bold mb-1"><?php echo $vpay_chargef;?></h3>
+													<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+												</div>
+											</div>
+											
+	
+										</div>
+									</div>
+								</div>
+
+							<?php }
+
+							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
+									$ncwallet = "Safehaven";
+									$ncwalletAccountName = vp_getuser($id,"ncwallet_accountname");
+									$ncwalletAccountNumber = vp_getuser($id,"ncwallet_accountnumber");
+
+									if(vp_getoption("ncwallet_charge_method") == "fixed"){
+										$ncwallet_chargef =  "₦".floatval(vp_getoption("ncwallet_charge_back"));
+									}
+									else{
+									 	$ncwallet_chargef =  floatval(vp_getoption("ncwallet_charge_back"))."%";
+									}
+
+								?>
+
+
+								<div class="tab-pane fade   <?php echo banksmodal();?>" id="ncwallet" role="tabpanel" aria-labelledby="ncwallet-tab">
+									<div class="card card-dark bg-secondary-gradient">
+										<div class="card-body skew-shadow">
+											<img src="<?php banks_log("ncwallet");?>" height="60" alt="Visa Logo">
+	
+											
+											<h2 class="py-4 mb-0">
+												Account Number:<?php echo $ncwalletAccountNumber;?>
+											</h2>
+	
+											<div class="row">
+												<div class="col-8 pr-0">
+													<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($ncwalletAccountName);?>
+													</h3>
+													<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($ncwallet);?></h3>
+													<br>
+													<div class="text-small text-uppercase fw-bold op-8">Automated Bank
+														Transfer</div>
+													<p class="text-small ">Make transfer to this account to fund your wallet
+													</p>
+												</div>
+												<div class="col-4 pl-0 text-right">
+													<h3 class="fw-bold mb-1"><?php echo $ncwallet_chargef;?></h3>
 													<div class="text-small text-uppercase fw-bold op-8">Charge</div>
 												</div>
 											</div>
