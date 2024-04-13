@@ -47,7 +47,7 @@ require __DIR__.'/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://github.com/bikendi-tech-solutions/msorg_template',
+	'https://github.com/bikendi-tech-solutions/msorg_template/',
 	__FILE__,
 	'msorg_template'
 );
