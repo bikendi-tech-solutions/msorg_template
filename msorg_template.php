@@ -53,7 +53,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
-
+$myUpdateChecker->setAuthentication('your-token-here');
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 
