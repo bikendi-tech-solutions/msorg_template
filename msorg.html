@@ -256,15 +256,15 @@ function banksmodal(){
 								</li>
 							<?php }
 							if($bank_mode == "live" && vp_getoption('enable_monnify') == "yes" ){ ?>
-							<li class="nav-item <?php if(stripos($bank_name2,"mon") != false){echo "d-none";} ?></li>">
+							<li class="nav-item <?php if(preg_match("/mon/i",$bank_name2)){echo "d-none";} ?></li>">
 								<a class="nav-link  <?php echo banksbtn() ;?>" id="bank2-tab" data-bs-toggle="tab" href="#bank2" role="tab" aria-controls="bank2" aria-selected="false"><?php echo ucfirst($bank_name2);?></a>
 							   
 							</li>
-							<li class="nav-item <?php if(stripos($bank_name1,"mon") != false){echo "d-none";} ?></li>">
+							<li class="nav-item <?php if(preg_match("/mon/i",$bank_name1)){echo "d-none";} ?></li>">
 							
 								<a class="nav-link  <?php echo banksbtn();?>" id="bank1-tab" data-bs-toggle="tab" href="#bank1" role="tab" aria-controls="bank1" aria-selected="false"><?php echo ucfirst($bank_name1);?></a>
 							</li>
-							<li class="nav-item <?php if(stripos($bank_name,"mon") != false){echo "d-none";} ?></li>">
+							<li class="nav-item <?php if(preg_match("/mon/i",$bank_name)){echo "d-none";} ?></li>">
 							
 								<a class="nav-link  <?php echo banksbtn();?>" id="bank-tab" data-bs-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false"><?php echo ucfirst($bank_name);?></a>
 							</li>
