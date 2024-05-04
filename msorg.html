@@ -173,7 +173,7 @@ function banksmodal(){
 				function accountNumber($aza, $generate){
 					$aza = strtolower($aza);
 				
-					if(emppty($aza) || $aza == "false" || $aza == "null"){
+					if(empty($aza) || $aza == "false" || $aza == "null"){
 					  echo "<span class='btn btn-primary generate_account' for='$generate'><i class='fa fa-history'></i> Generate Account Number</span>";
 					}
 					else{
@@ -228,7 +228,7 @@ function banksmodal(){
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 
 							<?php
-							
+
 							if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){?>
 								<li class="nav-item">
 									<a class="nav-link <?php echo banksbtn();?>" id="vpay-tab" data-bs-toggle="tab" href="#vpay" role="tab" aria-controls="vpay" aria-selected="true">VPAY</a>
