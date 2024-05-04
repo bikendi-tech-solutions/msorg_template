@@ -169,6 +169,19 @@ function banksmodal(){
 
 				<!--BANK DETAILS-->
 				<?php 
+
+				function accountNumber($aza, $generate){
+					$aza = strtolower($aza);
+				
+					if(emppty($aza) || $aza == "false" || $aza == "null"){
+					  echo "<span class='btn btn-primary generate_account' for='$generate'><i class='fa fa-history'></i> Generate Account Number</span>";
+					}
+					else{
+					  echo $aza;
+					}
+				  }
+
+
 				$bvn = vp_getuser($id,"myBvn",true);
 				$nin = vp_getuser($id,"myNin",true);
 				if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes"  || vp_getoption('enablesquadco') == "yes"  || vp_getoption('enablekuda') == "yes" || vp_getoption('enablevpay') == "yes" && ($bvn != 'false' || $nin != 'false' || vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin) || vp_getoption('enablevpay') == "yes" ) && (mb_strlen($bvn) > 10 || mb_strlen($nin) > 10 || vp_getoption('enablevpay') == "yes" )){
@@ -240,15 +253,15 @@ function banksmodal(){
 								</li>
 							<?php }
 							if($bank_mode == "live" && vp_getoption('enable_monnify') == "yes" ){ ?>
-							<li class="nav-item">
-								<a class="nav-link  <?php echo banksbtn();?>" id="bank2-tab" data-bs-toggle="tab" href="#bank2" role="tab" aria-controls="bank2" aria-selected="false"><?php echo ucfirst($bank_name2);?></a>
+							<li class="nav-item <?php if(stripos("mon",$bank_name2) === false){echo "d-none";} ?></li>">
+								<a class="nav-link  <?php echo banksbtn() ;?>" id="bank2-tab" data-bs-toggle="tab" href="#bank2" role="tab" aria-controls="bank2" aria-selected="false"><?php echo ucfirst($bank_name2);?></a>
 							   
 							</li>
-							<li class="nav-item">
+							<li class="nav-item <?php if(stripos("mon",$bank_name1) === false){echo "d-none";} ?></li>">
 							
 								<a class="nav-link  <?php echo banksbtn();?>" id="bank1-tab" data-bs-toggle="tab" href="#bank1" role="tab" aria-controls="bank1" aria-selected="false"><?php echo ucfirst($bank_name1);?></a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item <?php if(stripos("mon",$bank_name) === false){echo "d-none";} ?></li>">
 							
 								<a class="nav-link  <?php echo banksbtn();?>" id="bank-tab" data-bs-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false"><?php echo ucfirst($bank_name);?></a>
 							</li>
@@ -279,7 +292,7 @@ function banksmodal(){
 	
 											
 											<h2 class="py-4 mb-0">
-												Account Number:<?php echo $vpayAccountNumber;?>
+												Account Number:<?php accountNumber($vpayAccountNumber,"vpay");?>
 											</h2>
 	
 											<div class="row">
@@ -328,7 +341,7 @@ function banksmodal(){
 	
 											
 											<h2 class="py-4 mb-0">
-												Account Number:<?php echo $ncwalletAccountNumber;?>
+												Account Number:<?php  accountNumber($ncwalletAccountNumber,"ncwallet");?>
 											</h2>
 	
 											<div class="row">
@@ -377,7 +390,7 @@ function banksmodal(){
 	
 											
 											<h2 class="py-4 mb-0">
-												Account Number:<?php echo $squadAccountNumber;?>
+												Account Number:<?php  accountNumber($squadAccountNumber,"gtb");?>
 											</h2>
 	
 											<div class="row">
@@ -426,7 +439,7 @@ function banksmodal(){
 	
 											
 											<h2 class="py-4 mb-0">
-												Account Number:<?php echo $kudaAccountNumber;?>
+												Account Number:<?php  accountNumber($kudaAccountNumber,"kuda");?>
 											</h2>
 	
 											<div class="row">
@@ -460,7 +473,7 @@ function banksmodal(){
 
 										
 										<h2 class="py-4 mb-0">
-											Account Number:<?php echo $account_number2;?>
+											Account Number:<?php  accountNumber($account_number2,"monnify");?>
 										</h2>
 
 										<div class="row">
@@ -492,7 +505,7 @@ function banksmodal(){
 
 										
 										<h2 class="py-4 mb-0">
-											Account Number:<?php echo $account_number1;?>
+											Account Number:<?php accountNumber($account_number1,"monnify");?>
 										</h2>
 
 										<div class="row">
@@ -524,7 +537,7 @@ function banksmodal(){
 
 										
 										<h2 class="py-4 mb-0">
-											Account Number:<?php echo $account_number;?>
+											Account Number:<?php accountNumber($account_number,"monnify");?>
 										</h2>
 
 										<div class="row">
