@@ -363,7 +363,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 <?php } 
                   
                   if(vp_getoption('enable_monnify') == "yes"){?>
-                  <li class="nav-item <?php if(stripos("mon",$bank_name2) === false){echo "d-none";} ?>">
+                  <li class="nav-item <?php if(stripos($bank_name2,"mon") != false){echo "d-none";} ?>">
                     <a
                       class="nav-link <?php echo banksbtn();?>"
                       data-bs-toggle="tab"
@@ -373,7 +373,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                       <span class="hidden-xs-down"><?php echo $bank_name2;?></span></a
                     >
                   </li>
-                  <li class="nav-item  <?php if(stripos("mon",$bank_name1) === false){echo "d-none";} ?>">
+                  <li class="nav-item  <?php if(stripos($bank_name1,"mon") != false){echo "d-none";} ?>">
                     <a
                       class="nav-link <?php echo banksbtn();?>"
                       data-bs-toggle="tab"
@@ -383,7 +383,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                       <span class="hidden-xs-down"><?php echo $bank_name1;?></span></a
                     >
                   </li>
-                  <li class="nav-item  <?php if(stripos("mon",$bank_name) === false){echo "d-none";} ?>">
+                  <li class="nav-item  <?php if(stripos($bank_name,"mon") != false){echo "d-none";} ?>">
                     <a
                       class="nav-link <?php echo banksbtn();?>"
                       data-bs-toggle="tab"
