@@ -161,6 +161,7 @@
 
 <script>
 
+document.addEventListener("DOMContentLoaded",function(){
 
 jQuery(".activate-now").click(function(){
 jQuery(".activate-now").text("Please Wait...");
@@ -294,9 +295,11 @@ jQuery.ajax({
 });
 
 
+});
+
 </script>
 
-<script src="<?php echo plugins_url('vtupress');?>/js/sweet.js';?>" ></script>
+<script src="<?php echo plugins_url('vtupress');?>/js/sweet.js" ></script>
 
 <script src="<?php echo plugins_url('vtupress');?>/js/jquery.js" ></script>
 

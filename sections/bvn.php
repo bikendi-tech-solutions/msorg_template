@@ -16,10 +16,18 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
         <div class="mb-2">
 
             <label for="vtype">Verification Type<code>*</code></label>
-                <select id="vtype" class="type form-select form-select-sm ">
+            <select id="vtype" class="type form-select form-select-sm ">
                     <option value="">Please Select</option>
                     <option value="bvn">BVN</option>
                     <option value="nin">NIN</option>
+                </select>
+                <select id="vtype" class="type form-select form-select-sm ">
+                    <option value="">Please Select</option>
+                    <option value="standard">Standard Slip</option>
+                    <option value="premium">Premium Card</option>
+                    <option value="portrait">Portrait Slip</option>
+                    <option value="landscape">Landscape Slip</option>
+                    <option value="nin">Bank Verification Slip</option>
                 </select>
 
             <label for="vvalue">Verification Value<code>*</code> </label>
