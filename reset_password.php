@@ -320,7 +320,7 @@ else if(data.status == "200" ){
 
 </script>
 
-<script src="<?php echo plugins_url('vtupress');?>/js/sweet.js';?>" ></script>
+<script src="<?php echo plugins_url('vtupress');?>/js/sweet.js" ></script>
 
 <script src="<?php echo plugins_url('vtupress');?>/js/jquery.js" ></script>
 

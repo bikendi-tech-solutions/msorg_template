@@ -745,6 +745,16 @@ echo '
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+
+<!--
+#
+#
+# PLAIN
+# 
+-->
+
+
+
 						<div class="container-fluid border border-secondary" id="verificationreceipt'.$resultsd->id.'">
 								<div class="row text-white">
 									<div class="mt-2 col text-white d-flex justify-content-center">
@@ -855,13 +865,25 @@ echo '
 						
 						
 						</div>
-		
+
+						
 					</div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary  p-2 text-xs font-bold text-black uppercase bg-grey-600 rounded shadow   bet-proceed-cancled" data-bs-dismiss="modal">Cancel</button>
-					  <button type="button" id="" class="btn btn-info  p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  onclick="printContent(\'verificationreceipt'.$resultsd->id.'\');">Print</button>
-                      <button type="button" name="verification_receipt" id="" class="btn btn-primary  p-2 text-xs font-bold text-black uppercase bg-indigo-600 rounded shadow   verification_proceed'.$resultsd->id.'" >Download</button>
-                    </div>
+				';
+
+				if(strtolower($type) == "nin"){
+					echo'
+					  <a href="?vend=history-plain&id='.$resultsd->id.'&plain_receipt" type="button" id="" class="btn btn-info  p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  >View Slip</a>
+                   ';
+				}
+				elseif(strtolower($type) == "bvn"){
+					echo'
+					<button type="button" id="" class="btn btn-info  p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  onclick="printContent(\'verificationreceipt'.$resultsd->id.'\');">Print</button>
+					<button type="button" name="verification_receipt" id="" class="btn btn-primary  p-2 text-xs font-bold text-black uppercase bg-indigo-600 rounded shadow   verification_proceed'.$resultsd->id.'" >Download</button>
+					';
+				}
+				echo '</div>
                   </div>
                 </div>
             </div>

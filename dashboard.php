@@ -9,8 +9,11 @@ error_reporting(0);
 include_once(ABSPATH."wp-load.php");
 include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
+if(!isset($_GET["plain_receipt"])){
 //TOP
 include_once(__DIR__."/top.html");
+
+}
 
 
 //PAGES
@@ -198,6 +201,14 @@ else{
             echo "</div>";
             
         break;
+        case"history-plain":
+            echo "<div class='container p-2'>";
+            echo "<div class='mt-3 mx-2 p-2'>";
+            include_once(__DIR__."/sections/id_cards/control.php");
+            echo "</div>";
+            echo "</div>";
+            
+        break;
         case"customize":
             if(vp_option_array($option_array,"resell") == "yes" && current_user_can("administrator")){
             echo "<div class='container p-2 loginit'>";
@@ -220,5 +231,7 @@ else{
 }
 
 //BOTTOM
+if(!isset($_GET["plain_receipt"])){
 include_once(__DIR__."/bottom.html");
+}
 ?>

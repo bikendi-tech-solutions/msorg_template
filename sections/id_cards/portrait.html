@@ -1,0 +1,77 @@
+<div id="Id-Portrait-Container" data-v-2ddb6756="">
+    <div class="text-black" data-v-8c825dc0="">
+        <table border="1" data-v-8c825dc0="" id="nin_card">
+            <tr data-v-8c825dc0="">
+                <td class="id-bkg-portrait" data-v-8c825dc0="">
+                    <table border="0" data-v-8c825dc0="" style="width: 192px;">
+                        <tr data-v-8c825dc0="">
+                            <td class="text-center" data-v-8c825dc0="">
+                                <img src="<?php echo $image_url;?>/id-header-portrait.daf1d085.png" width="150" height="50" data-v-8c825dc0="">
+                            </td>
+                        </tr>
+                        <tr data-v-8c825dc0="">
+                            <td class="text-center" data-v-8c825dc0="">
+                                <img src="<?php echo $accountImage;?>" width="50" height="60" class="rounded" data-v-8c825dc0="">
+                            </td>
+                        </tr>
+                        <tr data-v-8c825dc0="">
+                            <td data-v-8c825dc0="" style="font-size: 10px;">
+                                <table data-v-8c825dc0="">
+                                    <tr data-v-8c825dc0="">
+                                        <th data-v-8c825dc0="">First Name</th>
+                                        <td data-v-8c825dc0="" class="nin_surname"><?php echo  strtoupper($ln);?></td>
+                                    </tr><tr data-v-8c825dc0="">
+                                        <th nowrap="" data-v-8c825dc0="">Middle Name</th>
+                                        <td data-v-8c825dc0=""><?php echo  strtoupper($mn);?></td>
+                                    </tr>
+                                    <tr data-v-8c825dc0="">
+                                        <th nowrap="" data-v-8c825dc0="">Surname</th>
+                                        <td data-v-8c825dc0=""><?php echo  strtoupper($fn);?></td>
+                                    </tr><tr data-v-8c825dc0="">
+                                        <th nowrap="" data-v-8c825dc0="">Date of birth</th>
+                                        <td data-v-8c825dc0=""><?php echo  $l_dob;?></td>
+                                    </tr>
+                                    <tr data-v-8c825dc0="">
+                                        <th colspan="2" nowrap="" data-v-8c825dc0=""> National Identification Number (NIN)</th>
+                                    </tr>
+                                    <tr data-v-8c825dc0="">
+                                        <td class="nin text-center" colspan="2" data-v-8c825dc0=""><?php echo str_replace(" ","",$value);?></td>
+                                    </tr>
+                                    <tr data-v-8c825dc0="">
+                                        <td class="text-center" colspan="2" data-v-8c825dc0="">
+                                            <table data-v-8c825dc0="" class="w-100">
+                                                <tr data-v-8c825dc0="" class="text-center">
+                                                    <td class="d-none" data-v-8c825dc0="">
+                                                        <img  src="" width="50" height="30" data-v-8c825dc0="">
+                                                    </td>
+                                                    <td data-v-8c825dc0=""><?php echo strtoupper($lgar);?> <br data-v-8c825dc0=""> <?php echo strtoupper($sor);?></td>
+                                                    <td  class="d-none"  data-v-8c825dc0="">
+                                                        <canvas data-v-8c825dc0="" width="40" height="40" style="width: 40px; height: 40px;"></canvas>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="divider" data-v-8c825dc0="" style="width: 10px;"></td>
+                <td class="id-bkg-portrait" data-v-8c825dc0="">
+                    <img src="<?php echo $image_url;?>/id-back-portrait.d852a048.png" width="192" height="310" data-v-8c825dc0=""></td>
+                </tr>
+        </table>
+        <table data-v-7199ee7a="">
+            <tr data-v-7199ee7a="">
+                <td class="" data-v-7199ee7a="">
+                    <div class="download-btns d-flex justify-content-start">
+                        <button class="btn btn-primary me-2 download" print="no"  did="nin_card" name="portrait">Download</button>
+                        <button class="btn btn-success download d-none" print="yes">Print</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+            <div class="" data-v-8c825dc0="" style="height: 5px; margin: 5px 0px; border-top: none;"></div>
+        </div>
+    </div>

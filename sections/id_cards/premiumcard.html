@@ -1,0 +1,82 @@
+<style>
+    .page-content{
+        position:relative;
+    }
+    .replace-image {
+        position:absolute;
+        width: 100px;
+        height: 130px;
+        z-index: 1;
+        transform: translate(27.3%, 60%);
+    }
+    .replace-image img{
+        width: 100px;
+        height: 130px;
+        background-position: center;
+        background-size:cover;
+    }
+    
+    .replace-qrcode {
+        width: 100px;
+        height: 100px;
+        background-color: white;
+        z-index: 1;
+        transform: translate(310%, 40%);
+    }
+
+    canvas{
+        width:100px !important;
+        height:100px !important;
+    }
+    
+    .t.m0.x1.h2.y1.ff1.fs0.fc0.sc0.ls0.ws0 {
+        z-index: 1;
+    }
+    
+    .t.m3.xa.ha.yf.ff2.fs5.fc1.sc0.ls0.ws0 {
+        z-index: 2;
+    }
+    
+    .download-btns{
+        position: relative;
+        z-index:22;
+        transform: translate(20px, 19rem);
+    }
+
+
+    
+    </style>
+
+
+<div class="download-btns d-flex justify-content-start">
+    <button class="btn btn-primary me-2 download" print="no" did="page-content" name="premium">Download</button>
+    <button class="btn btn-success download d-none" print="yes">Print</button>
+</div>
+    <div id="page-container">
+
+    <div id="page1" class="page w0 h0" data-orig-page="1">
+        <div class="page-content page-content1 w0 h0 position-relative" id="page-content">
+        <div id="img" class="replace-image position-absolute"><img src="<?php echo $accountImage;?>"></div>
+        <div class="replace-qrcode position-absolute"></div>
+        <img class="bi x0 y0 w1 h1" alt="" src="<?php echo $premium_card;?>"><div class="t m0 x1 h2 y1 ff1 fs0 fc0 sc0 ls0 ws0">NGA</div>
+        <div class="t m0 x2 h3 y2 ff2 fs1 fc1 sc0 ls0 ws0 nin_number"><?php echo $value;?></div>
+        <div class="t m0 x3 h4 y3 ff2 fs2 fc2 sc0 ls0 ws0">SURNAME/NOM</div>
+        <div class="t m0 x3 h5 y4 ff3 fs0 fc0 sc0 ls0 ws0 nin_surname"><?php echo  $fn;?></div>
+        <div class="t m0 x3 h4 y5 ff2 fs2 fc2 sc0 ls0 ws0">GIVEN NAMES/PRENOMS</div>
+        <div class="t m0 x3 h5 y6 ff3 fs0 fc0 sc0 ls0 ws0 nin_othername"><?php echo  $mn.", ".$ln;?> </div>
+        <div class="t m0 x3 h4 y7 ff2 fs2 fc2 sc0 ls0 ws0">DATE OF BIRTH   SEX/SEXE</div>
+        <div class="t m0 x3 h5 y8 ff3 fs0 fc0 sc0 ls0 ws0 nin_dob"><?php echo $dob." ".$gender;?></div>
+        <div class="t m0 x4 h6 y9 ff1 fs2 fc0 sc0 ls0 ws0">ISSUE DATE </div>
+        <div class="t m0 x5 h7 ya ff3 fs2 fc0 sc0 ls0 ws0 nin_issuedate"><?php echo $_dob;?></div>
+        <div class="t m0 x6 h8 yb ff1 fs3 fc0 sc0 ls0 ws0">National Identification Number (NIN)</div>
+        <div class="t m1 x7 h9 yc ff3 fs4 fc0 sc0 ls0 ws0 nin_number"><?php echo $value;?></div>
+        <div class="t m0 x8 h8 yd ff1 fs3 fc0 sc0 ls0 ws0">   </div>
+        <div class="t m2 x9 ha ye ff2 fs5 fc1 sc0 ls0 ws0 nin_number"><?php echo $value;?></div>
+        <div class="t m3 xa ha yf ff2 fs5 fc1 sc0 ls0 ws0 nin_number"><?php echo $value;?></div>
+        <div class="t m4 xb ha y10 ff2 fs5 fc1 sc0 ls0 ws0 nin_number"><?php echo $value;?></div>
+        </div>
+
+    </div>
+    </div>
+
+

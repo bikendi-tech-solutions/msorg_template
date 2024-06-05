@@ -1,0 +1,30 @@
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    jQuery(".download").on("click",function(){
+        var did = jQuery(this).attr("did");
+        var name = jQuery(this).attr("name");
+        var surname = jQuery(".nin_surname").text().toLowerCase();
+        var element = document.getElementById(did);
+
+    if (element) {
+                const opt = {
+                    margin: 1,
+                    filename: surname+'_'+name+'.pdf',
+                    image: { type: 'jpeg', quality: 1.0 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Generate and save the PDF
+                html2pdf(element,opt);
+            } else {
+                console.error('Element with id "areaID" not found.');
+            }
+
+    });
+
+});
+</script>
+</body></html>
