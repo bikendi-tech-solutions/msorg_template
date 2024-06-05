@@ -16,18 +16,16 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
         <div class="mb-2">
 
             <label for="vtype">Verification Type<code>*</code></label>
-            <select id="vtype" class="type form-select form-select-sm ">
+                <select id="vtype" class="type form-select form-select-sm ">
                     <option value="">Please Select</option>
                     <option value="bvn">BVN</option>
                     <option value="nin">NIN</option>
                 </select>
-                <select id="vtype" class="type form-select form-select-sm ">
+                <select id="card_type" class="card_type d-none form-select form-select-sm ">
                     <option value="">Please Select</option>
-                    <option value="standard">Standard Slip</option>
                     <option value="premium">Premium Card</option>
                     <option value="portrait">Portrait Slip</option>
                     <option value="landscape">Landscape Slip</option>
-                    <option value="nin">Bank Verification Slip</option>
                 </select>
 
             <label for="vvalue">Verification Value<code>*</code> </label>
@@ -46,13 +44,17 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                     switch(type){
                         case"bvn":
                             amt.val(parseInt("<?php echo vp_getoption('u_bvn_verification_charge');?>"));
+                            jQuery(".card_type").addClass("d-none");
                             break;
                         case"nin":
                             amt.val(parseInt("<?php echo vp_getoption('u_nin_verification_charge');?>"));
+                            jQuery(".card_type").removeClass("d-none");
+
                             break;
                         default:
                             amt.val(0);
                             alert("Please choose a valid verification type");
+                            jQuery(".card_type").addClass("d-none");
                             break;
                     }
 
@@ -61,11 +63,13 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
 
                 jQuery(".vverify").on("click",function(){
                     var vtype = jQuery("#vtype").val();
+                    var card = jQuery("#card_type").val();
                     var vvalue = jQuery("#vvalue").val();
 
                     obj = {};
                     obj["type"] = vtype;
                     obj["value"] = vvalue;
+                    obj["card"] = card;
                    
                     if(vtype == "" || vvalue == "" ){
                         alert("Please fill all the fields");
