@@ -21,11 +21,12 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                     <option value="bvn">BVN</option>
                     <option value="nin">NIN</option>
                 </select>
+            <label for="card_type">Card Type<code>*</code></label>
                 <select id="card_type" class="card_type d-none form-select form-select-sm ">
                     <option value="">Please Select</option>
-                    <option value="premium">Premium Card</option>
-                    <option value="portrait">Portrait Slip</option>
-                    <option value="landscape">Landscape Slip</option>
+                    <option value="premium_card">Premium Card</option>
+                    <option value="portrait_card">Portrait Slip</option>
+                    <option value="landscape_card">Landscape Slip</option>
                 </select>
 
             <label for="vvalue">Verification Value<code>*</code> </label>

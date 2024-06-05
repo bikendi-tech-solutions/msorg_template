@@ -721,7 +721,7 @@ $email = $verify_data->email;
 $dob = $verify_data->birthdate;
 $gender = $verify_data->gender;
 $lgar = $verify_data->lgaOfResidence;
-$sor = $verify_data->stateOfOrigin;
+$sor = $verify_data->stateOfResidence;
 $lgao = $verify_data->lgaOfOrigin;
 $ra = $verify_data->residentialAddress;
 
