@@ -724,6 +724,7 @@ $lgar = $verify_data->lgaOfResidence;
 $sor = $verify_data->stateOfResidence;
 $lgao = $verify_data->lgaOfOrigin;
 $ra = $verify_data->residentialAddress;
+$card_type = $verify_data->card_type;
 
 echo "
 <tr>
@@ -769,6 +770,14 @@ echo '
 									</div>
 									<div class="col d-flex justify-content-end">
 										<h6>'.$value.'</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col d-flex justify-content-start">
+										<h5>Card Type <code>*</code> : 
+									</div>
+									<div class="col d-flex justify-content-end">
+										<h6>'.$card_type.'</h6>
 									</div>
 								</div>
 
@@ -830,7 +839,7 @@ echo '
 								</div>
 								<div class="row">
 									<div class="col d-flex justify-content-start">
-										<h5>state Of Origin <code>*</code> : 
+										<h5>state Of Residence <code>*</code> : 
 									</div>
 									<div class="col d-flex justify-content-end">
 										<h6>'.$sor.'</h6>
@@ -874,7 +883,7 @@ echo '
 
 				if(strtolower($type) == "nin"){
 					echo'
-					  <a href="?vend=history-plain&id='.$resultsd->id.'&plain_receipt" type="button" id="" class="btn btn-info  p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  >View Slip</a>
+					  <a href="?vend=history-plain&id='.$resultsd->id.'&plain_receipt" type="button" id="" class="btn btn-info  p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  >View Original Slip</a>
                    ';
 				}
 				elseif(strtolower($type) == "bvn"){
