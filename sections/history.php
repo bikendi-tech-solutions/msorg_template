@@ -724,7 +724,7 @@ $lgar = $verify_data->lgaOfResidence;
 $sor = $verify_data->stateOfResidence;
 $lgao = $verify_data->lgaOfOrigin;
 $ra = $verify_data->residentialAddress;
-$card_type = $verify_data->card_type;
+$card_type = $resultsd->card_type;
 
 echo "
 <tr>
