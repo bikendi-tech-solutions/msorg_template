@@ -51,6 +51,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 	__FILE__,
 	'msorg_template'
 );
+
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
 //$myUpdateChecker->setAuthentication('your-token-here');
