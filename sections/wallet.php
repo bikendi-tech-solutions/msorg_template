@@ -305,7 +305,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                     <?php } 
                   if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
                     
-                                  $ncwallet = "Safehaven";
+                                  $ncwallet = "Providus";
                                   $ncwallet_accountname = vp_getuser($id,"ncwallet_accountname");
                                   $ncwallet_accountnumber = vp_getuser($id,"ncwallet_accountnumber");
 
@@ -517,7 +517,7 @@ if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_nc
   
   <div class="row mb-3">
   <div class="col Logo-name fs-3">
-    Safehaven
+    Providus
   </div>
   </div>
   
