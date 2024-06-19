@@ -529,6 +529,13 @@ if( vp_getoption('enable_ncwallet') == "yes" ){
                         </li>
     <?php
 }
+if( vp_getoption('enable_billstack') == "yes" ){
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="billstack"> <span class="sub-item">Generate Billstack</span> </a>
+                        </li>
+    <?php
+}
 if( vp_getoption('enable_monnify') == "yes" ){
     ?>
                         <li>
