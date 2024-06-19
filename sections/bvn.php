@@ -21,7 +21,7 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                     <option value="bvn">BVN</option>
                     <option value="nin">NIN</option>
                 </select>
-            <label for="card_type">Card Type<code>*</code></label>
+            <label for="card_type" class="mt-2 d-none" >Card Type<code>*</code></label>
                 <select id="card_type" class="card_type d-none form-select form-select-sm ">
                     <option value="">Please Select</option>
                     <option value="premium_card">Premium Card</option>
@@ -29,15 +29,16 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                     <option value="landscape_card">Landscape Slip</option>
                 </select>
 
-            <label for="vvalue">Verification Value<code>*</code> </label>
+            <label for="vvalue" class="mt-2" ><span class="text-type">Verification</span> Number<code>*</code> </label>
                 <input id="vvalue" class="value form-control" type="number" placeholder="Please enter value"/>
 
-            <label for="amount">Charge</label>
+            <label for="amount" class="mt-2">Charge</label>
                 <input id="amount" class="form-control" type="number" readonly>
 
             <button class="btn vverify p-2 text-xs font-bold text-white uppercase bg-gray-600 rounded shadow data-proceed-cancled btn-success">Verify</button>
 
             <script>
+
                 jQuery("#vtype").on("change",function(){
                     var amt = jQuery("#amount");
                     var type = jQuery("#vtype").val();
@@ -45,17 +46,21 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                     switch(type){
                         case"bvn":
                             amt.val(parseInt("<?php echo vp_getoption('u_bvn_verification_charge');?>"));
-                            jQuery(".card_type").addClass("d-none");
+                            jQuery(".card_type, [for=card_type]").addClass("d-none");
+                            jQuery(".text-type").text("Bvn");
                             break;
                         case"nin":
                             amt.val(parseInt("<?php echo vp_getoption('u_nin_verification_charge');?>"));
-                            jQuery(".card_type").removeClass("d-none");
+                            jQuery(".card_type,[for=card_type] ").removeClass("d-none");
+                            jQuery(".text-type").text("Nin");
 
                             break;
                         default:
                             amt.val(0);
                             alert("Please choose a valid verification type");
-                            jQuery(".card_type").addClass("d-none");
+                            jQuery(".card_type, [for=card_type]").addClass("d-none");
+                            jQuery(".text-type").text("Verification");
+
                             break;
                     }
 
@@ -174,7 +179,7 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                                     swal({
                                     title: "Verification Failed!",
                                     text: data,
-                                    icon: "danger",
+                                    icon: "error",
                                     button: "Okay",
                                     });
                                 }
