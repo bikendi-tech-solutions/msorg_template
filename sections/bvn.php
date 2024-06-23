@@ -39,6 +39,8 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
 
             <script>
 
+
+
                 jQuery("#vtype").on("change",function(){
                     var amt = jQuery("#amount");
                     var type = jQuery("#vtype").val();
@@ -66,6 +68,22 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
 
                 });
                 		
+
+
+                var url = location.href;
+
+                if(url.indexOf("bvn&bvn") > 0){
+                    jQuery("#vtype").val("bvn");
+                    jQuery("#vtype").change();
+                    jQuery(".card_type, [for=card_type], [value=nin]").hide();
+
+                }
+                else if(url.indexOf("bvn&nin") > 0){
+                    jQuery("#vtype").val("nin");
+                    jQuery("#vtype").change();
+                    jQuery("[value=bvn]").hide();
+                }
+
 
                 jQuery(".vverify").on("click",function(){
                     var vtype = jQuery("#vtype").val();

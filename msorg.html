@@ -897,6 +897,38 @@ if(strtolower(vp_option_array($option_array,"msorg_faq_link_enable")) == "yes"){
 						</div>
 					<?php
 				}
+				if(vp_getoption("setbvn") == "yes" && vp_getoption("vtupress_custom_bvn") == "yes"){
+					?>
+						<div class="col-6 col-sm-4 col-lg-3">
+							<a href="?vend=bvn&bvn">
+								<div class="card">
+									<div class="card-body p-3 text-center">
+										<span style="font-size: 30px;">
+											<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/bvn.jpg" height="100px">
+										</span>
+										<div class="h4 m-2 text-dark">Bvn Verification</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					<?php
+				}
+				if(vp_getoption("setbvn") == "yes" && vp_getoption("vtupress_custom_bvn") == "yes"){
+					?>
+						<div class="col-6 col-sm-4 col-lg-3">
+							<a href="?vend=bvn&nin">
+								<div class="card">
+									<div class="card-body p-3 text-center">
+										<span style="font-size: 30px;">
+											<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/nin.jpg" height="100px">
+										</span>
+										<div class="h4 m-2 text-dark">Nin Verification</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					<?php
+				}
 		if(vp_option_array($option_array,"airtime_to_cash") == "yes" || vp_option_array($option_array,"airtime_to_wallet") == "yes" && vp_option_array($option_array,"resell") == "yes"){
 		?>
 			<div class="col-6 col-sm-4 col-lg-3">
