@@ -184,7 +184,7 @@ function banksmodal(){
 
 				$bvn = vp_getuser($id,"myBvn",true);
 				$nin = vp_getuser($id,"myNin",true);
-				if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes"  || vp_getoption('enable_billstack') == "yes"  || vp_getoption('enablesquadco') == "yes"  || vp_getoption('enablekuda') == "yes" || vp_getoption('enablevpay') == "yes" && ($bvn != 'false' || $nin != 'false' || vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin) || vp_getoption('enablevpay') == "yes" ) && (mb_strlen($bvn) > 10 || mb_strlen($nin) > 10 || vp_getoption('enablevpay') == "yes" )){
+				if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes"  || vp_getoption('enable_billstack') == "yes" || vp_getoption('enable_payvessel') == "yes"  || vp_getoption('enablesquadco') == "yes"  || vp_getoption('enablekuda') == "yes" || vp_getoption('enablevpay') == "yes" && ($bvn != 'false' || $nin != 'false' || vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin) || vp_getoption('enablevpay') == "yes" ) && (mb_strlen($bvn) > 10 || mb_strlen($nin) > 10 || vp_getoption('enablevpay') == "yes" )){
 
 
 					if(vp_getoption("charge_method") == "fixed"){
@@ -218,7 +218,7 @@ function banksmodal(){
 						elseif(strtolower($name) == "ncwallet"){
 							echo plugins_url('msorg_template')."/msorg_template/providus.jpeg";
 						}
-						elseif(strtolower($name) == "billstack"){
+						elseif(strtolower($name) == "billstack" || strtolower($name) == "payvessel"  ){
 							echo plugins_url('msorg_template')."/msorg_template/9psb.jpeg";
 						}
 						
@@ -249,6 +249,12 @@ function banksmodal(){
 							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){?>
 								<li class="nav-item">
 									<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab" data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet" aria-selected="true">PROVIDUS</a>
+								   
+								</li>
+							<?php }
+							if(vp_getoption('enable_payvessel') == "yes"  && vp_getoption("vtupress_custom_payvessel") == "yes"){?>
+								<li class="nav-item">
+									<a class="nav-link <?php echo banksbtn();?>" id="payvessel-tab" data-bs-toggle="tab" href="#payvessel" role="tab" aria-controls="payvessel" aria-selected="true">9PSB</a>
 								   
 								</li>
 							<?php }
@@ -379,36 +385,36 @@ function banksmodal(){
 							</div>
 
 						<?php }
-						if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_billstack") == "yes"){
-							$billstack = "9Psb / 9 Payment Service Bank";
-							$billstackAccountName = vp_getuser($id,"billstack_accountname");
-							$billstackAccountNumber = vp_getuser($id,"billstack_accountnumber");
+						if(vp_getoption('enable_payvessel') == "yes"  && vp_getoption("vtupress_custom_payvessel") == "yes"){
+							$payvessel = "9Psb / 9 Payment Service Bank";
+							$payvesselAccountName = vp_getuser($id,"payvessel_accountname");
+							$payvesselAccountNumber = vp_getuser($id,"payvessel_accountnumber");
 
-							if(vp_getoption("billstack_charge_method") == "fixed"){
-								$billstack_chargef =  "₦".floatval(vp_getoption("billstack_charge_back"));
+							if(vp_getoption("payvessel_charge_method") == "fixed"){
+								$payvessel_chargef =  "₦".floatval(vp_getoption("payvessel_charge_back"));
 							}
 							else{
-								 $billstack_chargef =  floatval(vp_getoption("billstack_charge_back"))."%";
+								 $payvessel_chargef =  floatval(vp_getoption("payvessel_charge_back"))."%";
 							}
 
 						?>
 
 
-						<div class="tab-pane fade   <?php echo banksmodal();?>" id="billstack" role="tabpanel" aria-labelledby="billstack-tab">
+						<div class="tab-pane fade   <?php echo banksmodal();?>" id="payvessel" role="tabpanel" aria-labelledby="payvessel-tab">
 							<div class="card card-dark bg-secondary-gradient">
 								<div class="card-body skew-shadow">
-									<img src="<?php banks_log("billstack");?>" height="60" alt="Visa Logo">
+									<img src="<?php banks_log("payvessel");?>" height="60" alt="Visa Logo">
 
 									
 									<h2 class="py-4 mb-0">
-										Account Number:<?php  accountNumber($billstackAccountNumber,"billstack");?>
+										Account Number:<?php  accountNumber($payvesselAccountNumber,"payvessel");?>
 									</h2>
 
 									<div class="row">
 										<div class="col-8 pr-0">
-											<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($billstackAccountName);?>
+											<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($payvesselAccountName);?>
 											</h3>
-											<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($billstack);?></h3>
+											<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($payvessel);?></h3>
 											<br>
 											<div class="text-small text-uppercase fw-bold op-8">Automated Bank
 												Transfer</div>
@@ -416,7 +422,7 @@ function banksmodal(){
 											</p>
 										</div>
 										<div class="col-4 pl-0 text-right">
-											<h3 class="fw-bold mb-1"><?php echo $billstack_chargef;?></h3>
+											<h3 class="fw-bold mb-1"><?php echo $payvessel_chargef;?></h3>
 											<div class="text-small text-uppercase fw-bold op-8">Charge</div>
 										</div>
 									</div>
@@ -427,6 +433,56 @@ function banksmodal(){
 						</div>
 
 					<?php }
+
+					
+					if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_billstack") == "yes"){
+						$billstack = "9Psb / 9 Payment Service Bank";
+						$billstackAccountName = vp_getuser($id,"billstack_accountname");
+						$billstackAccountNumber = vp_getuser($id,"billstack_accountnumber");
+
+						if(vp_getoption("billstack_charge_method") == "fixed"){
+							$billstack_chargef =  "₦".floatval(vp_getoption("billstack_charge_back"));
+						}
+						else{
+							 $billstack_chargef =  floatval(vp_getoption("billstack_charge_back"))."%";
+						}
+
+					?>
+
+
+					<div class="tab-pane fade   <?php echo banksmodal();?>" id="billstack" role="tabpanel" aria-labelledby="billstack-tab">
+						<div class="card card-dark bg-secondary-gradient">
+							<div class="card-body skew-shadow">
+								<img src="<?php banks_log("billstack");?>" height="60" alt="Visa Logo">
+
+								
+								<h2 class="py-4 mb-0">
+									Account Number:<?php  accountNumber($billstackAccountNumber,"billstack");?>
+								</h2>
+
+								<div class="row">
+									<div class="col-8 pr-0">
+										<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($billstackAccountName);?>
+										</h3>
+										<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($billstack);?></h3>
+										<br>
+										<div class="text-small text-uppercase fw-bold op-8">Automated Bank
+											Transfer</div>
+										<p class="text-small ">Make transfer to this account to fund your wallet
+										</p>
+									</div>
+									<div class="col-4 pl-0 text-right">
+										<h3 class="fw-bold mb-1"><?php echo $billstack_chargef;?></h3>
+										<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+									</div>
+								</div>
+								
+
+							</div>
+						</div>
+					</div>
+
+				<?php }
 
 							 if(vp_getoption('enablesquadco') == "yes"  && vp_getoption("vtupress_custom_gtbank") == "yes"){
 								$squad = "GTBank";
@@ -1045,6 +1101,7 @@ if(is_plugin_active("vpcards/vpcards.php") && vp_option_array($option_array,"car
 			</div>
 <?php
 }
+
 if(is_plugin_active("vpmlm/vpmlm.php")  && vp_option_array($option_array,'mlm') == "yes"){
 ?>
 
