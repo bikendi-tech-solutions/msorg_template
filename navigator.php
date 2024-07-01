@@ -536,6 +536,13 @@ if( vp_getoption('enable_billstack') == "yes" ){
                         </li>
     <?php
 }
+if( vp_getoption('enable_payvessel') == "yes" ){
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="payvessel"> <span class="sub-item">Generate Payvessel</span> </a>
+                        </li>
+    <?php
+}
 if( vp_getoption('enable_monnify') == "yes" ){
     ?>
                         <li>
