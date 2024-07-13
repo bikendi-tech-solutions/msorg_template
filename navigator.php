@@ -135,6 +135,17 @@ if(is_plugin_active("vpepin/vpepin.php") && vp_option_array($option_array,"epins
     </li>
 <?php
 }
+if( vp_option_array($option_array,"vtupress_custom_isavings") == "yes" ){ 
+    ?>
+    <li class="nav-item <?php make_active("savings");?>">
+        
+        <a href="?vend=savings">
+        <i class="fas fa-piggy-bank"></i>
+            <p>Savings</p>
+        </a>
+    </li>
+<?php
+}
 if(is_plugin_active("vpcards/vpcards.php") && vp_option_array($option_array,"cardscontrol") == "checked" && vp_option_array($option_array,"resell") == "yes"){ 
     ?>
     <li class="nav-item <?php make_active("cards");?>">

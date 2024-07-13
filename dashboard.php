@@ -33,6 +33,9 @@ else{
             echo "</div>";
             }
         break;
+        case"savings":
+            include_once(__DIR__."/sections/savings.php");
+        break;
         case"bet":
             if(vp_option_array($option_array,"betcontrol") == "checked"){
             echo "<div class='container'>";
