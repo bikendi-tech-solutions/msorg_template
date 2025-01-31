@@ -547,6 +547,13 @@ if( vp_getoption('enable_billstack') == "yes" ){
                         </li>
     <?php
 }
+if( vp_getoption('enable_paymentpoint') == "yes" ){
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="paymentpoint"> <span class="sub-item">Generate Palmpay</span> </a>
+                        </li>
+    <?php
+}
 if( vp_getoption('enable_payvessel') == "yes" ){
     ?>
                         <li>
