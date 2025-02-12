@@ -1731,7 +1731,7 @@ echo "
 <td>".$resultsa->type."</td>
 
 ";
-if($resultsa->status == "Approved" || $resultsa->status == "Approve"){
+if(strtolower($resultsa->status) == "approved" || $resultsa->status == "approve"){
 	echo"
 <td><span class='btn-success rounded shadow p-1'>".$resultsa->status."</span></td>
 ";

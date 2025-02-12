@@ -72,7 +72,7 @@ width:100% !important;
         <select name="withto" class="withto  form-control" class="form-select">
             <option value="wallet" class="towallet dark">Wallet</option>
 			';
-			if(strtolower(vp_option_array($option_array,"allow_to_bank")) == "yes"){
+			if(strtolower(vp_option_array($option_array,"allow_to_bank")) == "yes" && vp_option_array($option_array,"vtupress_custom_transfer") != "yes"){
 				echo'
             <option value="bank" class="tobank dark">Bank Account</option>
 			';

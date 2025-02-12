@@ -162,6 +162,13 @@ else{
             echo "</div>";
             }
         break;
+        case"transfer2":
+            echo "<div class='container p-2'>";
+            echo "<div class='mt-3 mx-2 p-2'>";
+            include_once(__DIR__."/sections/transfer2.php");
+            echo "</div>";
+            echo "</div>";
+        break;
         case"kyc":
             if(vp_option_array($option_array,"resell") == "yes"){
             echo "<div class='container p-2'>";

@@ -941,7 +941,7 @@ KUDA
 if(vp_getoption('enable_monnify') == "yes"){?>
 
 
-                  <div class="tab-pane <?php echo banksmodal();?>" id="home" role="tabpanel">
+                  <div class="tab-pane <?php echo (is_numeric($account_number2)) ? banksmodal():""; ?>" id="home" role="tabpanel">
                     <div class="p-md-20">
 
                     <!-------------CONTENT----------->
@@ -994,7 +994,7 @@ VISA
                     <!------------------>
                     </div>
                   </div>
-                  <div class="tab-pane <?php echo banksmodal();?>" id="profile" role="tabpanel">
+                  <div class="tab-pane <?php echo (is_numeric($account_number1)) ? banksmodal():""; ?>" id="profile" role="tabpanel">
                     <div class="p-md-20">
 
                     <!-------------CONTENT----------->
@@ -1011,9 +1011,9 @@ VISA
 <div class=" container text-white p-4 roundeds">
 
 <div class="row mb-3">
-<div class="col Logo-name fs-3">
-<?php echo $bank_name1;?>
-</div>
+  <div class="col Logo-name fs-3">
+      <?php echo $bank_name1;?>
+  </div>
 </div>
 
 <div class="row mb-3">
@@ -1050,54 +1050,105 @@ VISA
                     <!------------------>
                     </div>
                   </div>
-                  <div class="tab-pane <?php echo banksmodal();?>" id="messages" role="tabpanel">
+                  <div class="tab-pane <?php echo (is_numeric($account_number)) ? banksmodal():""; ?>" id="messages" role="tabpanel">
                     <div class="p-md-20">
 
-                    <!-------------CONTENT----------->
+                      <!-------------CONTENT----------->
 
 
-                    <div class="Wrap mb-2 cdebit-card   position-relative">
-  <div class="Base">
-    <div class="Inner-wrap">
+                        <div class="Wrap mb-2 cdebit-card   position-relative">
+                              <div class="Base">
+                                  <div class="Inner-wrap">
 
-<div class=" container text-white p-4 roundeds">
+                                    <div class=" container text-white p-4 roundeds">
 
-<div class="row mb-3">
-<div class="col Logo-name fs-3">
-<?php echo $bank_name;?>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col Logo-name fs-3">
+                                          <?php echo $bank_name;?>
+                                        </div>
+                                      </div>
 
-<div class="row mb-3">
-<div class="col card-number text-center">
-<p><?php accountNumber($account_number,"monnify");?></p>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col card-number text-center">
+                                        <p><?php accountNumber($account_number,"monnify");?></p>
+                                        </div>
+                                      </div>
 
-<div class="row mb-3">
-<div class="col Name white  text-center">
-<p><?php echo $account_name;?></p>
-</div>
-</div>
-
-
-<div class="row">
-<div class="col fs-5">
-VISA
-</div>
-<div class="col flex justify-content-end  fs-5">
-<?php echo $chargef;?> Charge Applied
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col Name white  text-center">
+                                          <p><?php echo $account_name;?></p>
+                                        </div>
+                                      </div>
 
 
-                    <!------------------>
+                                      <div class="row">
+                                        <div class="col fs-5">
+                                          VISA
+                                        </div>
+                                        <div class="col flex justify-content-end  fs-5">
+                                          <?php echo $chargef;?> Charge Applied
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                              </div>
+                        </div>
+
+
+                      <!------------------>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane <?php echo (is_numeric($account_number2) || is_numeric($account_number1) || is_numeric($account_number)) ? "d-none":" show active"; ?>" id="messages2" role="tabpanel">
+                    <div class="p-md-20">
+
+                      <!-------------CONTENT----------->
+
+
+                        <div class="Wrap mb-2 cdebit-card   position-relative">
+                              <div class="Base">
+                                  <div class="Inner-wrap">
+
+                                    <div class=" container text-white p-4 roundeds">
+
+                                      <div class="row mb-3">
+                                        <div class="col Logo-name fs-3">
+                                          <?php echo $bank_name;?>
+                                        </div>
+                                      </div>
+
+                                      <div class="row mb-3">
+                                        <div class="col card-number text-center">
+                                        <p><?php accountNumber($account_number,"monnify");?></p>
+                                        </div>
+                                      </div>
+
+                                      <div class="row mb-3">
+                                        <div class="col Name white  text-center">
+                                          <p><?php echo $account_name;?></p>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="row">
+                                        <div class="col fs-5">
+                                          VISA
+                                        </div>
+                                        <div class="col flex justify-content-end  fs-5">
+                                          <?php echo $chargef;?> Charge Applied
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                              </div>
+                        </div>
+
+
+                      <!------------------>
                     </div>
                   </div>
 
