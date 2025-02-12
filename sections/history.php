@@ -1,5 +1,6 @@
 <?php	
 if(isset($_GET["vend"]) && $_GET["vend"]=="history" && isset($_GET["for"])){
+	$site_name = get_option('blogname');
 		echo '
 		<script src="'.esc_url(plugins_url("vtupress/js/print.js")).'"></script>
 		<script src="'.esc_url(plugins_url("vtupress/js/pdf.js")).'"></script>
@@ -1720,10 +1721,134 @@ echo"
 <th scope='col'>Current Balance</th>
 <th scope='col'>Description</th>
 <th scope='col'>time</th>
+<th scope='col'>Action</th>
 </tr>
 ";
 global $resultsad;
-foreach ($resultsad as $resultsa){ 
+foreach ($resultsad as $resultsa){
+	if(strtolower($resultsa->type) == "transfer" && strtolower($resultsa->status) == "approved"){
+		$action  = "<button type='button' class=\"btn btn-sm btn-secondary p-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded shadow  show_transfer".$resultsa->id."\" data-bs-toggle=\"modal\" data-bs-target=\"#transferexampleModal".$resultsa->id."\" data-bs-whatever='@getbootstrap'>VIEW</button>";
+	
+	
+		preg_match('/\[\s*(\d{10})\s*<=>\s*(.*?)\s*\]/', $resultsa->description, $matches);
+		$accountNumber = $matches[1]; // The 10-digit account number
+		$bankName = $matches[2]; // The bank name
+
+
+		echo '
+            <div class="modal fade" id="transferexampleModal'.$resultsa->id.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Transfer Receipt</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+						<div class="container-fluid border border-secondary" id="transferreceipt'.$resultsa->id.'">
+								<div class="row bg bg-dark text-white">
+									<div class="col bg bg-dark text-white">
+										<span class=""><h3>['.$site_name.'] @INVOICE </h3></span>
+									</div>
+								</div>
+							
+							
+						<div class="row p-4">
+							
+							<div class="row bg text-dark border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>ID</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>'.strtoupper($resultsa->id).'</h5></span>
+								</div>
+							</div>
+							
+							<div class="row bg text-dark border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>SENDER</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>'.strtoupper($resultsa->name).'</h5></span>
+								</div>
+							</div>
+							
+							<div class="row bg text-dark border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>Account Number</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>'.intval($accountNumber).'</h5></span>
+								</div>
+							</div>
+
+							<div class="row bg text-dark border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>Bank Name</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>'.strtoupper($bankName).'</h5></span>
+								</div>
+							</div>
+							
+							<div class="row bg text-dark border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>TIME</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>'.strtoupper($resultsa->the_time).'</h5></span>
+								</div>
+							</div>
+							
+
+							<div class="row bg bg-secondary text-white border border-bottom-primary md-2">
+								<div class="col">
+										<span class="input-group-text1"><h5>Amount</h5></span>
+								</div>
+								<div class="col right">
+										<span class="input-group-text1"><h5>₦'.number_format($resultsa->fund_amount).'</h5></span>
+								</div>
+							</div>
+							
+						</div>
+							
+						
+						
+						</div>
+		
+					</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary p-2 text-xs font-bold text-black uppercase bg-grey-600 rounded shadow  data-proceed-cancled" data-bs-dismiss="modal">Cancel</button>
+                      <button type="button" id="" class="btn btn-info p-2 text-xs font-bold text-white uppercase bg-blue-600 rounded shadow  "  onclick="printContent(\'transferreceipt'.$resultsa->id.'\');">Print</button>
+                      <button type="button" name="transfer_receipt" id="" class="btn btn-primary p-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded shadow  transfer_proceed'.$resultsa->id.'" >Download</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+			
+';
+	echo "
+	<script>
+
+jQuery(\".transfer_proceed".$resultsa->id."\").on(\"click\",function(){
+ var element = document.getElementById(\"transferreceipt".$resultsa->id."\");
+ alert('download would start shortly');
+html2pdf(element, {
+  margin:       10,
+  filename:     'transfer-$accountNumber.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+  jsPDF:        { unit:'mm', format: 'a4', orientation:'portrait' }
+});
+});
+
+</script>
+";
+	
+	}else{
+		$action = '---';
+	}
+
 echo "
 <tr>
 <td scope='row'>".$resultsa->id."</td>
@@ -1753,6 +1878,7 @@ echo"
 <td>".$resultsa->now_amount."</td>
 <td>".$resultsa->description."</td>
 <td>".$resultsa->the_time."</td>
+<td>".$action."</td>
 </tr>
 ";
 }
