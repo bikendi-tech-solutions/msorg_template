@@ -78,7 +78,7 @@ $user_email = get_userdata($id)->user_email;
 
 $bvn = vp_getuser($id,"myBvn",true);
 $nin = vp_getuser($id,"myNin",true);
-if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes" || vp_getoption('enable_payvessel') == "yes" || vp_getoption('enable_billstack') == "yes" || vp_getoption('enable_paymentpoint') == "yes" || vp_getoption('enable_paymentpoint') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
+if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes" || vp_getoption('enable_payvessel') == "yes" || vp_getoption('enable_billstack') == "yes" || vp_getoption('enable_paymentpoint') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
 
   
   if(vp_getoption("charge_method") == "fixed"){
@@ -305,7 +305,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                     <?php } 
                   if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
                     
-                                  $ncwallet = "Providus";
+                                  $ncwallet = "Bankly";
                                   $ncwallet_accountname = vp_getuser($id,"ncwallet_accountname");
                                   $ncwallet_accountnumber = vp_getuser($id,"ncwallet_accountnumber");
 
@@ -364,29 +364,29 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 <?php } 
                 if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
                     
-                  $paymentpoint = "Palmpay";
-                  $paymentpoint_accountname = vp_getuser($id,"paymentpoint_accountname");
-                  $paymentpoint_accountnumber = vp_getuser($id,"paymentpoint_accountnumber");
+                        $paymentpoint = "Palmpay";
+                        $paymentpoint_accountname = vp_getuser($id,"paymentpoint_accountname");
+                        $paymentpoint_accountnumber = vp_getuser($id,"paymentpoint_accountnumber");
 
-                  if(vp_getoption("paymentpoint_charge_method") == "fixed"){
-                      $paymentpoint_chargef =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
-                    }
-                    else{
-                      $paymentpoint_chargef =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
-                    }
-  ?>
+                        if(vp_getoption("paymentpoint_charge_method") == "fixed"){
+                            $paymentpoint_chargef =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
+                          }
+                          else{
+                            $paymentpoint_chargef =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
+                          }
+                    ?>
                   
 
-                <li class="nav-item">
-                  <a
-                    class="nav-link <?php echo banksbtn();?>"
-                    data-bs-toggle="tab"
-                    href="#paymentpoint"
-                    role="tab"
-                    ><span class="hidden-sm-up"></span>
-                    <span class="hidden-xs-down"><?php echo $paymentpoint;?></span></a
-                  >
-                </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link <?php echo banksbtn();?>"
+                          data-bs-toggle="tab"
+                          href="#paymentpoint"
+                          role="tab"
+                          ><span class="hidden-sm-up"></span>
+                          <span class="hidden-xs-down"><?php echo $paymentpoint;?></span></a
+                        >
+                      </li>
 
 <?php } 
 
@@ -417,35 +417,7 @@ if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_b
 </li>
 
 <?php } 
-
-
-if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
-                    
-  $paymentpoint = "Palmpay";
-  $paymentpoint_accountname = vp_getuser($id,"paymentpoint_accountname");
-  $paymentpoint_accountnumber = vp_getuser($id,"paymentpoint_accountnumber");
-
-  if(vp_getoption("paymentpoint_charge_method") == "fixed"){
-      $paymentpoint_chargef =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
-    }
-    else{
-      $paymentpoint_chargef =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
-    }
-?>
-  
-
-<li class="nav-item">
-  <a
-    class="nav-link <?php echo banksbtn();?>"
-    data-bs-toggle="tab"
-    href="#paymentpoint"
-    role="tab"
-    ><span class="hidden-sm-up"></span>
-    <span class="hidden-xs-down"><?php echo $paymentpoint;?></span></a
-  >
-</li>
-
-<?php } 
+ 
                 if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){
                     
                   $kuda = "Kuda";
@@ -631,7 +603,7 @@ if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_nc
   
   <div class="row mb-3">
   <div class="col Logo-name fs-3">
-    Providus
+    Bankly
   </div>
   </div>
   
@@ -831,60 +803,6 @@ if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custo
   
   <?php }
 
-
-if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){?>
-
-  <div class="tab-pane <?php echo banksmodal();?>" id="paymentpoint" role="tabpanel">
-      <div class="p-md-20">
-  
-      <!-------------CONTENT----------->
-  <div class="Wrap mb-2 cdebit-card   position-relative">
-  <div class="Base">
-  <div class="Inner-wrap">
-  
-  <div class=" container text-white p-4 roundeds">
-  
-  <div class="row mb-3">
-  <div class="col Logo-name fs-3">
-    Palmpay
-  </div>
-  </div>
-  
-  <div class="row mb-3">
-  <div class="col card-number text-center">
-  <p><?php accountNumber($paymentpoint_accountnumber,"paymentpoint");?></p>
-  </div>
-  </div>
-  
-  <div class="row mb-3">
-  <div class="col Name white  text-center">
-  <p><?php echo $paymentpoint_accountname;?></p>
-  </div>
-  </div>
-  
-  
-  <div class="row">
-  <div class="col fs-5">
-  VISA
-  </div>
-  <div class="col flex justify-content-end  fs-5">
-  <?php echo $paymentpoint_chargef;?> Charge Applied
-  </div>
-  </div>
-  
-  </div>
-  
-  </div>
-  </div>
-  </div>
-  
-  
-      <!------------------>
-      </div>
-    </div>
-  
-  <?php }
-
 if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){?>
 
   <div class="tab-pane <?php echo banksmodal();?>" id="kuda" role="tabpanel">
@@ -936,118 +854,116 @@ KUDA
       </div>
     </div>
   
-  <?php } 
-
-if(vp_getoption('enable_monnify') == "yes"){?>
+  <?php } if(vp_getoption('enable_monnify') == "yes"){?>
 
 
                   <div class="tab-pane <?php echo (is_numeric($account_number2)) ? banksmodal():""; ?>" id="home" role="tabpanel">
                     <div class="p-md-20">
 
-                    <!-------------CONTENT----------->
-  <div class="Wrap mb-2 cdebit-card   position-relative">
- <!-- <div class="position-absolute bg bg-primary w-100 h-100">
+                                          <!-------------CONTENT----------->
+                      <div class="Wrap mb-2 cdebit-card   position-relative">
+                              <!-- <div class="position-absolute bg bg-primary w-100 h-100">
 
-  
+                                
 
-</div>-->
-  <div class="Base">
-    <div class="Inner-wrap">
+                              </div>-->
+                              <div class="Base">
+                                  <div class="Inner-wrap">
 
-<div class=" container text-white p-4 roundeds">
+                                    <div class=" container text-white p-4 roundeds">
 
-<div class="row mb-3">
-<div class="col Logo-name fs-3">
-<?php echo $bank_name2;?>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col Logo-name fs-3">
+                                        <?php echo $bank_name2;?>
+                                        </div>
+                                      </div>
 
-<div class="row mb-3">
-<div class="col card-number text-center">
-<p><?php accountNumber($account_number2,"monnify");?></p>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col card-number text-center">
+                                        <p><?php accountNumber($account_number2,"monnify");?></p>
+                                        </div>
+                                      </div>
 
-<div class="row mb-3">
-<div class="col Name white  text-center">
-<p><?php echo $account_name2;?></p>
-</div>
-</div>
-
-
-<div class="row">
-<div class="col fs-5">
-VISA
-</div>
-<div class="col flex justify-content-end  fs-5">
-<?php echo $chargef;?> Charge Applied
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
+                                      <div class="row mb-3">
+                                        <div class="col Name white  text-center">
+                                        <p><?php echo $account_name2;?></p>
+                                        </div>
+                                      </div>
 
 
-                    <!------------------>
+                                      <div class="row">
+                                        <div class="col fs-5">
+                                          VISA
+                                        </div>
+                                        <div class="col flex justify-content-end  fs-5">
+                                          <?php echo $chargef;?> Charge Applied
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                              </div>
+                      </div>
+
+
+                                          <!------------------>
                     </div>
                   </div>
                   <div class="tab-pane <?php echo (is_numeric($account_number1)) ? banksmodal():""; ?>" id="profile" role="tabpanel">
                     <div class="p-md-20">
 
-                    <!-------------CONTENT----------->
+                      <!-------------CONTENT----------->
 
-                    <div class="Wrap mb-2 cdebit-card   position-relative">
- <!-- <div class="position-absolute bg bg-primary w-100 h-100">
+                      <div class="Wrap mb-2 cdebit-card   position-relative">
+                        <!-- <div class="position-absolute bg bg-primary w-100 h-100">
 
-  
+                          
 
-</div>-->
-  <div class="Base">
-    <div class="Inner-wrap">
+                        </div>-->
+                        <div class="Base">
+                            <div class="Inner-wrap">
 
-<div class=" container text-white p-4 roundeds">
+                              <div class=" container text-white p-4 roundeds">
 
-<div class="row mb-3">
-  <div class="col Logo-name fs-3">
-      <?php echo $bank_name1;?>
-  </div>
-</div>
+                                <div class="row mb-3">
+                                  <div class="col Logo-name fs-3">
+                                      <?php echo $bank_name1;?>
+                                  </div>
+                                </div>
 
-<div class="row mb-3">
-<div class="col card-number text-center">
-<p><?php accountNumber($account_number1,"monnify");?></p>
-</div>
-</div>
+                                <div class="row mb-3">
+                                  <div class="col card-number text-center">
+                                  <p><?php accountNumber($account_number1,"monnify");?></p>
+                                  </div>
+                                </div>
 
-<div class="row mb-3">
-<div class="col Name white  text-center">
-<p><?php echo $account_name1;?></p>
-</div>
-</div>
-
-
-<div class="row">
-<div class="col fs-5">
-VISA
-</div>
-<div class="col flex justify-content-end  fs-5">
-<?php echo $chargef;?> Charge Applied
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
+                                <div class="row mb-3">
+                                  <div class="col Name white  text-center">
+                                  <p><?php echo $account_name1;?></p>
+                                  </div>
+                                </div>
 
 
+                                <div class="row">
+                                  <div class="col fs-5">
+                                  VISA
+                                  </div>
+                                  <div class="col flex justify-content-end  fs-5">
+                                  <?php echo $chargef;?> Charge Applied
+                                  </div>
+                                </div>
+
+                              </div>
+
+                            </div>
+                        </div>
+                      </div>
 
 
-                    <!------------------>
+
+
+                      <!------------------>
                     </div>
                   </div>
                   <div class="tab-pane <?php echo (is_numeric($account_number)) ? banksmodal():""; ?>" id="messages" role="tabpanel">
@@ -1100,7 +1016,6 @@ VISA
                       <!------------------>
                     </div>
                   </div>
-
                   <div class="tab-pane <?php echo (is_numeric($account_number2) || is_numeric($account_number1) || is_numeric($account_number)) ? "d-none":" show active"; ?>" id="messages2" role="tabpanel">
                     <div class="p-md-20">
 
@@ -1152,7 +1067,7 @@ VISA
                     </div>
                   </div>
 
-                  <?php } ?>
+  <?php } ?>
 
                 </div>
               </div>

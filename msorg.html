@@ -216,7 +216,7 @@ function banksmodal(){
 							echo plugins_url('msorg_template')."/msorg_template/vpay.jpg";
 						}
 						elseif(strtolower($name) == "ncwallet"){
-							echo plugins_url('msorg_template')."/msorg_template/providus.jpeg";
+							echo plugins_url('msorg_template')."/msorg_template/bankly.jpg";
 						}
 						elseif(strtolower($name) == "billstack" || strtolower($name) == "payvessel"  ){
 							echo plugins_url('msorg_template')."/msorg_template/9psb.jpeg";
@@ -257,7 +257,7 @@ function banksmodal(){
 
 							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){?>
 								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab" data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet" aria-selected="true">PROVIDUS</a>
+									<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab" data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet" aria-selected="true">BANKLY</a>
 								   
 								</li>
 							<?php }
@@ -397,7 +397,7 @@ function banksmodal(){
 							<?php }
 
 							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
-								$ncwallet = "Providus";
+								$ncwallet = "Bankly";
 								$ncwalletAccountName = vp_getuser($id,"ncwallet_accountname");
 								$ncwalletAccountNumber = vp_getuser($id,"ncwallet_accountnumber");
 
