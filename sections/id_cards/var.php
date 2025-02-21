@@ -84,13 +84,20 @@ $id = sanitize_text_field($_GET["id"]);
 
 global $wpdb;
 $table = $wpdb->prefix."vp_verifications";
-$result = $wpdb->get_results("SELECT * FROM $table WHERE id = '$id'");
+if($id == "last"){
+    $result = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT 1");
+}else{
+    $result = $wpdb->get_results("SELECT * FROM $table WHERE id = '$id'");
+}
 
 if($result == null || $result == false || empty($result)){
     die("No Data Received");
 }
 
 $resultsd = $result[0];
+$id = $resultsd->id;
+$_GET["id"] = $id;
+
 (isset(json_decode($resultsd->vDatas)->data))? $verify_data = json_decode($resultsd->vDatas)->data :  $verify_data = "" ;
 
 $accountImage = "data:image/jpeg;base64,".$verify_data->photo;
