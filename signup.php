@@ -298,7 +298,7 @@ include_once(ABSPATH.'wp-admin/includes/plugin.php');
             Pin<span class="asteriskField">*</span>
         </label>
             <div class="">
-                <input type="text" name="pin" maxlength="4" minlength="4" class="textinput textInput form-control" required="" id="id_Pin">
+                <input type="password" name="pin" maxlength="4" minlength="4" class="textinput textInput form-control" required="" id="id_Pin">
             </div>
 </div>
 

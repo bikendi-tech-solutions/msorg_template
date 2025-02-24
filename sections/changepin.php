@@ -20,13 +20,13 @@ echo'
 <label for="user-id" class="form-label">New Pin</label><br>
 
 <div class="input-group mb-2">
-<input type="number" name="pin" class="form-control pin" maxlength="5" required><br>
+<input type="password" name="pin" class="form-control pin" maxlength="5" required><br>
 </div>
 
 <label for="user-id" class="form-label">Confirm Pin</label><br>
 
 <div class="input-group mb-2">
-<input type="number" name="cpin" class="form-control cpin" maxlength="5" required><br>
+<input type="password" name="cpin" class="form-control cpin" maxlength="5" required><br>
 </div>
 
 <label for="amount" class="form-label">Your Password</label><br>

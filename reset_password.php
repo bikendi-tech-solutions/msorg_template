@@ -135,7 +135,7 @@
         </label>
         
             <div class="">
-                <input type="number" name="pin" autofocus="" id="pin" autocapitalize="none" autocomplete="pin" maxlength="150" class="textinput textInput form-control pin" required="" id="id_pin">
+                <input type="password" name="pin" autofocus="" id="pin" autocapitalize="none" autocomplete="pin" maxlength="150" class="textinput textInput form-control pin" required="" id="id_pin">
                 
             </div>
         
