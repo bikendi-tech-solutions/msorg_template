@@ -358,6 +358,9 @@ function generateName(response){
 }
 
 function transferResponse(response){
+
+    jQuery(".withdrawNow").removeClass("disabled");
+
     if(response == "success"){
         showToast("Transfer successful!","green");
         jQuery("#amount").val("");
@@ -428,7 +431,7 @@ jQuery("#accountNumber").on("input", function() {
     },500);
 });
 
-jQuery(".withdrawNow").click(function() {
+jQuery(".withdrawNow:not('.disabled')").click(function() {
     var amt = jQuery("#amount").val();
     var bal = parseInt(jQuery(".userbalance").text());
     var acct = jQuery("#accountNumber").val();
@@ -477,6 +480,7 @@ jQuery(".withdrawNow").click(function() {
 
     console.log(obj);
     console.log(withdrawUrl);
+    jQuery(this).addClass("disabled");
     doAjax(withdrawUrl,obj,'post',transferResponse);
     
 });
