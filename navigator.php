@@ -428,7 +428,7 @@ if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && $level[0]->tran
 
 
 <?php
-if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,"resell") == "yes" && isset($level)){
+if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,"resell") == "yes"  && vp_option_array($option_array,"hide_pricing") != "yes" && isset($level)){
 ?>    
     <li class="nav-item <?php make_active("pricing");?>">
         

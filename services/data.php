@@ -260,11 +260,24 @@ $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
 					<div class="smileEmailDiv">
                 		<label for="smile_account_type" class="form-label">Type</label>
 							<select class="form-select form-select-sm smile_account_type" id="smile_account_type">
-								<option value="PhoneNumber">Phone Number</option>
-								<option value="AccountNumber">Account Number</option>
+								<option value="">--Please Select--</option>
+								<option value="id">Account Number</option>
+								<option value="phone">Phone Number</option>
 							</select>
-						</div>
 					</div>
+					<script>
+						$(document).ready(function(){
+                            $("#smile_account_type").change(function(){
+                                if($(this).val() == "phone"){
+                                    $("label[for='phone']").text("Phone");
+                                    $("input#phone").attr("placeholder","Phone Number");
+                                }else{
+									$("label[for='phone']").text("Account Number");
+                                    $("input#phone").attr("placeholder","Account Number");
+                                }
+                            });
+                        });
+                    </script>
 			</div>
 
 			<div class="mb-2 visually-hidden">
@@ -291,21 +304,169 @@ $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
                     <label for="phone" class="form-label">Phone</label>
                     <input id="phone" name="phone" list="beneficiaries" type="number" class="form-control data-number data-phone" maxlength="11" placeholder="Phone Number" aria-label="Phone Number" aria-describedby="basic-addon1">
 					<datalist id="beneficiaries">
-<?php
-$bens = explode(",",vp_getuser($id,"beneficiaries",true));
-if(count($bens) >= 1 && vp_getoption("enable_beneficiaries") == "yes"){
-    foreach($bens as $ben){
-        if(!empty($ben)){
-            echo "<option value='$ben'>";
-        }
-    }
-}
-?>
-                </datalist>
+								<?php
+								$bens = explode(",",vp_getuser($id,"beneficiaries",true));
+								if(count($bens) >= 1 && vp_getoption("enable_beneficiaries") == "yes"){
+									foreach($bens as $ben){
+										if(!empty($ben)){
+											echo "<option value='$ben'>";
+										}
+									}
+								}
+								?>
+                	</datalist>
+					<div class="mb-2 smileReqs d-flex justify-content-end mb-2">
+								<span class="btn btn-primary verify-email btn-sm p-2 d-flex align-items-center justify-content-center" style="width:100px;height:25px;">Verify</span>
+
+						<script>
+							jQuery(".verify-email").on("click",function(){
+									var demail = jQuery("input#phone").val();
+									var $by = jQuery(".smile_account_type").val();
+									jQuery(".verify-email").addClass("disabled");
+									jQuery(".spinner-grow").removeClass("visually-hidden");
+									if(demail == ""){
+										swal({
+                                            title: "Error!",
+                                            text: "Please enter a value to verify",
+                                            icon: "error",
+                                            button: "Okay",
+                                        });
+                                        return false;
+									}
+									else if($by == ""){
+										swal({
+                                            title: "Error!",
+                                            text: "Please select a type to verify",
+                                            icon: "error",
+                                            button: "Okay",
+                                        });
+                                        return false;
+									}
+
+									jQuery.LoadingOverlay("show");
+
+									
+									var obj = {};
+									obj["demail"] = demail;
+									obj["by"] = $by;
+									jQuery.ajax({
+									url: '<?php echo esc_url(plugins_url('vtupress/apis/verify_smile.php'));?>',
+									data: obj,
+									dataType: 'text',
+									'cache': false,
+									"async": true,
+									error: function (jqXHR, exception) {
+										jQuery(".verify-email").removeClass("disabled");
+										jQuery(".spinner-grow").addClass("visually-hidden");
+										var msg = "";
+										if (jqXHR.status === 0) {
+											msg = "No Connection.\n Verify Network.";
+										} else if (jqXHR.status == 404) {
+											msg = "Requested page not found. [404]";
+										} else if (jqXHR.status == 500) {
+											msg = "Internal Server Error [500].";
+										} else if (exception === "parsererror") {
+											msg = "Requested JSON parse failed.";
+										} else if (exception === "timeout") {
+											msg = "Time out error.";
+										} else if (exception === "abort") {
+											msg = "Ajax request aborted.";
+										} else {
+											msg = "Uncaught Error.\n" + jqXHR.responseText;
+										}
+
+										swal({
+											title: "Error!",
+											text: msg,
+											icon: "error",
+											button: "Okay",
+										});
+									},
+							
+									success: function(data) {
+										jQuery(".verify-email").removeClass("disabled");
+									
+										jQuery.LoadingOverlay("hide");
+									
+										try {
+											var data = JSON.parse(data);
+											if ('status' in data) {
+												if(data.status == "success"){
+													var accountId = data.message;
+													swal({
+														title: accountId,
+														text: "Verified Successfully",
+														icon: "success",
+														button: "Okay",
+													});
+												}
+												else if(data.status == "failed"){
+														swal({
+														title: "Error verifying value. \n Please try another type",
+														text: data.message,
+														icon: "warning",
+														button: "Okay"
+														});
+												}
+											}
+											else{
+										
+												console.log(data);
+												jQuery.LoadingOverlay("hide");
+													swal({
+															title: "Error Verifying Email",
+															text: data.message,
+															icon: "warning",
+															button: "Okay"
+													});
+											}
+											
+										} catch (error) {
+											console.log(error);
+                                            jQuery.LoadingOverlay("hide");
+											swal({
+													buttons: {
+															<?php
+															if(vp_getoption("hide_why") != "yes"){
+															?>
+															cancel: "Why?",
+															<?php
+															}
+															?>
+															defeat: "Okay",
+													},
+													title: "Verification Failed",
+													text: "Please try another type (phoneNumber or accountNumber)",
+													icon: "error",
+											})
+											.then((value) => {
+													switch (value) {
+														case "defeat":
+															//location.reload();
+														break;
+														default:
+															swal(data,{
+																icon: "info",
+																button: "Okay"
+															});
+													}
+											});
+
+										};
+
+									},
+									type: 'POST'
+								});
+							
+							
+							});
+						</script>
+					</div>
 					<div id="validationServer04Feedback" class="invalid-feedback">
                        Error: <span class="number-error-message"></span>.
-                      </div>
+                    </div>
                 </div>
+
                 <div class="mb-2">
                     <label for="network" class="form-label">Original Amount</label>
                     <div class="input-group mb-2" >
@@ -2665,43 +2826,42 @@ else{
 		  }
 		  else{
 			 jQuery.LoadingOverlay("hide");
-		swal({
-	  buttons: {
-		<?php
-		if(vp_getoption("hide_why") != "yes"){
-	?>
-		cancel: "Why?",
-		<?php
-		}
-		?>
-		defeat: "Okay",
-	  },
-	  title: "Transaction Processing",
-	  text: "Funds Will Be Reversed If Debited And Status Marked Failed",
-	  icon: "warning",
-	})
-	.then((value) => {
-	  switch (value) {
-	 
-		case "defeat":
-			location.reload();
-		  break;
-		default:
-		swal(data,{
-	  icon: "info",
-	  button: "Okay"
-	}).then((value) => {
-	  switch (value) {
-	 
-		case "defeat":
-			location.reload();
-		  break;
-		default:
-		   location.reload();
-	  }
-	});
-	  }
-	});
+			swal({
+			buttons: {
+					<?php
+					if(vp_getoption("hide_why") != "yes"){
+					?>
+					cancel: "Why?",
+					<?php
+					}
+					?>
+					defeat: "Okay",
+			},
+			title: "Transaction Processing",
+			text: "Funds Will Be Reversed If Debited And Status Marked Failed",
+			icon: "warning",
+			})
+			.then((value) => {
+			switch (value) {
+				case "defeat":
+					location.reload();
+				break;
+				default:
+					swal(data,{
+						icon: "info",
+						button: "Okay"
+					}).then((value) => {
+							switch (value) {
+							
+								case "defeat":
+									location.reload();
+								break;
+								default:
+								location.reload();
+							}
+					});
+			}
+			});
 		  }
 	  },
 	  type: 'POST'

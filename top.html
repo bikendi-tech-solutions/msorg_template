@@ -204,6 +204,15 @@ if(vp_getoption("charge_method") == "fixed"){
 			/* background: linear-gradient(132deg, #680ee3, #090d54) !important; */
 			background: linear-gradient(132deg, <?php echo vp_option_array($option_array,"msorg_from"); ?>,  <?php echo vp_option_array($option_array,"msorg_to"); ?> ) !important;
 		}
+		.bg-from {
+			/* background: linear-gradient(132deg, #680ee3, #090d54) !important; */
+			background-color: <?php echo vp_option_array($option_array,"msorg_from"); ?> !important;
+		}
+
+		.bg-to {
+			/* background: linear-gradient(132deg, #680ee3, #090d54) !important; */
+			background-color: <?php echo vp_option_array($option_array,"msorg_to"); ?> ) !important;
+		}
 
 		.swal2-styled.swal2-confirm{
 			background-color: <?php echo vp_option_array($option_array,"msorg_from"); ?> !important;

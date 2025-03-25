@@ -239,7 +239,7 @@ $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
 
 			<div class="mb-2 smileReqs">
 					<div class="smileEmailDiv">
-                		<label for="smile_email" class="form-label">Smile Email</label>
+                		<label for="smile_email" class="form-label">Customer ID:</label>
 						<div class="input-group" >
                 		<input type="email" name="smile_email" class="form-control smile_email" placeholder="Smile Email" aria-label="smile_email" aria-describedby="basic-addon1" value="">
 						<span class="input-group-text" id="basic-addon1">
@@ -621,14 +621,14 @@ else{
 			var obj = {};
 			obj["demail"] = demail;
 			jQuery.ajax({
-	  url: '<?php echo esc_url(plugins_url('vtupress/apis/verify_smile.php'));?>',
-	  data: obj,
-	  dataType: 'json',
-	  'cache': false,
-	  "async": true,
-	  error: function (jqXHR, exception) {
-		jQuery(".verify-email").removeClass("visually-hidden");
-	jQuery(".spinner-grow").addClass("visually-hidden");
+			url: '<?php echo esc_url(plugins_url('vtupress/apis/verify_smile.php'));?>',
+			data: obj,
+			dataType: 'json',
+			'cache': false,
+			"async": true,
+			error: function (jqXHR, exception) {
+				jQuery(".verify-email").removeClass("visually-hidden");
+			jQuery(".spinner-grow").addClass("visually-hidden");
 			var msg = "";
 			if (jqXHR.status === 0) {
 				msg = "No Connection.\n Verify Network.";
