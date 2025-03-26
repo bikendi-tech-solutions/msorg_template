@@ -193,7 +193,11 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array
                                     }).then((value) => {
                                         //?vend=history-plain&id='.$resultsd->id.'&plain_receipt
                                         //location.reload();
-                                        location.href = "?vend=history-plain&id=last&plain_receipt";
+                                        var vtype = jQuery("#vtype").val();
+
+                                        if(vtype == "nin"){
+                                            location.href = "?vend=history-plain&id=last&plain_receipt";
+                                        }
                                     });
                                 }else{
                                     swal({
