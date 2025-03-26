@@ -331,18 +331,18 @@ $plan_type = "SME";
 $plan_name = vp_option_array($option_array,"acdatan$i");
 $plan = vp_option_array($option_array,"acdata$i");
 
-if(!empty($plan) && !empty($plan_name)&& !empty($disamount)   && vp_option_array($option_array,"smecontrol") == "checked"    && vp_option_array($option_array,"setdata") == "checked"){
-echo"
-<tr style='background-color:#e83e8c; color:white;'>
-<td scope='row'> $plan_type </td>
-<td> $plan_network </td>
-<td> ".strtoupper($plan_name)." </td>
-<td> NGN $disamount </td>
-<td> $discount% </td>
-</tr>
-";
+    if(!empty($plan) && !empty($plan_name)&& !empty($disamount)   && vp_option_array($option_array,"smecontrol") == "checked"    && vp_option_array($option_array,"setdata") == "checked"){
+    echo"
+    <tr style='background-color:#e83e8c; color:white;'>
+    <td scope='row'> $plan_type </td>
+    <td> $plan_network </td>
+    <td> ".strtoupper($plan_name)." </td>
+    <td> NGN $disamount </td>
+    <td> $discount% </td>
+    </tr>
+    ";
 
-}
+    }
 }
 
 

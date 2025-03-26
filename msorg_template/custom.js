@@ -15,7 +15,7 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 document.addEventListener("DOMContentLoaded",function(){
-    var text = "Fullname: "+jQuery(".nin_surname").text()+" "+jQuery(".nin_othername").text()+" | NIN: "+jQuery(".nin_number").text();
+    var text = "Fullname: "+jQuery(".nin_surname").text()+" "+jQuery(".nin_othername").text()+" | NIN: "+jQuery(".the_number").text();
     if (text) {
         jQuery('.replace-qrcode').empty(); 
         
