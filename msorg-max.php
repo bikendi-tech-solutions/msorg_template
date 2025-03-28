@@ -137,16 +137,16 @@ if ($kyc == "yes") {
                                                 <i style="color: black;" class="ri-stock-line tp"></i>
                                                 <strong style="white-space: nowrap">Verify To Get <br>Account</strong>
                                             </div>
-                                        <a data-bs-toggle="offcanvas" data-bs-target="#fundWallet">
+                                        <a data-bs-toggle="offcanvas" data-bs-target="#fundWallet" href="?vend=wallet">
                                             <div style="background-color: #fffff" class="iconbox">
                                                 <i style="color: black;" class="ri-bank-card-line tp"></i>
                                                 <strong style="white-space: nowrap">Fund Wallet</strong>
                                             </div>
                                         </a>
-                                        <a href="#">
+                                        <a href="?vend=transfer">
                                             <div style="background-color: #fffff" class="iconbox">
                                                 <i style="color: black;" class="ri-cash-line tp"></i>
-                                                <strong style="white-space: nowrap">Make Money</strong>
+                                                <strong style="white-space: nowrap">Transfer</strong>
                                             </div>
 
                                         </a>
@@ -389,6 +389,7 @@ $features = array(
     'bulksms' => vp_option_array($option_array,"smscontrol"),
     'coupon' => vp_option_array($option_array,"enable_coupon"),
     'kyc' => strtolower($kyc_data[0]->enable),
+    'make' => "true",
     'referral' => "true"
 );
 
@@ -406,6 +407,7 @@ $services = array(
     'bulksms' => array('icon' => 'max-sms', 'label' => 'BulkSMS', 'url' => '?vend=sms'),
     'coupon' => array('icon' => 'max-award', 'label' => 'Coupon', 'url' => '?vend=wallet&sub=coupon'),
     'referral' => array('icon' => 'max-user', 'label' => 'Referral', 'url' => '?vend=referral-details'),
+    'make' => array('icon' => 'max-user', 'label' => 'Money', 'url' => '#'),
 );
 $demo = true;
 echo '<div class="row " style="position:relative;left:15px;">';

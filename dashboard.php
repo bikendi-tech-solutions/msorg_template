@@ -18,13 +18,15 @@ include_once(__DIR__."/top.html");
 
 //PAGES
 if(!isset($_GET["vend"])){
-include_once(__DIR__."/msorg.html");
+    include_once(__DIR__."/msorg.html");
+// include_once(__DIR__."/msorg-max.php");
 }
 else{
 
     switch($_GET["vend"]){
         case"dashboard":
             include_once(__DIR__."/msorg.html");
+            // include_once(__DIR__."/msorg-max.php");
         break;
         case"data":
             if(vp_option_array($option_array,"setdata") == "checked"){
