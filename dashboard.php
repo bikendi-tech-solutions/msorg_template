@@ -165,11 +165,13 @@ else{
             }
         break;
         case"transfer2":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/transfer2.php");
-            echo "</div>";
-            echo "</div>";
+            if(vp_getoption('allow_to_bank') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes"  && vp_getoption("vtupress_custom_transfer") == "yes" ){
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__."/sections/transfer2.php");
+                echo "</div>";
+                echo "</div>";
+            }
         break;
         case"kyc":
             if(vp_option_array($option_array,"resell") == "yes"){

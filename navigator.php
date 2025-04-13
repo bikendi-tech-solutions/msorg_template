@@ -554,6 +554,13 @@ if( vp_getoption('enable_paymentpoint') == "yes" ){
                         </li>
     <?php
 }
+if( vp_getoption('enable_nomba') == "yes" ){
+    ?>
+                        <li>
+                            <a href="#" class="generate_account" for="nomba"> <span class="sub-item">Generate Nomba</span> </a>
+                        </li>
+    <?php
+}
 if( vp_getoption('enable_payvessel') == "yes" ){
     ?>
                         <li>

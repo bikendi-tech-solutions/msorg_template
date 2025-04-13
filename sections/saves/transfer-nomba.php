@@ -29,10 +29,13 @@ $admin_first = vp_getuser($id,"first_name",true);
 $admin_last = vp_getuser($id,"last_name",true);
 
 
+$secret_key = vp_getoption("nomba_secretkey");
+$client_id = vp_getoption("nomba_businessid");
+$account_id = vp_getoption("nomba_apikey");
 
-$secret_key = vp_getoption('psec'); //get_option('jettrade_paystack_secret');
 
-$name = $admin_first." ".$admin_last;
+
+$admin_name = $admin_first." ".$admin_last;
 
 $accountNo = trim($_POST["account_number"]);
 $bank_code = trim($_POST["bank_code"]);
@@ -47,15 +50,74 @@ if(isset($_POST["get_details"])):
     $get_details = true;
 endif;
 
-//create recipient
+//get token
+$payload =  [
+    "grant_type" => "client_credentials",
+    "client_id" => $client_id,
+    "client_secret"=> $secret_key
+];
 
-$url  = "https://api.paystack.co/transferrecipient";
+
+$url = "https://api.nomba.com/v1/auth/token/issue";
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+CURLOPT_URL =>  $url,
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS =>json_encode($payload,JSON_UNESCAPED_SLASHES),
+CURLOPT_HTTPHEADER => [
+    "Authorization: Bearer $secret_key",
+    "accountId: $account_id",
+    "Content-Type: application/json"
+],
+]);
+
+$res = curl_exec($curl);
+$response = json_decode($res,true); 
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+
+$return_account = new stdClass;
+$return_account->status = 'failed';
+$return_account->message = $err;
+
+$msg = json_encode($return_account);
+error_log($msg);
+die($msg);
+
+} else {
+
+    if(!isset($response["data"]["access_token"])){
+        $return_account = new stdClass;
+        $return_account->status = 'failed';
+        $return_account->message = $res;
+
+        $msg = json_encode($return_account);
+        error_log($msg);
+        die($msg);
+    }else{
+        $token = $response["data"]["access_token"];
+    }
+}
+
+
+
+
+
+//lookup
+
+$url  = "https://api.nomba.com/v1/transfers/bank/lookup";
   $fields = [
-    'type' => "nuban",
-    'name' => $name,
-    'account_number' => $accountNo,
-    'bank_code' => $bank_code,
-    'currency' => $currency
+    'accountNumber' => $accountNo,
+    'bankCode' => $bank_code
   ];
   
    $fields_string = http_build_query($fields);
@@ -69,6 +131,7 @@ $url  = "https://api.paystack.co/transferrecipient";
   curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Authorization: Bearer $secret_key",
+    "accountId: $account_id",
     "Cache-Control: no-cache",
   ));
   
@@ -82,20 +145,17 @@ $json = json_decode($result,true);
 
 
 
-if(isset($json["data"]["recipient_code"])):
-    $result = $json["data"]["recipient_code"];
+if(!isset($json["description"]) || !isset($json["data"]["accountName"])):
+    die($result);
 else:
-    error_log("create recipient error .. ".$result);
-    if(isset($json["message"])):
-        die($json["message"]);
-    endif;
-        die("101");
+    if(strtolower($json["description"]) != "success"){
+        die($result)
+    }
 endif;
   
  
 if(isset($json["data"]["details"]["account_name"])):
-  $name = $json["data"]["details"]["account_name"];
-  $bank_code = $json["data"]["details"]["bank_name"];
+  $name = $json["data"]["accountName"];
 else:
   $name = "";
   $bank_code = "";
@@ -109,76 +169,81 @@ if($get_details):
     die($name);
 endif;
 
-if($amount < 5000 ){
-  $charge = 20;
-}
-elseif($amount < 50000){
-  $charge = 70;
-}
-else{
-  $charge = 100;
-}
 
-$amountWithCharge = ($amount + $charge);
-
-if($current_balance < $amount):
-  die("Insufficient balance [$current_balance]");
-elseif($amount < 100):
-    die("Minimum transfer amount is 100");
-elseif($current_balance < $amountWithCharge):
-  die("Insufficient balance to cover transfer fee [$charge] inclusively");
-else:
-//charge = 
-
-  $updatedBalance = $current_balance - $amountWithCharge;
+  if($amount < 5000 ){
+    $charge = 20;
+  }
+  elseif($amount < 50000){
+    $charge = 70;
+  }
+  else{
+    $charge = 100;
+  }
 
 
-endif;
+  $amountWithCharge = ($amount + $charge);
 
-$status = "failed";
-   
-    //initiate transfer
-
-$url  = "https://api.paystack.co/transfer";
-  $fields = [
-    'source' => "balance",
-    'reason' => "Money Transfer From Trade",
-    'amount' => $amount*100,
-    'reference' => uniqid(),
-    'recipient' => $result
-  ];
+  if($current_balance < $amount):
+    die("Insufficient balance [$current_balance]");
+  elseif($amount < 100):
+      die("Minimum transfer amount is 100");
+  elseif($current_balance < $amountWithCharge):
+    die("Insufficient balance to cover transfer fee [$charge] inclusively");
+  else:
+  //charge = 
   
-   $fields_string = http_build_query($fields);
+    $updatedBalance = $current_balance - $amountWithCharge;
   
-    //open connection
-  $ch = curl_init();
   
-  //set the url, number of POST vars, POST data
-  curl_setopt($ch,CURLOPT_URL, $url);
-  curl_setopt($ch,CURLOPT_POST, true);
-  curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+  endif;
+  
+  $status = "failed";
+
+
+  
+$url  = "https://api.nomba.com/v1/transfers/bank";
+$fields = [
+  'narration' => "Money Transfer From Trade",
+  'amount' => $amount,
+  'merchantTxRef' => uniqid(),
+  'bankCode' => $bank_code,
+  'accountNumber' => $accountNo,
+  'accountName' => $name,
+  "senderName" => $admin_name
+];
+
+ $fields_string = http_build_query($fields);
+
+  //open connection
+$ch = curl_init();
+
+//set the url, number of POST vars, POST data
+curl_setopt($ch,CURLOPT_URL, $url);
+curl_setopt($ch,CURLOPT_POST, true);
+curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Authorization: Bearer $secret_key",
+    "accountId: $account_id",
     "Cache-Control: no-cache",
   ));
-  
-  //So that curl_exec returns the contents of the cURL; rather than echoing it
-  curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
-  
-  //execute post
-  $result = curl_exec($ch);
+
+//So that curl_exec returns the contents of the cURL; rather than echoing it
+curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+
+//execute post
+$result = curl_exec($ch);
 
 $json = json_decode($result,true);
-    
-if(isset($json["data"]["status"])):
-    $status = $json["data"]["status"];
+  
+if(isset($json["description"])):
+  $status = strtolower($json["description"]);
 else:
-    error_log("running transfer error .. ".$result);
-    if(isset($json["message"])):
-        die($json["message"]);
-    endif;
-    die("102");
+  error_log("running transfer error .. ".$result);
+  die($result);
 endif;
+
+
+
 
 
 

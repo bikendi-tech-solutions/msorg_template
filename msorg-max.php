@@ -95,10 +95,10 @@ if ($kyc == "yes") {
             </div>';
     }
 } else {
-    echo '
+    // echo '
        
-            </div>
-        </div>';
+    //         </div>
+    //     </div>';
 }
                            echo'
                             <div class="card bg-customdash card-animate">
@@ -398,8 +398,8 @@ $services = array(
     'data' => array('icon' => 'max-simcard', 'label' => 'Data', 'url' => '?vend=data'),
     'electricity' => array('icon' => 'max-lamp-charge', 'label' => 'Electricity' , 'url' => '?vend=cable'),
     'tv' => array('icon' => 'max-monitor', 'label' => 'TV', 'url' => '?vend=bill'),
-    'id-verification?nin' => array('icon' => 'max-barcode', 'label' => 'NIN Printing', 'url' => '?vend=bvn&nin'),
-    'id-verification?bvn' => array('icon' => 'max-bank', 'label' => 'BVN Printing', 'url' => '?vend=bvn'),
+    'id-verification?nin' => array('icon' => 'max-barcode', 'label' => 'Print NIN', 'url' => '?vend=bvn&nin'),
+    'id-verification?bvn' => array('icon' => 'max-bank', 'label' => 'Prin BVN', 'url' => '?vend=bvn'),
     'datacard' => array('icon' => 'max-card', 'label' => 'DataCard', 'url' => '?vend=datacard'),
     'rechargecard' => array('icon' => 'max-printer', 'label' => 'AirtimeBulk', 'url' => '?vend=cards'),
     'a2cash' => array('icon' => 'max-blend-2', 'label' => 'A2Cash', 'url' => '?vend=wallet&sub=airtime'),
@@ -407,12 +407,12 @@ $services = array(
     'bulksms' => array('icon' => 'max-sms', 'label' => 'BulkSMS', 'url' => '?vend=sms'),
     'coupon' => array('icon' => 'max-award', 'label' => 'Coupon', 'url' => '?vend=wallet&sub=coupon'),
     'referral' => array('icon' => 'max-user', 'label' => 'Referral', 'url' => '?vend=referral-details'),
-    'make' => array('icon' => 'max-user', 'label' => 'Money', 'url' => '#'),
+    'make' => array('icon' => 'max-user', 'label' => 'Money', 'url' => 'https://dasamonie.com/make-money/'),
 );
 $demo = true;
 echo '<div class="row " style="position:relative;left:15px;">';
 foreach ($features as $key => $feature) {
-    if ($feature == 'yes' || $feature == 'checked' || $demo) {
+    if (($feature == 'yes' || $feature == 'checked' || $demo) && !empty($services[$key]['url'])) {
         if (strpos($key, '#') === 0) {
             echo '<a href="javascript:void(0);" class="col-3 mb-2" data-bs-toggle="offcanvas" data-bs-target="' . $key . '"><div>';
         } else {
@@ -471,7 +471,7 @@ echo '</div></div></div></div>';
                 <div class="border-primary box-2 bg-altt m-box">
                     <i class="ri-stock-line tps i-box"></i>
                 </div>
-                <small class="fs-11 d-block" style="white-space: nowrap">Upgrade Account</small>
+                <small class="fs-11 d-block" style="white-space: nowrap">Upgrade</small>
             </a>
         </div>';
 // } 
@@ -490,7 +490,7 @@ echo '</div></div></div></div>';
                 <div class="border-primary box-2 bg-altt  m-box">
                     <i class="max-flash i-box"></i>
                 </div>
-                <small class="fs-11 d-block" style="white-space: nowrap; position: relative; left: -10px">Become Agent</small>
+                <small class="fs-11 d-block" style="white-space: nowrap; position: relative; left: -10px">Agent</small>
             </a>
         </div>
         <div class="col-3 left-1"> 
@@ -640,7 +640,7 @@ if (empty($transactions)) {
 } else {
     foreach ($transactions as $transaction) {
         $biller_name = "Data";
-        $transaction_details = $transaction->plan ." Sent To ". $transaction->phone;
+        $transaction_details = preg_replace("/With\s*-\s*ID/","",$transaction->plan); //." Sent To ". $transaction->phone;
         $ref =  "#";
         $status = strtolower($transaction->status);
 
