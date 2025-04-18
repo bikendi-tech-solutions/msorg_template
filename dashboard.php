@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if(!defined('ABSPATH')){
     $pagePath = explode('/wp-content/', dirname(__FILE__));
     include_once(str_replace('wp-content/' , '', $pagePath[0] . '/wp-load.php'));
@@ -14,6 +15,15 @@ if(!isset($_GET["plain_receipt"])){
 include_once(__DIR__."/top.html");
 
 }
+
+if(!function_exists("whatsapp_message")):
+    function whatsapp_message($message = "Hi Admin"){
+        global $option_array;
+        $message = str_replace(" ","%20",$message);
+        $admin_whatsapp = 'whatsapp://send?phone=234'.vp_option_array($option_array,"vp_whatsapp").'&amp;text='.$message;
+        echo $admin_whatsapp;
+    }
+endif;
 
 
 //PAGES
@@ -210,7 +220,29 @@ else{
         case"history":
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/history.php");
+
+            
+
+            if(!is_plugin_active("opay/opay.php")){
+                include_once(__DIR__."/sections/history.php");
+            }else{
+                
+                if(!isset($_GET["sub"])){
+
+                    $_GET["sub"] = "wallet";
+
+                }
+
+                if(!isset($_GET["id"]) && !isset($_GET["generate"])){
+                    include_once(__DIR__."/history/wallet.html");
+                }elseif(!isset($_GET["plain"])){
+                    include_once(__DIR__."/history/receipt.html");
+                }else{
+                    include_once(__DIR__."/history/receipt-plain.html");
+                }
+
+            }
+
             echo "</div>";
             echo "</div>";
             

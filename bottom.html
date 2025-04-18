@@ -5,6 +5,46 @@
     
     <script>
 
+jQuery(".go-back").on("click",function(){
+  event.preventDefault();
+  window.history.back();
+});
+
+jQuery("[link]").on("click",function(){
+      var link = jQuery(this).attr("link");
+      var url = location.href;
+
+      var pattern = /^&(\w+)=([a-zA-Z0-9]+)/;
+
+      let linkUrl = link.match(pattern);
+
+      if(linkUrl){
+
+        
+
+        var linkkey = linkUrl[1];
+        var linkvalue = linkUrl[2];
+
+
+        var url1 = url.replace("#","");
+
+        var url2 = url1.replace(new RegExp('&'+linkkey+'=[a-zA-Z0-9]+'), "");
+        
+        link = url2+"&"+linkkey+"="+linkvalue;
+
+      }
+
+
+
+      //CUSTOM RULES
+      link = link.replace(/&amp;/g, "&");
+
+      location.href = link;
+      
+
+
+    });
+
         jQuery(".generate_account").on("click",function(){
         
             var forG = jQuery(this).attr("for");
