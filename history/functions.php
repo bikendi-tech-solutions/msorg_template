@@ -28,8 +28,9 @@ switch($_GET["sub"]){
                         }
 
                         $icon = '<i class="fas fa-wallet"></i>';
-                        $sender = $thisResult->name;
-                        $recipient = $thisResult->sender;
+                        // strtolower($type) == "transfer" ? $thisResult->bank_details : $thisResult->sender;
+                        $sender = strtolower($type) == "transfer" ? $thisResult->name : $thisResult->sender;
+                        $recipient = strtolower($type) == "transfer" ? $thisResult->bank :  $thisResult->name ;
                         $button = '<i class="fas fa-wallet" link="?vend=wallet"></i> Fund Wallet';
             break;
             case"airtime":

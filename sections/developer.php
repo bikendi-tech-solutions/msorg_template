@@ -400,6 +400,148 @@ echo"
 
 
 <div class="mb-3 mt-3">
+<h2>SMILE API DOC [Get/Post]</h2><br>
+Parameters:<br>
+<table>
+<tbody>
+<table class="table table-responsive table-hover">
+<tbody>
+<tr>
+<th  scope="col">Parameter</th>
+<th  scope="col">Meaning</th>
+<th  scope="col">Value</th>
+</tr>
+<tr>
+<td>q</td>
+<td>Query</td>
+<td>smile</td>
+</tr>
+<tr>
+<td>id</td>
+<td>your user id</td>
+<td>20</td>
+</tr>
+<tr>
+<td>apikey</td>
+<td>your Api key</td>
+<td>23403</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Recipient account type </td>
+<td>id or phone</td>
+</tr>
+<tr>
+<td>recipient</td>
+<td>Customer value for the type above</td>
+<td>07049626922</td>
+</tr>
+<td>plan_id</td>
+<td>The Dataplan You Wanna Buy</td>
+<td>.see below for list of dataplan and id</td>
+</tr>
+</tbody>
+</table>
+<br>
+Example: <?php echo esc_url(plugins_url('vprest/?id=1&apikey=165c66r&q=smile&type=id&plan_id=767&recipient=2209002222'));?><br>
+
+Response [JSON]: 
+<?php
+
+$obj = new stdClass;
+$obj->Status = "100";
+$obj->Successful = "true";
+$obj->Message = "Purchase Of 3GB BIGGA Was Successful";
+$obj->Previous_Balance = 1000;
+$obj->Current_Balance = 900;
+$obj->Amount_Charged = 100;
+$obj->Data_Plan = "3GB BIGGA";
+$obj->Plan_Code = 767;
+$obj->Data_Type = "Smile";
+$obj->Network = "Smile";
+$obj->Receiver = "2209002222";
+echo json_encode($obj);
+
+?>
+<br>
+
+<!--https://dev.betabundles.com.ng/wp-content/plugins/vprest/?id=1&apikey=2344&q=data&phone=07049626922&amount=200&network=mtn&type=sme&dataplan=1-->
+</div>
+<div class="col">
+<h5>RESPONSES</h5><br>
+<table class="table table-hover table-responsive">
+<tbody>
+<tr>
+<th>Response Code</th>
+<th>Response Meaning</th>
+</tr>
+<tr>
+<td>Status:100 or Successful:true</td>
+<td>Successful Query/Transaction</td>
+</tr>
+<tr>
+<td>Status:200 or Successful:false</td>
+<td>Failed Query/Transaction</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Response Message</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response Message</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+<div class="col my-2 shadow rounded p-3">
+<h5 class="font-bold code">SMILE PLANS AND PRODUCT ID </h5><br>
+<table class="table table-responsive table-hover history-successful h6 font-size">
+<thead>
+<tr>
+<th scope='col'>Product ID</th>
+<th scope='col'>Name</th>
+<th scope='col'>Amount</th>
+</tr>
+</thead>
+<tbody>
+	<?php
+			$array_ids = [];
+			for($i=0; $i<=20; $i++){
+				$doos = vp_option_array($option_array,"csmiledata".$i);
+				if($doos != "" ){
+					
+					$array_ids[$doos] = [
+						"id" => $doos,
+						"name" => vp_option_array($option_array,"csmiledatan".$i),
+						"price" => vp_option_array($option_array,"csmiledatap".$i)
+					];
+				}
+			}
+
+			foreach($array_ids as $key => $val){
+				$id = $val["id"];
+				$name = $val["name"];
+				$price = $val["price"];
+	?>
+	<tr>
+		<td> <?php echo $id;?></td>
+		<td> <?php echo $name;?></td>
+		<td> <?php echo $price;?></td>
+	</tr>
+	<?php
+			}
+	?>
+
+</tbody>
+</table>
+</div>
+
+
+<div class="mb-3 mt-3">
 <h2>Data API DOC [Get/Post]</h2><br>
 Parameters:<br>
 <table>

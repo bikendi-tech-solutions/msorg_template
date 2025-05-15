@@ -1,5 +1,5 @@
 <?php
-
+$id = get_current_user_id();
 if(isset($_GET["vend"]) && $_GET["vend"]=="wallet"){
 
   $array["showbtn"] = "";
@@ -78,7 +78,7 @@ $user_email = get_userdata($id)->user_email;
 
 $bvn = vp_getuser($id,"myBvn",true);
 $nin = vp_getuser($id,"myNin",true);
-if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes" || vp_getoption('enable_payvessel') == "yes" || vp_getoption('enable_billstack') == "yes" || vp_getoption('enable_paymentpoint') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
+if(vp_getoption('enable_monnify') == "yes"  || vp_getoption('enable_ncwallet') == "yes" || vp_getoption('enable_payvessel') == "yes" || vp_getoption('enable_billstack') == "yes" || vp_getoption('enable_nomba') == "yes"  || vp_getoption('enable_paymentpoint') == "yes"  || vp_getoption('enablesquadco') == "yes" ||  vp_getoption('enablevpay') == "yes"  || vp_getoption('enablekuda') == "yes" && ($bvn != 'false' || $nin != 'false'  ||  vp_getoption('enablevpay') == "yes" ) && (!empty($bvn) || !empty($nin)  ||  vp_getoption('enablevpay') == "yes" )  && (mb_strlen($bvn) > 10  ||  vp_getoption('enablevpay') == "yes" )){
 
   
   if(vp_getoption("charge_method") == "fixed"){
@@ -364,29 +364,57 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 <?php } 
                 if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
                     
-                        $paymentpoint = "Palmpay";
-                        $paymentpoint_accountname = vp_getuser($id,"paymentpoint_accountname");
-                        $paymentpoint_accountnumber = vp_getuser($id,"paymentpoint_accountnumber");
+                  $paymentpoint = "Palmpay";
+                  $paymentpoint_accountname = vp_getuser($id,"paymentpoint_accountname");
+                  $paymentpoint_accountnumber = vp_getuser($id,"paymentpoint_accountnumber");
 
-                        if(vp_getoption("paymentpoint_charge_method") == "fixed"){
-                            $paymentpoint_chargef =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
-                          }
-                          else{
-                            $paymentpoint_chargef =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
-                          }
-                    ?>
-                  
+                  if(vp_getoption("paymentpoint_charge_method") == "fixed"){
+                      $paymentpoint_chargef =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
+                    }
+                    else{
+                      $paymentpoint_chargef =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
+                    }
+              ?>
+            
 
-                      <li class="nav-item">
-                        <a
-                          class="nav-link <?php echo banksbtn();?>"
-                          data-bs-toggle="tab"
-                          href="#paymentpoint"
-                          role="tab"
-                          ><span class="hidden-sm-up"></span>
-                          <span class="hidden-xs-down"><?php echo $paymentpoint;?></span></a
-                        >
-                      </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link <?php echo banksbtn();?>"
+                    data-bs-toggle="tab"
+                    href="#paymentpoint"
+                    role="tab"
+                    ><span class="hidden-sm-up"></span>
+                    <span class="hidden-xs-down"><?php echo $paymentpoint;?></span></a
+                  >
+                </li>
+
+<?php } 
+
+if(vp_getoption('enable_nomba') == "yes"  && vp_getoption("vtupress_custom_nomba") == "yes"){
+                    
+  $nomba = "Nombank";
+  $nomba_accountname = vp_getuser($id,"nomba_accountname");
+  $nomba_accountnumber = vp_getuser($id,"nomba_accountnumber");
+
+  if(vp_getoption("nomba_charge_method") == "fixed"){
+      $nomba_chargef =  "₦".floatval(vp_getoption("nomba_charge_back"));
+    }
+    else{
+      $nomba_chargef =  floatval(vp_getoption("nomba_charge_back"))."%";
+    }
+?>
+
+
+<li class="nav-item">
+  <a
+    class="nav-link <?php echo banksbtn();?>"
+    data-bs-toggle="tab"
+    href="#nomba"
+    role="tab"
+    ><span class="hidden-sm-up"></span>
+    <span class="hidden-xs-down"><?php echo $nomba;?></span></a
+  >
+</li>
 
 <?php } 
 
@@ -787,6 +815,60 @@ if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custo
   </div>
   <div class="col flex justify-content-end  fs-5">
   <?php echo $paymentpoint_chargef;?> Charge Applied
+  </div>
+  </div>
+  
+  </div>
+  
+  </div>
+  </div>
+  </div>
+  
+  
+      <!------------------>
+      </div>
+    </div>
+  
+  <?php }
+
+    
+if(vp_getoption('enable_nomba') == "yes"  && vp_getoption("vtupress_custom_nomba") == "yes"){?>
+
+  <div class="tab-pane <?php echo banksmodal();?>" id="nomba" role="tabpanel">
+      <div class="p-md-20">
+  
+      <!-------------CONTENT----------->
+  <div class="Wrap mb-2 cdebit-card   position-relative">
+  <div class="Base">
+  <div class="Inner-wrap">
+  
+  <div class=" container text-white p-4 roundeds">
+  
+  <div class="row mb-3">
+  <div class="col Logo-name fs-3">
+    Nombank 
+  </div>
+  </div>
+  
+  <div class="row mb-3">
+  <div class="col card-number text-center">
+  <p><?php accountNumber($nomba_accountnumber,"nomba");?></p>
+  </div>
+  </div>
+  
+  <div class="row mb-3">
+  <div class="col Name white  text-center">
+  <p><?php echo $nomba_accountname;?></p>
+  </div>
+  </div>
+  
+  
+  <div class="row">
+  <div class="col fs-5">
+  VISA
+  </div>
+  <div class="col flex justify-content-end  fs-5">
+  <?php echo $nomba_chargef;?> Charge Applied
   </div>
   </div>
   

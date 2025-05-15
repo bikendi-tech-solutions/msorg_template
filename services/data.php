@@ -234,7 +234,7 @@ $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
 							if($doos != "" ){
 								echo '<option value="'.vp_option_array($option_array,"csmiledata".$i).'" id="'.$i.'" class="smiledata smiledataplan">'.vp_option_array($option_array,"csmiledatan".$i).' ₦'.vp_option_array($option_array,"csmiledatap".$i).'</option>';
 							}
-							}
+						}
 						?>
 						</div>
 						
