@@ -10,7 +10,7 @@
 *Plugin Name: Ms-Org Template
 *Plugin URI: http://vtupress.com
 *Description: This add Ms-Org template into your vtu website
-*Version: 2.0.2
+*Version: 2.0.3
 *Author: Akor Victor
 *Author URI: https://facebook.com/vtupressceo
 Requires PHP: 7.4

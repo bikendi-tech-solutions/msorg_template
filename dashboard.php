@@ -9,6 +9,14 @@ error_reporting(0);
 }
 include_once(ABSPATH."wp-load.php");
 include_once(ABSPATH.'wp-admin/includes/plugin.php');
+  $vp_country = vp_country();
+	$glo = $vp_country["glo"];
+	$mobile = $vp_country["9mobile"];
+	$bypass = $vp_country["bypass"];
+	$currency = $vp_country["currency"];
+	$symbol = $vp_country["symbol"];
+  $prefix = $vp_country["line_prefix"];
+  $country = $vp_country["country"];
 
 if(!isset($_GET["plain_receipt"])){
 //TOP
@@ -20,7 +28,7 @@ if(!function_exists("whatsapp_message")):
     function whatsapp_message($message = "Hi Admin"){
         global $option_array;
         $message = str_replace(" ","%20",$message);
-        $admin_whatsapp = 'whatsapp://send?phone=234'.vp_option_array($option_array,"vp_whatsapp").'&amp;text='.$message;
+        $admin_whatsapp = 'whatsapp://send?phone='.$prefix.vp_option_array($option_array,"vp_whatsapp").'&amp;text='.$message;
         echo $admin_whatsapp;
     }
 endif;

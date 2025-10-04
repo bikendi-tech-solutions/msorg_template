@@ -45,6 +45,17 @@ $session =  vp_getuser($id,'run_code',true);
 global $wpdb;
 $table_name = $wpdb->prefix."vp_levels";
 $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
+
+
+
+	$vp_country = vp_country();
+	$glo = $vp_country["glo"];
+	$mobile = $vp_country["9mobile"];
+	$mtn = $vp_country["mtn"];
+	$airtel = $vp_country["airtel"];
+	$bypass = $vp_country["bypass"];
+	$currency = $vp_country["currency"];
+	$symbol = $vp_country["symbol"];
 ?>
 
 
@@ -61,10 +72,10 @@ $level = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$plan'");
          <label for="network" class="form-label">Network</label>
             <select class="form-select form-select-sm airtime-network" aria-label="form-select-sm example" id="net" name="network" onchange="makeChoice()">
                 <option value="none" selected>---Select---</option>
-                <option value="" for="mtn" class="formtn">MTN</option>
-                <option value="" for="glo" class="forglo">GLO</option>
-                <option value="" for="airtel" class="forairtel">AIRTEL</option>
-                <option value="" for="9mobile"  class="for9mobile">9MOBILE</option>
+                <option value="" for="mtn" class="formtn"><?php echo $mtn;?></option>
+                <option value="" for="glo" class="forglo"><?php echo $glo;?></option>
+                <option value="" for="airtel" class="forairtel"><?php echo $airtel;?></option>
+                <option value="" for="9mobile"  class="for9mobile"><?php echo $mobile;?></option>
             </select>
             <div id="validationServer04Feedback" class="invalid-feedback">
                 <span class="airtime-select-network">Please Choose a Network. </span>
@@ -139,7 +150,7 @@ if(count($bens) >= 1 && vp_getoption("enable_beneficiaries") == "yes"){
             <div class="mb-2">
                 <label for="network" class="form-label">Original Amount</label>
                 <div class="input-group mb-2">
-                    <span class="input-group-text" id="basic-addon1">NGN.</span>
+                    <span class="input-group-text" id="basic-addon1"><?php echo $currency;?>.</span>
                     <input id="amt" name="amount" type="number" class="form-control airtime-amount" onchange="calcit();" placeholder="Amount" aria-label="Username" aria-describedby="basic-addon1">
                     <span class="input-group-text" id="basic-addon1">.00</span>
                 </div>
@@ -163,7 +174,7 @@ if(count($bens) >= 1 && vp_getoption("enable_beneficiaries") == "yes"){
 				
 					?>
                 <div class="input-group mb-2">
-                    <span class="input-group-text" id="basic-addon1">NGN.</span>
+                    <span class="input-group-text" id="basic-addon1"><?php echo $currency;?>.</span>
                     <input id="amttopay" type="number" class="form-control amttopay" max="<?php echo $bal;?>" placeholder="Amount To Pay" aria-label="Username" aria-describedby="basic-addon1" readonly>
                     <span class="input-group-text" id="basic-addon1">.00</span>
                     <div id="validationServer04Feedback" class="invalid-feedback">
@@ -177,7 +188,9 @@ if(count($bens) >= 1 && vp_getoption("enable_beneficiaries") == "yes"){
 				?>
 			
 <div class="form-check">
-  <input class="form-check-input bypass" type="checkbox" value="" id="flexCheckDefault">
+  <input class="form-check-input bypass" type="checkbox" value="" id="flexCheckDefault" <?php if ($bypass) {
+							echo "checked readonly";
+						} ?>>
   <label class="form-check-label" for="flexCheckDefault">
     Bypass Number Validator
   </label>
@@ -220,18 +233,18 @@ else{
                     <div>
                     Network : <span class="airtime-network-confirm"></span><br>
                     Phone : <span class="airtime-number-confirm"></span><br>
-					Original Amount: ₦<span class="airtime-amount-confirm"></span><br>
+					Original Amount: <?php echo $symbol;?><span class="airtime-amount-confirm"></span><br>
 					<?php
 				if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,'resell') == "yes"){
 					
 					if(vp_option_array($option_array,"discount_method") == "direct"){
 					?>
-					Amount To Pay : ₦<span class="amttopay2" ></span><br>
+					Amount To Pay : <?php echo $symbol;?><span class="amttopay2" ></span><br>
 					Discount : <span class="discount-amount-confirm"></span> <br>
 					<?php
 					}else{
 					?>
-					Charge Back Bonus : ₦<span class="amttopay2" ></span><br>
+					Charge Back Bonus : <?php echo $symbol;?><span class="amttopay2" ></span><br>
 					Commission : <span class="discount-amount-confirm"></span><br>	
 					<?php	
 					}

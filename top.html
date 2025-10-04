@@ -1,7 +1,7 @@
 <?php
 extract(vtupress_user_details());
 if(vp_getoption("charge_method") == "fixed"){
-	$chargef =  "₦".floatval(vp_getoption("charge_back"));
+	$chargef =  $symbol. floatval(vp_getoption("charge_back"));
 	}
 	else{
 	 $chargef =  floatval(vp_getoption("charge_back"))."%";
@@ -327,7 +327,7 @@ if(vp_getoption("charge_method") == "fixed"){
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									<?php echo do_shortcode("[vtupress get='name']");?>
-									<span class="user-level">balance: ₦ <?php echo do_shortcode("[vtupress get='balance']");?></span>
+									<span class="user-level">balance:  <?php echo $symbol. do_shortcode("[vtupress get='balance']");?></span>
 								</span>
 							</a>
 							<div class="clearfix"></div>
