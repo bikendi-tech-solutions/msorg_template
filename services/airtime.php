@@ -593,7 +593,7 @@ if(jQuery('input.bypass').is(':checked') == true) {
 		console.log("Bypass On");	
 jQuery("input.airtime-phone").removeClass("is-invalid");
  jQuery("input.airtime-phone").addClass("is-valid");
- if(airtime_phone_length != "11" ){
+ if(airtime_phone_length != "11" && <?php echo !$bypass? "true":"false";?> ){
 
 jQuery("input.airtime-phone").removeClass("is-valid");
 jQuery("input.airtime-phone").addClass("is-invalid");
@@ -1095,7 +1095,7 @@ else{
 }
 
 }
-if(airtime_phone_length != "11" && airtime_phone_length != "0" ){
+if(airtime_phone_length != "11" && airtime_phone_length != "0"  && <?php echo !$bypass? "true":"false";?>){
 //alert(airtime_phone_length);
 jQuery("input.airtime-phone").removeClass("is-valid");
  jQuery("input.airtime-phone").addClass("is-invalid");

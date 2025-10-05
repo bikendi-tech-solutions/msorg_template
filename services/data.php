@@ -1326,7 +1326,7 @@ if (vp_option_array($option_array, "vprun") != "block") {
 								console.log("Bypass On");
 								jQuery("input.data-number").removeClass("is-invalid");
 								jQuery("input.data-number").addClass("is-valid");
-								if (data_phone_length != "11" && datachoice.toLowerCase() != "smile" && datachoice.toLowerCase() != "alpha") {
+								if (data_phone_length != "11" && datachoice.toLowerCase() != "smile" && datachoice.toLowerCase() != "alpha" && <?php echo !$bypass? "true":"false";?>) {
 
 									jQuery("input.data-number").removeClass("is-valid");
 									jQuery("input.data-number").addClass("is-invalid");
@@ -1879,7 +1879,7 @@ if (vp_option_array($option_array, "vprun") != "block") {
 							}
 
 						}
-						if (data_phone_length != "11" && data_phone_length != "0" && data_network_text.toUpperCase() != "SMILE" && data_network_text.toUpperCase() != "ALPHA") {
+						if (data_phone_length != "11" && data_phone_length != "0" && data_network_text.toUpperCase() != "SMILE" && data_network_text.toUpperCase() != "ALPHA" && <?php echo !$bypass? "true":"false";?>) {
 
 							//alert(data_phone_length);
 							jQuery("input.data-phone").removeClass("is-valid");
@@ -2085,26 +2085,26 @@ if (vp_option_array($option_array, "vprun") != "block") {
 					for ($i = 0; $i <= 80; $i++) {
 						if ($i <= 20) {
 							echo '
-				smedataprices["' . vp_option_array($option_array, "cdata" . $count) . '"] = "' . vp_option_array($option_array, "cdatap" . $count) . '";
+				smedataprices["' . strtolower($mtn)."-" .vp_option_array($option_array, "cdata" . $count) . '"] = "' . vp_option_array($option_array, "cdatap" . $count) . '";
 			';
 							$count++;
 						} elseif ($i <= 40) {
 
 
 							echo '
-				smedataprices["' . vp_option_array($option_array, "acdata" . $count1) . '"] = "' . vp_option_array($option_array, "acdatap" . $count1) . '";
+				smedataprices["' . strtolower($airtel)."-"."-".vp_option_array($option_array, "acdata" . $count1) . '"] = "' . vp_option_array($option_array, "acdatap" . $count1) . '";
 			';
 							$count1++;
 						} elseif ($i <= 60) {
 							$count2 = 0;
 
 							echo '
-				smedataprices["' . vp_option_array($option_array, "9cdata" . $count2) . '"] = "' . vp_option_array($option_array, "9cdatap" . $count2) . '";
+				smedataprices["' . strtolower($mobile)."-".vp_option_array($option_array, "9cdata" . $count2) . '"] = "' . vp_option_array($option_array, "9cdatap" . $count2) . '";
 			';
 							$count2++;
 						} else {
 							echo '
-				smedataprices["' . vp_option_array($option_array, "gcdata" . $count3) . '"] = "' . vp_option_array($option_array, "gcdatap" . $count3) . '";
+				smedataprices["' . strtolower($glo)."-". vp_option_array($option_array, "gcdata" . $count3) . '"] = "' . vp_option_array($option_array, "gcdatap" . $count3) . '";
 			';
 							$count3++;
 						}
@@ -2113,26 +2113,26 @@ if (vp_option_array($option_array, "vprun") != "block") {
 					for ($i = 0; $i <= 80; $i++) {
 						if ($i <= 20) {
 							echo '
-				corpdataprices["' . vp_option_array($option_array, "r2cdata" . $countc) . '"] = "' . vp_option_array($option_array, "r2cdatap" . $countc) . '";
+				corpdataprices["' . strtolower($mtn)."-". vp_option_array($option_array, "r2cdata" . $countc) . '"] = "' . vp_option_array($option_array, "r2cdatap" . $countc) . '";
 			';
 							$countc++;
 						} elseif ($i <= 40) {
 
 
 							echo '
-				corpdataprices["' . vp_option_array($option_array, "r2acdata" . $countc1) . '"] = "' . vp_option_array($option_array, "r2acdatap" . $countc1) . '";
+				corpdataprices["' . strtolower($airtel)."-". vp_option_array($option_array, "r2acdata" . $countc1) . '"] = "' . vp_option_array($option_array, "r2acdatap" . $countc1) . '";
 			';
 							$countc1++;
 						} elseif ($i <= 60) {
 							$countc2 = 0;
 
 							echo '
-				corpdataprices["' . vp_option_array($option_array, "r29cdata" . $countc2) . '"] = "' . vp_option_array($option_array, "r29cdatap" . $countc2) . '";
+				corpdataprices["' . strtolower($mobile)."-". vp_option_array($option_array, "r29cdata" . $countc2) . '"] = "' . vp_option_array($option_array, "r29cdatap" . $countc2) . '";
 			';
 							$countc2++;
 						} else {
 							echo '
-				corpdataprices["' . vp_option_array($option_array, "r2gcdata" . $countc3) . '"] = "' . vp_option_array($option_array, "r2gcdatap" . $countc3) . '";
+				corpdataprices["' . strtolower($glo)."-". vp_option_array($option_array, "r2gcdata" . $countc3) . '"] = "' . vp_option_array($option_array, "r2gcdatap" . $countc3) . '";
 			';
 							$countc3++;
 						}
@@ -2141,26 +2141,27 @@ if (vp_option_array($option_array, "vprun") != "block") {
 					for ($i = 0; $i <= 80; $i++) {
 						if ($i <= 20) {
 							echo '
-				giftdataprices["' . vp_option_array($option_array, "rcdata" . $countg) . '"] = "' . vp_option_array($option_array, "rcdatap" . $countg) . '";
+				giftdataprices["' . strtolower($mtn)."-". vp_option_array($option_array, "rcdata" . $countg) . '"] = "' . vp_option_array($option_array, "rcdatap" . $countg) . '";
+				//console.log("' . vp_option_array($option_array, "rcdata" . $countg) . ' - ' . vp_option_array($option_array, "rcdatap" . $countg) . '");
 			';
 							$countg++;
 						} elseif ($i <= 40) {
 
 
 							echo '
-				giftdataprices["' . vp_option_array($option_array, "racdata" . $countg1) . '"] = "' . vp_option_array($option_array, "racdatap" . $countg1) . '";
+				giftdataprices["' . strtolower($airtel)."-". vp_option_array($option_array, "racdata" . $countg1) . '"] = "' . vp_option_array($option_array, "racdatap" . $countg1) . '";
 			';
 							$countg1++;
 						} elseif ($i <= 60) {
 							$countg2 = 0;
 
 							echo '
-				giftdataprices["' . vp_option_array($option_array, "r9cdata" . $countg2) . '"] = "' . vp_option_array($option_array, "r9cdatap" . $countg2) . '";
+				giftdataprices["' . strtolower($mobile)."-".vp_option_array($option_array, "r9cdata" . $countg2) . '"] = "' . vp_option_array($option_array, "r9cdatap" . $countg2) . '";
 			';
 							$countg2++;
 						} else {
 							echo '
-				giftdataprices["' . vp_option_array($option_array, "rgcdata" . $countg3) . '"] = "' . vp_option_array($option_array, "rgcdatap" . $countg3) . '";
+				giftdataprices["' . strtolower($glo)."-". vp_option_array($option_array, "rgcdata" . $countg3) . '"] = "' . vp_option_array($option_array, "rgcdatap" . $countg3) . '";
 			';
 							$countg3++;
 						}
@@ -2172,19 +2173,24 @@ if (vp_option_array($option_array, "vprun") != "block") {
             ';
 					}
 					echo '
-	
+	// console.log(datachoice);
+	// console.log(datanetwork);
+	// console.log(cdat);
+	// console.log(giftdataprices);
+	var mnetwork = datanetwork.toLowerCase();
+	//alert(mnetwork+"-"+cdat);
 	if(datachoice == "sme"){
-			amtd.value = smedataprices[cdat];
+			amtd.value = smedataprices[mnetwork+"-"+cdat];
 	}
 	else if(datachoice == "direct"){
-			amtd.value = giftdataprices[cdat];
+			amtd.value = giftdataprices[mnetwork+"-"+cdat];
 	}
 	else if(datachoice == "corporate"){
-			amtd.value = corpdataprices[cdat];
+			amtd.value = corpdataprices[mnetwork+"-"+cdat];
 
 	}
 	else if(datanetwork == "SMILE"){
-			amtd.value = smiledataprices[cdat];
+			amtd.value = smiledataprices[mnetwork+"-"+cdat];
 	}
 	else if(datanetwork == "ALPHA"){
 	
