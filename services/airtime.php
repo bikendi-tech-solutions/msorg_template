@@ -74,22 +74,22 @@ if (vp_option_array($option_array, "vprun") != "block") {
                             <?php
                             if (strtolower($mtn) != ""):
                                 ?>
-                                <option value="" for="mtn" id="formtn"><?php echo $mtn; ?></option>
+                                <option value="" for="mtn" id="formtn" class="formtn"><?php echo $mtn; ?></option>
                                 <?php
                             endif;
                             if (strtolower($glo) != ""):
                                 ?>
-                                <option value="" for="glo" id="forglo"><?php echo $glo; ?></option>
+                                <option value="" for="glo" id="forglo" class="forglo"><?php echo $glo; ?></option>
                                 <?php
                             endif;
                             if (strtolower($airtel) != ""):
                                 ?>
-                                <option value="" for="airtel" id="forairtel"><?php echo $airtel; ?></option>
+                                <option value="" for="airtel" id="forairtel" class="forairtel"><?php echo $airtel; ?></option>
                                 <?php
                             endif;
                             if (strtolower($mobile) != ""):
                                 ?>
-                                <option value="" for="9mobile" id="for9mobile"><?php echo $mobile; ?></option>
+                                <option value="" for="9mobile" id="for9mobile"  class="for9mobile"><?php echo $mobile; ?></option>
                                 <?php
                             endif;
                             ?>
@@ -311,11 +311,16 @@ if (vp_option_array($option_array, "vprun") != "block") {
                         var topay = jQuery("#amttopay");
                         //var airtime_network_for = jQuery("select.airtime-network option:selected").attr("for");
 
+
                         var airtimechoice = jQuery("#airtimechoice").val();
 
 
                         var airtime_network_value = jQuery("select.airtime-network").val();
 
+                        // console.log(airtime_network_value);
+                        // console.log(airtimechoice);
+                        // console.log(original);
+                        
 
                         var discount = "";
                         <?php
@@ -417,6 +422,8 @@ if (vp_option_array($option_array, "vprun") != "block") {
                         var airtime_network_for = jQuery("select.airtime-network option:selected").attr("for");
 
                         var airtimechoice = jQuery("#airtimechoice").val();
+                        // console.log("for "+airtime_network_for);
+                        // console.log("choice "+airtimechoice);
 
                         switch (airtime_network_for) {
                             case "mtn":
