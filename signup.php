@@ -176,7 +176,7 @@ include_once(ABSPATH.'wp-admin/includes/plugin.php');
                 Phone<span class="asteriskField">*</span>
             </label>
                 <div class="">
-                    <input type="text" name="phone" maxlength="11" minlength="11" class="textinput textInput form-control phone" required="" id="id_Phone">
+                    <input type="text" name="phone" maxlength="11" minlength="9" class="textinput textInput form-control phone" required="" id="id_Phone">
                 </div>
     </div>
     
