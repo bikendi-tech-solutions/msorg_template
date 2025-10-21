@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
     function make_active($pg="null"){
         if(!isset($_GET["vend"]) && $pg == "null"){
             echo "active";

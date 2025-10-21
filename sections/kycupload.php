@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 error_reporting(0);
 if(!defined('ABSPATH')){
     $pagePath = explode('/wp-content/', dirname(__FILE__));

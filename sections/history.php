@@ -1,4 +1,5 @@
 <?php	
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="history" && isset($_GET["for"])){
 	$site_name = get_option('blogname');
 		echo '

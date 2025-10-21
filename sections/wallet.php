@@ -1,4 +1,6 @@
 <?php
+
+vtupress_auto_override();
 $id = get_current_user_id();
 if (isset($_GET["vend"]) && $_GET["vend"] == "wallet") {
 
@@ -1246,7 +1248,7 @@ switch(dchoice){
 ';
             if (vp_getoption("paystack_charge_method") == "fixed") {
               ?>
-              jQuery(".dcharge .methodinai").text(" ₦");
+              jQuery(".dcharge .methodinai").text(" <?php echo $symbol;?>");
               <?php
             } else {
               ?>
@@ -1263,7 +1265,7 @@ switch(dchoice){
       ';
             if (vp_getoption("charge_method") == "fixed") {
               ?>
-              jQuery(".dcharge .methodinai").text(" ₦");
+              jQuery(".dcharge .methodinai").text(" <?php echo $symbol;?>");
               <?php
             } else {
               ?>
@@ -1280,7 +1282,7 @@ switch(dchoice){
       ';
             if (vp_getoption("gtb_charge_method") == "fixed") {
               ?>
-              jQuery(".dcharge .methodinai").text(" ₦");
+              jQuery(".dcharge .methodinai").text(" <?php echo $symbol;?>");
               <?php
             } else {
               ?>
@@ -1298,6 +1300,7 @@ switch(dchoice){
 jQuery(".charge_back_value").val(chg);
 
 });
+
 </script>
 
 

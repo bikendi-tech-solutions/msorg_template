@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="account"){
     $id = get_current_user_id();
 

@@ -1,5 +1,5 @@
 <?php
-
+vtupress_auto_override();
 ?>
 <!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->

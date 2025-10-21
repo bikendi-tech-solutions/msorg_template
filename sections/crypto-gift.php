@@ -1,4 +1,5 @@
 <?php	
+vtupress_auto_override();
 if(vp_option_array($option_array,'resell') == "yes" ){
 if(isset($_GET["vend"]) && $_GET["vend"]=="gift-card"  && vp_option_array($option_array,"allow_cards") == "yes"){
 ?>

@@ -1,6 +1,6 @@
 
 <?php
-
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="pricing" && vp_option_array($option_array,"resell") == "yes" && isset($level)){
 	
 

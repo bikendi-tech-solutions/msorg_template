@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 global $option_array;
 $option_array =  json_decode(get_option("vp_options"),true);
 

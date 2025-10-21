@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 $option_array = json_decode(get_option("vp_options"),true);
 if(vp_option_array($option_array,"vprun") != "block"){
 $option_array = json_decode(get_option("vp_options"),true);

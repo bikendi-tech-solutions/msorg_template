@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="transfer" && vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
 
 echo'

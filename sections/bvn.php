@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="bvn" && vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
 			echo'
 			<!-- bvn -->

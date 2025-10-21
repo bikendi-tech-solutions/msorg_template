@@ -1,5 +1,5 @@
 <?php
-
+vtupress_auto_override();
 if (isset($_GET["vend"]) && $_GET["vend"] == "developer" && is_plugin_active("vprest/vprest.php") && vp_option_array($option_array, "resell") == "yes" && isset($level)) {
 
 	if (strtolower($level[0]->developer) == "yes") {

@@ -1,4 +1,5 @@
 	<?php	
+	vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="data" && vp_option_array($option_array,"setdata") == "checked"){
 			echo'
 			<!-- data -->

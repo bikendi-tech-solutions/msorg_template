@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 extract(vtupress_user_details());
 if(vp_getoption("charge_method") == "fixed"){
 	$chargef =  $symbol. floatval(vp_getoption("charge_back"));

@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if( vp_option_array($option_array,"resell") == "yes"){		
 			if(isset($_GET["vend"]) && $_GET["vend"]=="message"){
 include_once(ABSPATH .'wp-content/plugins/vtupress/admin/pages/messages/functions.php');

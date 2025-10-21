@@ -1,4 +1,5 @@
 <?php
+vtupress_auto_override();
 if(is_plugin_active('bcmv/bcmv.php')){
 
 		if(isset($_GET["vend"]) && $_GET["vend"]=="cable" && vp_option_array($option_array,"setcable") == "checked"){

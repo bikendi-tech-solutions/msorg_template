@@ -1,4 +1,5 @@
 <?php	
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="savings" && vp_option_array($option_array,"vtupress_custom_isavings") == "yes"){
     $id = get_current_user_id();
     $bal = intval(vp_getuser($id, 'vp_bal', true));

@@ -1,6 +1,6 @@
 
 <?php
-
+vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="kyc" && is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes"){
 
 

@@ -1,5 +1,5 @@
 <?php
-
+vtupress_auto_override();
 if(is_plugin_active('vpmlm/vpmlm.php')  && vp_option_array($option_array,'mlm') == "yes" ){
 if(isset($_GET["vend"]) && $_GET["vend"]=="withdraw"){
 				
