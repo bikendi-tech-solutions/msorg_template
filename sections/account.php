@@ -1,4 +1,5 @@
 <?php
+
 vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="account"){
     $id = get_current_user_id();
@@ -10,6 +11,7 @@ if(vp_getuser($id,"update_profile",true) != "v2"){
     $profile = $wpdb->prefix.'vp_profile';
 
     $profiling = $wpdb->get_results("SELECT * FROM $kyc WHERE user_id = $id");
+    $my_code = $profiling[0]->code ?? "";
 
 if(isset($profiling) && !empty($profiling)){
     $selfieh = $profiling[0]->selfie;

@@ -526,6 +526,9 @@ if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,"rese
                 <li>
                     <a href="?vend=changeemail"> <span class="sub-item">Change Email</span> </a>
                 </li>
+                 <li>
+                    <a href="?vend=biometric"> <span class="sub-item">Biometric</span> </a>
+                </li>
                 <?php
 if( vp_getoption('enablevpay') == "yes" ){
     ?>

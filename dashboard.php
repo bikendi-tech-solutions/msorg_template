@@ -79,6 +79,16 @@ else{
             }
              }
         break;
+        case"account":
+            echo "<div class='container'>";
+            include_once(__DIR__."/sections/account.php");
+            echo "</div>";
+        break;
+        case"biometric":
+            echo "<div class='container'>";
+            include_once(__DIR__."/sections/bio.php");
+            echo "</div>";
+        break;
         case"bill":
             if(is_plugin_active("bcmv/bcmv.php")){
                 if(vp_option_array($option_array,"setbill") == "checked"){
