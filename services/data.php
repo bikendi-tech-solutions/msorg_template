@@ -621,6 +621,7 @@ if (vp_option_array($option_array, "vprun") != "block") {
 										<span class="input-group-text">PIN</span>
 										<input class="form-control pin" type="password" name="pin">
 									</div>
+									
 								</div>
 							</div>
 							<div class="modal-footer">

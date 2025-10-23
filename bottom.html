@@ -9,7 +9,22 @@
     
     <script>
 
-        
+var ptmp = `<span class="input-group-text" id="d_bio_transaction2"><i class="fas fa-fingerprint"></i></span>`;
+var stmp = `<div id="status"></div>`;
+jQuery(".pin").after(ptmp);
+jQuery(".pin").parent().after(stmp);
+jQuery(document).on("click", "#d_bio_transaction2", function(){
+    bio_transaction((pin) => {
+        if($("button[form='cfor']").is(":visible")){
+            jQuery(".pin").val(pin);
+            jQuery(".pin").attr("readonly", true);
+            proceedWithTransaction = true;
+            $("button[form='cfor']").click();
+        }else{
+            $("#status").html(`✅ Authenticated but can't proceed .`);
+        }
+    });
+});
 
 jQuery(".go-back").on("click",function(){
   event.preventDefault();
