@@ -1,301 +1,388 @@
 <?php
 vtupress_auto_override();
-if(!defined('ABSPATH')){
+if (!defined('ABSPATH')) {
     $pagePath = explode('/wp-content/', dirname(__FILE__));
-    include_once(str_replace('wp-content/' , '', $pagePath[0] . '/wp-load.php'));
+    include_once(str_replace('wp-content/', '', $pagePath[0] . '/wp-load.php'));
 }
-if(WP_DEBUG == false){
-error_reporting(0);	
+if (WP_DEBUG == false) {
+    error_reporting(0);
 }
-include_once(ABSPATH."wp-load.php");
-include_once(ABSPATH.'wp-admin/includes/plugin.php');
-  $vp_country = vp_country();
-	$glo = $vp_country["glo"];
-	$mobile = $vp_country["9mobile"];
-	$bypass = $vp_country["bypass"];
-	$currency = $vp_country["currency"];
-	$symbol = $vp_country["symbol"];
-  $prefix = $vp_country["line_prefix"];
-  $country = $vp_country["country"];
+include_once(ABSPATH . "wp-load.php");
+include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+$vp_country = vp_country();
+$glo = $vp_country["glo"];
+$mobile = $vp_country["9mobile"];
+$bypass = $vp_country["bypass"];
+$currency = $vp_country["currency"];
+$symbol = $vp_country["symbol"];
+$prefix = $vp_country["line_prefix"];
+$country = $vp_country["country"];
 
-if(!isset($_GET["plain_receipt"])){
-//TOP
-include_once(__DIR__."/top.html");
+if (!isset($_GET["plain_receipt"])) {
+    //TOP
+    include_once(__DIR__ . "/top.html");
 
 }
 
-if(!function_exists("whatsapp_message")):
-    function whatsapp_message($message = "Hi Admin"){
+global $wpdb;
+if (!function_exists("whatsapp_message")):
+    function whatsapp_message($message = "Hi Admin")
+    {
         global $option_array;
-        $message = str_replace(" ","%20",$message);
-        $admin_whatsapp = 'whatsapp://send?phone='.$prefix.vp_option_array($option_array,"vp_whatsapp").'&amp;text='.$message;
+        $message = str_replace(" ", "%20", $message);
+        $admin_whatsapp = 'whatsapp://send?phone=' . $prefix . vp_option_array($option_array, "vp_whatsapp") . '&amp;text=' . $message;
         echo $admin_whatsapp;
     }
 endif;
 
+$profile = $wpdb->prefix . 'vp_profile';
+$profileresult = $wpdb->get_results("SELECT * FROM $profile WHERE user_id = $id");
+global $my_code, $my_photo;
+$my_code = !empty($profileresult[0]->code) ? $profileresult[0]->code : "";
+$my_photo = !empty($profileresult[0]->photo_link) ? $profileresult[0]->photo_link : "";
+
+function bio_enforce_access()
+{
+    global $my_photo;
+    if (vp_getoption("vtupress_custom_biometric") == "yes" && vp_getoption("vtupress_enforce_biometric_access") == "yes" && strlen($my_photo) < 7) {
+        echo "<div class='container'>";
+        include_once(__DIR__ . "/sections/bio.php");
+        echo "</div>";
+        //BOTTOM
+        if (!isset($_GET["plain_receipt"])) {
+            include_once(__DIR__ . "/bottom.html");
+        }
+
+        exit;
+    }
+
+
+
+}
+function bio_enforce_transactions()
+{
+    global $my_photo;
+    bio_enforce_access();
+
+    if (vp_getoption("vtupress_custom_biometric") == "yes" && vp_getoption("vtupress_enforce_biometric_transactions") == "yes" && strlen($my_photo) < 7) {
+        echo "<div class='container'>";
+        include_once(__DIR__ . "/sections/bio.php");
+        echo "</div>";
+
+        //BOTTOM
+        if (!isset($_GET["plain_receipt"])) {
+            include_once(__DIR__ . "/bottom.html");
+        }
+
+        exit;
+    }
+
+
+}
+
 
 //PAGES
-if(!isset($_GET["vend"])){
-    include_once(__DIR__."/msorg.html");
-// include_once(__DIR__."/msorg-max.php");
-}
-else{
+if (!isset($_GET["vend"])) {
+    include_once(__DIR__ . "/msorg.html");
+    // include_once(__DIR__."/msorg-max.php");
+} else {
 
-    switch($_GET["vend"]){
-        case"dashboard":
-            include_once(__DIR__."/msorg.html");
+    switch ($_GET["vend"]) {
+        case "dashboard":
+            include_once(__DIR__ . "/msorg.html");
             // include_once(__DIR__."/msorg-max.php");
-        break;
-        case"data":
-            if(vp_option_array($option_array,"setdata") == "checked"){
-            echo "<div class='container'>";
-            include_once(__DIR__."/services/data.php");
-            echo "</div>";
+            break;
+        case "data":
+            bio_enforce_transactions();
+            if (vp_option_array($option_array, "setdata") == "checked") {
+                echo "<div class='container'>";
+                include_once(__DIR__ . "/services/data.php");
+                echo "</div>";
             }
-        break;
-        case"savings":
-            include_once(__DIR__."/sections/savings.php");
-        break;
-        case"bet":
-            if(vp_option_array($option_array,"betcontrol") == "checked"){
-            echo "<div class='container'>";
-            include_once(__DIR__."/services/bet.php");
-            echo "</div>";
+            break;
+        case "savings":
+            bio_enforce_transactions();
+            include_once(__DIR__ . "/sections/savings.php");
+            break;
+        case "bet":
+            bio_enforce_transactions();
+            if (vp_option_array($option_array, "betcontrol") == "checked") {
+                echo "<div class='container'>";
+                include_once(__DIR__ . "/services/bet.php");
+                echo "</div>";
             }
-        break;
-        case"airtime":
-            if(vp_option_array($option_array,"setairtime") == "checked"){
-            echo "<div class='container'>";
-            include_once(__DIR__."/services/airtime.php");
-            echo "</div>";
+            break;
+        case "airtime":
+            bio_enforce_transactions();
+            if (vp_option_array($option_array, "setairtime") == "checked") {
+                echo "<div class='container'>";
+                include_once(__DIR__ . "/services/airtime.php");
+                echo "</div>";
             }
-        break;
-        case"cable":
-            if(is_plugin_active("bcmv/bcmv.php")){
-                if(vp_option_array($option_array,"setcable") == "checked"){
-            echo "<div class='container'>";
-            include_once(__DIR__."/services/cable.php");
-            echo "</div>";
-            }
-             }
-        break;
-        case"account":
-            echo "<div class='container'>";
-            include_once(__DIR__."/sections/account.php");
-            echo "</div>";
-        break;
-        case"biometric":
-            echo "<div class='container'>";
-            include_once(__DIR__."/sections/bio.php");
-            echo "</div>";
-        break;
-        case"bill":
-            if(is_plugin_active("bcmv/bcmv.php")){
-                if(vp_option_array($option_array,"setbill") == "checked"){
-            echo "<div class='container'>";
-            include_once(__DIR__."/services/bill.php");
-            echo "</div>";
+            break;
+        case "cable":
+            bio_enforce_transactions();
+            if (is_plugin_active("bcmv/bcmv.php")) {
+                if (vp_option_array($option_array, "setcable") == "checked") {
+                    echo "<div class='container'>";
+                    include_once(__DIR__ . "/services/cable.php");
+                    echo "</div>";
                 }
             }
-        break;
-        case"crypto":
-            if(is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes" && vp_option_array($option_array,"allow_crypto") == "yes"){
+            break;
+        case "account":
+            bio_enforce_access();
             echo "<div class='container'>";
-            include_once(__DIR__."/sections/crypto-gift.php");
+            include_once(__DIR__ . "/sections/account.php");
             echo "</div>";
-            }
-        break;
-        case"gift-card":
-            if(is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes" && vp_option_array($option_array,"allow_cards") == "yes"){
+            break;
+        case "biometric":
             echo "<div class='container'>";
-            include_once(__DIR__."/sections/crypto-gift.php");
+            include_once(__DIR__ . "/sections/bio.php");
             echo "</div>";
+            break;
+        case "bill":
+            bio_enforce_transactions();
+
+            if (is_plugin_active("bcmv/bcmv.php")) {
+                if (vp_option_array($option_array, "setbill") == "checked") {
+                    echo "<div class='container'>";
+                    include_once(__DIR__ . "/services/bill.php");
+                    echo "</div>";
+                }
             }
-        break;
-        case"bvn":
-            if( vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+            break;
+        case "crypto":
+            bio_enforce_transactions();
+
+            if (is_plugin_active("vprest/vprest.php") && vp_option_array($option_array, "resell") == "yes" && vp_option_array($option_array, "allow_crypto") == "yes") {
                 echo "<div class='container'>";
-                include_once(__DIR__."/sections/bvn.php");
+                include_once(__DIR__ . "/sections/crypto-gift.php");
                 echo "</div>";
             }
-        break;
-        case"wallet":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/wallet.php");
-            echo "</div>";
-            echo "</div>";
-        break;
-        case"pricing":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/pricing.php");
-            echo "</div>";
-            echo "</div>";
-        break;
-        case"changepin":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/changepin.php");
-            echo "</div>";
-            echo "</div>";
-        break;
-        case"changeemail":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/changeemail.php");
-            echo "</div>";
-            echo "</div>";
-        break;
-        case"message":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/messages.php");
-            echo "</div>";
-            echo "</div>";
+            break;
+        case "gift-card":
+            bio_enforce_transactions();
+
+            if (is_plugin_active("vprest/vprest.php") && vp_option_array($option_array, "resell") == "yes" && vp_option_array($option_array, "allow_cards") == "yes") {
+                echo "<div class='container'>";
+                include_once(__DIR__ . "/sections/crypto-gift.php");
+                echo "</div>";
             }
-        break;
-        case"withdraw":
-            if(vp_option_array($option_array,"resell") == "yes"){
+            break;
+        case "bvn":
+            if (vp_option_array($option_array, "setbvn") == "yes" && vp_option_array($option_array, "vtupress_custom_bvn") == "yes") {
+                echo "<div class='container'>";
+                include_once(__DIR__ . "/sections/bvn.php");
+                echo "</div>";
+            }
+            break;
+        case "wallet":
+            bio_enforce_access();
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/withdraw-referral.php");
+            include_once(__DIR__ . "/sections/wallet.php");
             echo "</div>";
             echo "</div>";
-            }
-        break;
-        case"referral-details":
-            if(vp_option_array($option_array,"resell") == "yes"){
+            break;
+        case "pricing":
+            bio_enforce_access();
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/ref-info.html");
+            include_once(__DIR__ . "/sections/pricing.php");
             echo "</div>";
             echo "</div>";
-            }
-        break;
-        case"referrals":
-            if(vp_option_array($option_array,"resell") == "yes"){
+            break;
+        case "changepin":
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/withdraw-referral.php");
+            include_once(__DIR__ . "/sections/changepin.php");
             echo "</div>";
             echo "</div>";
-            }
-        break;
-        case"transfer":
-            if(vp_option_array($option_array,"resell") == "yes"){
+            break;
+        case "changeemail":
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/transfer.php");
+            include_once(__DIR__ . "/sections/changeemail.php");
             echo "</div>";
             echo "</div>";
-            }
-        break;
-        case"transfer2":
-            if(vp_getoption('allow_to_bank') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes"  && vp_getoption("vtupress_custom_transfer") == "yes" ){
+            break;
+        case "message":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
                 echo "<div class='container p-2'>";
                 echo "<div class='mt-3 mx-2 p-2'>";
-                include_once(__DIR__."/sections/transfer2.php");
+                include_once(__DIR__ . "/sections/messages.php");
                 echo "</div>";
                 echo "</div>";
             }
-        break;
-        case"kyc":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/kyc.php");
-            echo "</div>";
-            echo "</div>";
+            break;
+        case "withdraw":
+            bio_enforce_transactions();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/withdraw-referral.php");
+                echo "</div>";
+                echo "</div>";
             }
-        break;
-        case"upgrade":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/upgrade.php");
-            echo "</div>";
-            echo "</div>";
-        break;
-        case"developer":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/developer.php");
-            echo "</div>";
-            echo "</div>";
+            break;
+        case "referral-details":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/ref-info.html");
+                echo "</div>";
+                echo "</div>";
             }
-        break;
-        case"stats":
-            if(vp_option_array($option_array,"resell") == "yes"){
+            break;
+        case "referrals":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/withdraw-referral.php");
+                echo "</div>";
+                echo "</div>";
+            }
+            break;
+        case "transfer":
+            bio_enforce_transactions();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/transfer.php");
+                echo "</div>";
+                echo "</div>";
+            }
+            break;
+        case "transfer2":
+            bio_enforce_transactions();
+
+            if (vp_getoption('allow_to_bank') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" && vp_getoption("vtupress_custom_transfer") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/transfer2.php");
+                echo "</div>";
+                echo "</div>";
+            }
+            break;
+        case "kyc":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/kyc.php");
+                echo "</div>";
+                echo "</div>";
+            }
+            break;
+        case "upgrade":
+            bio_enforce_access();
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/statistics.php");
+            include_once(__DIR__ . "/sections/upgrade.php");
             echo "</div>";
             echo "</div>";
+            break;
+        case "developer":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/developer.php");
+                echo "</div>";
+                echo "</div>";
             }
-        break;
-        case"history":
+            break;
+        case "stats":
+            bio_enforce_access();
+
+            if (vp_option_array($option_array, "resell") == "yes") {
+                echo "<div class='container p-2'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/sections/statistics.php");
+                echo "</div>";
+                echo "</div>";
+            }
+            break;
+        case "history":
+            bio_enforce_access();
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
 
-            
 
-            if(!is_plugin_active("opay/opay.php")){
-                include_once(__DIR__."/sections/history.php");
-            }else{
-                
-                if(!isset($_GET["sub"])){
+
+            if (!is_plugin_active("opay/opay.php")) {
+                include_once(__DIR__ . "/sections/history.php");
+            } else {
+
+                if (!isset($_GET["sub"])) {
 
                     $_GET["sub"] = "wallet";
 
                 }
 
-                if(!isset($_GET["id"]) && !isset($_GET["generate"])){
-                    include_once(__DIR__."/history/wallet.html");
-                }elseif(!isset($_GET["plain"])){
-                    include_once(__DIR__."/history/receipt.html");
-                }else{
-                    include_once(__DIR__."/history/receipt-plain.html");
+                if (!isset($_GET["id"]) && !isset($_GET["generate"])) {
+                    include_once(__DIR__ . "/history/wallet.html");
+                } elseif (!isset($_GET["plain"])) {
+                    include_once(__DIR__ . "/history/receipt.html");
+                } else {
+                    include_once(__DIR__ . "/history/receipt-plain.html");
                 }
 
             }
 
             echo "</div>";
             echo "</div>";
-            
-        break;
-        case"history-plain":
+
+            break;
+        case "history-plain":
+            bio_enforce_access();
+
             echo "<div class='container p-2'>";
             echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/id_cards/control.php");
+            include_once(__DIR__ . "/sections/id_cards/control.php");
             echo "</div>";
             echo "</div>";
-            
-        break;
-        case"customize":
-            if(vp_option_array($option_array,"resell") == "yes" && current_user_can("administrator")){
-            echo "<div class='container p-2 loginit'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/customizer.php");
-            echo "</div>";
-            echo "</div>";
+
+            break;
+        case "customize":
+            if (vp_option_array($option_array, "resell") == "yes" && current_user_can("administrator")) {
+                echo "<div class='container p-2 loginit'>";
+                echo "<div class='mt-3 mx-2 p-2'>";
+                include_once(__DIR__ . "/customizer.php");
+                echo "</div>";
+                echo "</div>";
             }
-        break;
+            break;
         default:
-      
-	    echo "<link rel=\"stylesheet\" href=\"".plugins_url('msorg_template')."/msorg_template/form.css?v=1\" media=\"all\">";
-	
-        echo "<div class='container'>";
-        do_action("template_user_feature");
-        echo "</div>";
-        break;
+
+            echo "<link rel=\"stylesheet\" href=\"" . plugins_url('msorg_template') . "/msorg_template/form.css?v=1\" media=\"all\">";
+
+            echo "<div class='container'>";
+            do_action("template_user_feature");
+            echo "</div>";
+            break;
     }
 
 }
 
 //BOTTOM
-if(!isset($_GET["plain_receipt"])){
-include_once(__DIR__."/bottom.html");
+if (!isset($_GET["plain_receipt"])) {
+    include_once(__DIR__ . "/bottom.html");
 }
 ?>

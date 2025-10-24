@@ -1,14 +1,10 @@
 <?php
-if(isset($_GET["vend"]) && $_GET["vend"]=="biometric"){
     $id = get_current_user_id();
 
     global $wpdb;
     $kyc = $wpdb->prefix.'vp_kyc';
-    $profile = $wpdb->prefix.'vp_profile';
-
     $profiling = $wpdb->get_results("SELECT * FROM $kyc WHERE user_id = $id");
-    $profileresult = $wpdb->get_results("SELECT * FROM $profile WHERE user_id = $id");
-    $my_code = !empty($profileresult[0]->code) ? $profileresult[0]->code : "";
+    
     ?>
 
 
@@ -20,8 +16,11 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="biometric"){
 ">
                             <div id="status" class="my-2"></div>
                             <h3 class="text-center">Biometric Registration</h3>
-                                                   
-                            <?php if(!empty($my_code)):?>
+
+
+                            <?php if(empty($my_photo)):?>
+                                <button class='btn btn-primary' id='d_bio_cam'>Capture Face Photo</button>
+                            <?php elseif(!empty($my_code)):?>
                                 <button class='btn btn-primary' id='d_bio_register_not'>Remove Biometric</button>
                             <?php else:?>
 
@@ -106,5 +105,4 @@ if(isset($_GET["vend"]) && $_GET["vend"]=="biometric"){
 
 <?php
 
-}
 ?>
