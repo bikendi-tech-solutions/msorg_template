@@ -18,6 +18,7 @@ jQuery(document).on("click", "#d_bio_transaction2", function(){
         if($("button[form='cfor']").is(":visible")){
             jQuery(".pin").val(pin);
             jQuery(".pin").attr("readonly", true);
+            // alert(pin);
             proceedWithTransaction = true;
             $("button[form='cfor']").click();
         }else{
