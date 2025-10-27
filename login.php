@@ -171,7 +171,7 @@ vtupress_auto_override();
             <div class="d-flex w-100 flex-column justify-content-center align-items-center">
               <div class="" id="d_bio_login">
 
-                <svg fill="#000000" height="50px" width="750px" version="1.1" id="Capa_1"
+                <svg fill="#000000" height="50px" width="50px" version="1.1" id="Capa_1"
                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 463 463"
                   xml:space="preserve">
                   <g>
