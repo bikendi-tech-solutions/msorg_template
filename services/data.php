@@ -2107,7 +2107,7 @@ if (vp_option_array($option_array, "vprun") != "block") {
 
 
 							echo '
-				smedataprices["' . strtolower($airtel) . "-" . "-" . vp_option_array($option_array, "acdata" . $count1) . '"] = "' . vp_option_array($option_array, "acdatap" . $count1) . '";
+				smedataprices["' . strtolower($airtel) . "-" . vp_option_array($option_array, "acdata" . $count1) . '"] = "' . vp_option_array($option_array, "acdatap" . $count1) . '";
 			';
 							$count1++;
 						} elseif ($i <= 60) {
@@ -2195,6 +2195,8 @@ if (vp_option_array($option_array, "vprun") != "block") {
 	var mnetwork = datanetwork.toLowerCase();
 	//alert(mnetwork+"-"+cdat);
 	if(datachoice == "sme"){
+	// console.log(smedataprices);
+	// console.log(mnetwork+"-"+cdat);
 			amtd.value = smedataprices[mnetwork+"-"+cdat];
 	}
 	else if(datachoice == "direct"){
