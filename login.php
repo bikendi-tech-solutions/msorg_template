@@ -168,6 +168,8 @@ vtupress_auto_override();
 
             <button type="button" class="btn btn-primary  mt-3 mt-sm-0 fw-bold loginow" id="loginow">Sign In</button>
 
+        </div>
+        <div>
             <div class="d-flex w-100 flex-column justify-content-center align-items-center">
               <div class="" id="d_bio_login">
 
