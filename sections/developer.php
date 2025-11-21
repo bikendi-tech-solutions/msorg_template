@@ -2,6 +2,7 @@
 vtupress_auto_override();
 if (isset($_GET["vend"]) && $_GET["vend"] == "developer" && is_plugin_active("vprest/vprest.php") && vp_option_array($option_array, "resell") == "yes" && isset($level)) {
 
+
 	if (strtolower($level[0]->developer) == "yes") {
 		$id = get_current_user_id();
 		$apikey = vp_getuser($id, "vr_id", true);
@@ -996,7 +997,7 @@ if (isset($_GET["vend"]) && $_GET["vend"] == "developer" && is_plugin_active("vp
 		</div>
 		<?php
 
-		if($bypass): return; ?>
+		if($bypass): return;  endif;
 		if (is_plugin_active("vprest/vprest.php") && vp_getoption("cardscontrol") == "checked") {
 			?>
 

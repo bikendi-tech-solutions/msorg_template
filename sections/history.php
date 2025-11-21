@@ -1,6 +1,7 @@
 <?php	
 vtupress_auto_override();
 if(isset($_GET["vend"]) && $_GET["vend"]=="history" && isset($_GET["for"])){
+	$user_id = get_current_user_id();
 	$site_name = get_option('blogname');
 		echo '
 		<script src="'.esc_url(plugins_url("vtupress/js/print.js")).'"></script>
@@ -48,7 +49,7 @@ if($_GET["for"] == "transactions"){
 		';
 		
 		
-pagination_before_front("?vend=history","sms","sms", "ssms", "resultsad", "WHERE user_id = $id");
+pagination_before_front("?vend=history","sms","sms", "ssms", "resultsad", "WHERE user_id = $user_id");
 
 pagination_after_front("?vend=history","sms","sms");
 
@@ -250,7 +251,7 @@ if($_GET["for"] == "transactions"){
 		';
 		
 		
-pagination_before_front("?vend=history","airtime","air", "sairtime", "resultsad", "WHERE user_id = $id");
+pagination_before_front("?vend=history","airtime","air", "sairtime", "resultsad", "WHERE user_id = $user_id");
 
 pagination_after_front("?vend=history","airtime","air");
 
@@ -459,7 +460,7 @@ if($_GET["for"] == "transactions"){
 		<!--SERVICE NAME-->
 		';
 		
-		pagination_before_front("?vend=history","data","dat", "sdata", "resultsadd", "WHERE user_id = $id");
+		pagination_before_front("?vend=history","data","dat", "sdata", "resultsadd", "WHERE user_id = $user_id");
 		
 		pagination_after_front("?vend=history","data","dat");
 		echo'
@@ -676,7 +677,7 @@ elseif($_GET["type"] == "verification"){
 		<!--SERVICE NAME-->
 		';
 		
-		pagination_before_front("?vend=history","verification","ver", "vp_verifications", "resultsadd", "WHERE user_id = $id");
+		pagination_before_front("?vend=history","verification","ver", "vp_verifications", "resultsadd", "WHERE user_id = $user_id");
 		
 		pagination_after_front("?vend=history","verification","ver");
 		echo'
@@ -943,7 +944,7 @@ echo'</tbody>
 		<!--SERVICE NAME-->
 		';
 		
-		pagination_before_front("?vend=history","bet","dat", "sbet", "resultsadd", "WHERE user_id = $id");
+		pagination_before_front("?vend=history","bet","dat", "sbet", "resultsadd", "WHERE user_id = $user_id");
 		
 		pagination_after_front("?vend=history","bet","dat");
 		echo'
@@ -1168,7 +1169,7 @@ echo'
 	<!--SERVICE NAME-->
 		<br>
 		';
-		pagination_before_front("?vend=history","cable","cab", "scable", "resultsad", "WHERE user_id = $id");
+		pagination_before_front("?vend=history","cable","cab", "scable", "resultsad", "WHERE user_id = $user_id");
 		pagination_after_front("?vend=history","cable","cab");
 		echo'
 		<div class="bg bg-white p-3 overflow-auto mx-3 ">
@@ -1371,7 +1372,7 @@ echo'
 		<!--SERVICE NAME-->
 		';
 		
-pagination_before_front("?vend=history","bill","bil", "sbill", "resultsadd", "WHERE user_id = $id");
+pagination_before_front("?vend=history","bill","bil", "sbill", "resultsadd", "WHERE user_id = $user_id");
 
 pagination_after_front("?vend=history","bill","bil");
 		echo'
@@ -1613,7 +1614,7 @@ echo'
 
 <!--SECTION NAME-->
 ';
-pagination_before_front("?vend=history","withdrawal","with", "vp_withdrawal", "resultsad", "WHERE user_id = $id");
+pagination_before_front("?vend=history","withdrawal","with", "vp_withdrawal", "resultsad", "WHERE user_id = $user_id");
 pagination_after_front("?vend=history","withdrawal","with");
 echo'
 <div class="bg bg-white p-3 overflow-auto mx-3 ">
@@ -1695,7 +1696,7 @@ table.table th{
 <div class="wallet-history">
 ';
 
-pagination_before_front("?vend=history","wallet","wall", "vp_wallet", "resultsad", "WHERE user_id = $id");
+pagination_before_front("?vend=history","wallet","wall", "vp_wallet", "resultsad", "WHERE user_id = $user_id");
 pagination_after_front("?vend=history","wallet","wall");
 
 echo'
