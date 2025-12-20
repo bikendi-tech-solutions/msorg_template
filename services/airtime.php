@@ -1227,9 +1227,12 @@ url.val("awufbase' . vp_option_array($option_array, "wairtimeendpoint") . "awufp
                     });
 
 
+                    var can_proceed = true;
 
 
                     jQuery(".airtime-proceed").click(function () {
+                        if(!can_proceed) return;
+                        can_proceed = false;
                         var request_id = jQuery("#uniqidvalue").val();
                         var phone = jQuery(".airtime-number").val();
                         var network = jQuery(".airtime-network").val();
@@ -1295,6 +1298,7 @@ url.val("' . vp_option_array($option_array, "wairtimebaseurl") . vp_option_array
                             'cache': false,
                             "async": true,
                             error: function (jqXHR, exception) {
+                        can_proceed = true;
                                 jQuery.LoadingOverlay("hide");
                                 var msg = "";
                                 if (jqXHR.status === 0) {
@@ -1358,6 +1362,8 @@ url.val("' . vp_option_array($option_array, "wairtimebaseurl") . vp_option_array
                             },
 
                             success: function (data) {
+                        can_proceed = true;
+
                                 jQuery.LoadingOverlay("hide");
                                 let result = data.includes("status");
 

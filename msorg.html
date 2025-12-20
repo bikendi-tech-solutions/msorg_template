@@ -16,10 +16,10 @@ vtupress_auto_override();
 		document.getElementById("greet").innerHTML = greeting;
 	}
 
-$(document).ready(function(){greet();});
+	$(document).ready(function () { greet(); });
 </script>
 <div class="container">
-<?php
+	<?php
 $array["showbtn"] = "";
 $array["showmodal"] = "";
 function banksbtn(){
@@ -48,25 +48,27 @@ function banksmodal(){
 	if(vp_option_array($option_array,"show_notify") == "yes"){
 		$meq = preg_replace('/\n|\t|\s|\r/'," ",$mess);
 		?>
-		<script>
-		jQuery(window).on("load",function(){
+	<script>
+		jQuery(window).on("load", function () {
 			var word = "<?php echo $meq;?>";
-	swal({
-	  title: "NOTIFICATION",
-	  text: "<?php echo $meq;?>",
-	  icon: "info",
-	  button: "Okay"
-	});
+			swal({
+				title: "NOTIFICATION",
+				text: "<?php echo $meq;?>",
+				icon: "info",
+				button: "Okay"
+			});
 		});
 	</script>
-		<?php
+	<?php
 	}
 	?>
 	<div class="panel-header bg-secondary-gradient  py-3 bubble-shadow" style="">
 		<div class="page-inner py-5">
 			<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row py-4">
 				<div>
-					<h2 class="text-white pb-2 fw-bold text-uppercase">Welcome to <?php echo get_bloginfo("name");?></h2>
+					<h2 class="text-white pb-2 fw-bold text-uppercase">Welcome to
+						<?php echo get_bloginfo("name");?>
+					</h2>
 					<h5 class="text-white mb-2" style="font-size: 14px;">
 						<p>
 							<?php 
@@ -81,41 +83,47 @@ function banksmodal(){
 					<?php 
 					if(strtolower(vp_option_array($option_array,"msorg_referral_copy_button_enable")) == "yes"){
 				?>
-				<p class="mb-0 text-white" style="font-size: 13px;"> <b>Referal Link:</b>
-					<span class="data-toggle=" id="mytext"><?php echo get_site_url();?>/vpaccount?ref=<?php echo $id;?></span>
-					<span class="badge badge-dark" onclick="CopyToClipboard(&#39;mytext&#39;);" style="cursor: pointer;">copy</span>
+					<p class="mb-0 text-white" style="font-size: 13px;"> <b>Referal Link:</b>
+						<span class="data-toggle=" id="mytext">
+							<?php echo get_site_url();?>/vpaccount?ref=
+							<?php echo $id;?>
+						</span>
+						<span class="badge badge-dark" onclick="CopyToClipboard(&#39;mytext&#39;);"
+							style="cursor: pointer;">copy</span>
 
-				</p>
-				<?php
+					</p>
+					<?php
 					}
 				
 				?>
 
 				</div>
 				<div class="ml-md-auto py-2 py-md-0">
-					<button type="button" class="btn btn-warning btn-round mr-2" data-bs-toggle="modal" data-bs-target="#WalletModal">
+					<button type="button" class="btn btn-warning btn-round mr-2" data-bs-toggle="modal"
+						data-bs-target="#WalletModal">
 						Fund Wallet
 					</button>
 				</div>
 				<?php if(current_user_can("administrator") || current_user_can("vtupress_admin")  || current_user_can("vtupress_sales")  || current_user_can("vtupress_user")){?>
 				<div class="ml-md-auto py-2 py-md-0">
-				<a href="/wp-admin/admin.php?page=vtupanel" role="button" class="btn btn-warning btn-round mr-2">
+					<a href="/wp-admin/admin.php?page=vtupanel" role="button" class="btn btn-warning btn-round mr-2">
 						Admin Dashboard
-				</a>
+					</a>
 				</div>
 				<?php }?>
-				
-				
+
+
 
 			</div>
 
 			<?php 
 			if(strtolower(vp_option_array($option_array,"msorg_download_button_enable")) == "yes"){
 		?>
-				<a href="<?php echo vp_option_array($option_array,'msorg_download_button_link');?>" style="margin-top:10px">
-					<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/en_badge_web_generic.png" style="height:110px;">
-				</a>
-		<?php
+			<a href="<?php echo vp_option_array($option_array,'msorg_download_button_link');?>" style="margin-top:10px">
+				<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/en_badge_web_generic.png"
+					style="height:110px;">
+			</a>
+			<?php
 			}
 		?>
 
@@ -131,47 +139,56 @@ function banksmodal(){
 
 				<div class="card full-height">
 					<div class="card-body">
-						<div class="card-title"><span id="greet">Good day,</span> <b><?php echo ucfirst(do_shortcode("[vtupress get='name']"));?></b></div>
+						<div class="card-title"><span id="greet">Good day,</span> <b>
+								<?php echo ucfirst(do_shortcode("[vtupress get='name']"));?>
+							</b></div>
 
 
 						<hr>
-						<p class="text-center " style="font-size:20px;"><b> Package : <?php echo strtoupper($myplan); ?> <b></b></b></p><b><b>
-
-						
-
-						
-					</b></b></div><b><b>
+						<p class="text-center " style="font-size:20px;"><b> Package :
+								<?php echo strtoupper($myplan); ?> <b></b>
+							</b></p><b><b>
 
 
 
-					
 
-				<?php 
+							</b></b>
+					</div><b><b>
+
+
+
+
+
+							<?php 
 					if(strtolower(vp_option_array($option_array,"msorg_message_reseller_enable")) == "yes"){
 				?>
-					<p style="margin:10px; background-image:linear-gradient(45deg,#477f9a,#465abdd9);background-color:#ff0000;border-radius:10px;color:white;padding:7px;font-size:14px;">
-						<span style="color:orange"><b>**NEW**</b></span>
-                        &nbsp; <?php echo vp_option_array($option_array,"msorg_message_reseller");?>
-						<?php 
+							<p
+								style="margin:10px; background-image:linear-gradient(45deg,#477f9a,#465abdd9);background-color:#ff0000;border-radius:10px;color:white;padding:7px;font-size:14px;">
+								<span style="color:orange"><b>**NEW**</b></span>
+								&nbsp;
+								<?php echo vp_option_array($option_array,"msorg_message_reseller");?>
+								<?php 
 						if(strtolower(vp_option_array($option_array,"msorg_reseller_button_enable")) == "yes"){
 					?>
-                        <a class="w3-btn  w3-border w3-round-large" href="<?php echo vp_option_array($option_array,'msorg_reseller_button_link');?>" style="background-color:white;color:blue;">Click Here</a>
-                   <?php
+								<a class="w3-btn  w3-border w3-round-large"
+									href="<?php echo vp_option_array($option_array,'msorg_reseller_button_link');?>"
+									style="background-color:white;color:blue;">Click Here</a>
+								<?php
 						}
 					?>
-					</p>
-				<?php
+							</p>
+							<?php
 					}
 				?>
 
-					<!--<p style="margin:10px; background-image:linear-gradient(45deg,#477f9a,#465abdd9);background-color:#ff0000;border-radius:10px;color:white;padding:7px;font-size:14px;"><span style="color:orange"><b>**NEW**</b></span>&nbsp; Own a DAREBUNDLES retailer website and retail all our services; Such as DATA, Recharge cards printing, AIRTIME and BILLS Payment. <a class="w3-btn  w3-border w3-round-large" href="https://api.whatsapp.com/send?phone=+2348160303163&text=Hello!%20my%20username%20is%20PrinceMalachy%2C%20i%20would%20like%20to%20create%20a%20retailers%20website%20with%20darebundles.com%2C%20how%20do%20i%20get%20started?" style="background-color:white;color:blue;">Click Here</a></p>-->
+							<!--<p style="margin:10px; background-image:linear-gradient(45deg,#477f9a,#465abdd9);background-color:#ff0000;border-radius:10px;color:white;padding:7px;font-size:14px;"><span style="color:orange"><b>**NEW**</b></span>&nbsp; Own a DAREBUNDLES retailer website and retail all our services; Such as DATA, Recharge cards printing, AIRTIME and BILLS Payment. <a class="w3-btn  w3-border w3-round-large" href="https://api.whatsapp.com/send?phone=+2348160303163&text=Hello!%20my%20username%20is%20PrinceMalachy%2C%20i%20would%20like%20to%20create%20a%20retailers%20website%20with%20darebundles.com%2C%20how%20do%20i%20get%20started?" style="background-color:white;color:blue;">Click Here</a></p>-->
 
 
 
 
 
-				<!--BANK DETAILS-->
-				<?php 
+							<!--BANK DETAILS-->
+							<?php 
 
 				function accountNumber($aza, $generate){
 					$aza = strtolower($aza);
@@ -236,82 +253,110 @@ function banksmodal(){
 						}
 					}
 				?>
-					<div class="mt-4">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<div class="mt-4">
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
 
-							<?php
+									<?php
 
 							if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="paymentpoint-tab" data-bs-toggle="tab" href="#paymentpoint" role="tab" aria-controls="paymentpoint" aria-selected="true">Palmpay</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="paymentpoint-tab"
+											data-bs-toggle="tab" href="#paymentpoint" role="tab"
+											aria-controls="paymentpoint" aria-selected="true">Palmpay</a>
+
+									</li>
+									<?php }
 							if(vp_getoption('enable_nomba') == "yes"  && vp_getoption("vtupress_custom_nomba") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="nomba-tab" data-bs-toggle="tab" href="#nomba" role="tab" aria-controls="nomba" aria-selected="true">Nomba</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="nomba-tab" data-bs-toggle="tab"
+											href="#nomba" role="tab" aria-controls="nomba"
+											aria-selected="true">Nomba</a>
+
+									</li>
+									<?php }
 							if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="vpay-tab" data-bs-toggle="tab" href="#vpay" role="tab" aria-controls="vpay" aria-selected="true">VPAY</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="vpay-tab" data-bs-toggle="tab"
+											href="#vpay" role="tab" aria-controls="vpay" aria-selected="true">VPAY</a>
+
+									</li>
+									<?php }
 						 if(vp_getoption('enablesquadco') == "yes"  && vp_getoption("vtupress_custom_gtbank") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="squad-tab" data-bs-toggle="tab" href="#squad" role="tab" aria-controls="squad" aria-selected="true">GTBank</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="squad-tab" data-bs-toggle="tab"
+											href="#squad" role="tab" aria-controls="squad"
+											aria-selected="true">GTBank</a>
+
+									</li>
+									<?php }
 
 
 							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab" data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet" aria-selected="true">NOMBA</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="ncwallet-tab"
+											data-bs-toggle="tab" href="#ncwallet" role="tab" aria-controls="ncwallet"
+											aria-selected="true">NOMBA</a>
+
+									</li>
+									<?php }
 							if(vp_getoption('enable_payvessel') == "yes"  && vp_getoption("vtupress_custom_payvessel") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="payvessel-tab" data-bs-toggle="tab" href="#payvessel" role="tab" aria-controls="payvessel" aria-selected="true">9PSB</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="payvessel-tab"
+											data-bs-toggle="tab" href="#payvessel" role="tab" aria-controls="payvessel"
+											aria-selected="true">9PSB</a>
+
+									</li>
+									<?php }
 							if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_billstack") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="billstack-tab" data-bs-toggle="tab" href="#billstack" role="tab" aria-controls="billstack" aria-selected="true">9PSB</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="billstack-tab"
+											data-bs-toggle="tab" href="#billstack" role="tab" aria-controls="billstack"
+											aria-selected="true">9PSB</a>
+
+									</li>
+									<?php }
 							if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){?>
-								<li class="nav-item">
-									<a class="nav-link <?php echo banksbtn();?>" id="kuda-tab" data-bs-toggle="tab" href="#kuda" role="tab" aria-controls="kuda" aria-selected="true">KUDA</a>
-								   
-								</li>
-							<?php }
+									<li class="nav-item">
+										<a class="nav-link <?php echo banksbtn();?>" id="kuda-tab" data-bs-toggle="tab"
+											href="#kuda" role="tab" aria-controls="kuda" aria-selected="true">KUDA</a>
+
+									</li>
+									<?php }
 							if($bank_mode == "live" && vp_getoption('enable_monnify') == "yes" ){ ?>
-							<li class="nav-item <?php if(preg_match("/null/i",$bank_name2) && (!empty($bank_name1) || !empty($bank_name)) ){echo "d-none";} ?>">
-								<a class="nav-link  <?php echo banksbtn() ;?>" id="bank2-tab" data-bs-toggle="tab" href="#bank2" role="tab" aria-controls="bank2" aria-selected="false"><?php echo ucfirst($bank_name2);?></a>
-							   
-							</li>
-							<li class="nav-item <?php if(preg_match("/null/i",$bank_name1) && (!empty($bank_name2) || !empty($bank_name)) ){echo "d-none";} ?>">
-							
-								<a class="nav-link  <?php echo banksbtn();?>" id="bank1-tab" data-bs-toggle="tab" href="#bank1" role="tab" aria-controls="bank1" aria-selected="false"><?php echo ucfirst($bank_name1);?></a>
-							</li>
-							<li class="nav-item <?php if(preg_match("/null/i",$bank_name) && (!empty($bank_name1) || !empty($bank_name2)) ){echo "d-none";} ?>">
-							
-								<a class="nav-link  <?php echo banksbtn();?>" id="bank-tab" data-bs-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false"><?php echo ucfirst($bank_name);?></a>
-							</li>
-							<?php } ?>
-						</ul>
+									<li class="nav-item <?php if(preg_match(" /null/i",$bank_name2) &&
+										(!empty($bank_name1) || !empty($bank_name)) ){echo "d-none" ;} ?>">
+										<a class="nav-link  <?php echo banksbtn() ;?>" id="bank2-tab"
+											data-bs-toggle="tab" href="#bank2" role="tab" aria-controls="bank2"
+											aria-selected="false">
+											<?php echo ucfirst($bank_name2);?>
+										</a>
 
-						<div class="tab-content" id="myTabContent">
+									</li>
+									<li class="nav-item <?php if(preg_match(" /null/i",$bank_name1) &&
+										(!empty($bank_name2) || !empty($bank_name)) ){echo "d-none" ;} ?>">
+
+										<a class="nav-link  <?php echo banksbtn();?>" id="bank1-tab"
+											data-bs-toggle="tab" href="#bank1" role="tab" aria-controls="bank1"
+											aria-selected="false">
+											<?php echo ucfirst($bank_name1);?>
+										</a>
+									</li>
+									<li class="nav-item <?php if(preg_match(" /null/i",$bank_name) &&
+										(!empty($bank_name1) || !empty($bank_name2)) ){echo "d-none" ;} ?>">
+
+										<a class="nav-link  <?php echo banksbtn();?>" id="bank-tab" data-bs-toggle="tab"
+											href="#bank" role="tab" aria-controls="bank" aria-selected="false">
+											<?php echo ucfirst($bank_name);?>
+										</a>
+									</li>
+									<?php } ?>
+								</ul>
+
+								<div class="tab-content" id="myTabContent">
 
 
-							
-							<?php	if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
+
+									<?php	if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
 								$paymentpoint = "Palmpay";
 								$paymentpointAccountName = vp_getuser($id,"paymentpoint_accountname");
 								$paymentpointAccountNumber = vp_getuser($id,"paymentpoint_accountnumber");
@@ -324,41 +369,52 @@ function banksmodal(){
 								}
 			
 							?>
-			
-			
-							<div class="tab-pane fade   <?php echo banksmodal();?>" id="paymentpoint" role="tabpanel" aria-labelledby="paymentpoint-tab">
-								<div class="card card-dark bg-secondary-gradient">
-									<div class="card-body skew-shadow">
-										<img src="<?php banks_log("paymentpoint");?>" height="60" alt="Visa Logo">
-			
-										
-										<h2 class="py-4 mb-0">
-											Account Number:<?php  accountNumber($paymentpointAccountNumber,"paymentpoint");?>
-										</h2>
-			
-										<div class="row">
-											<div class="col-8 pr-0">
-												<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($paymentpointAccountName);?>
-												</h3>
-												<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($paymentpoint);?></h3>
-												<br>
-												<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-													Transfer</div>
-												<p class="text-small ">Make transfer to this account to fund your wallet
-												</p>
-											</div>
-											<div class="col-4 pl-0 text-right">
-												<h3 class="fw-bold mb-1"><?php echo $paymentpoint_chargef;?></h3>
-												<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+
+
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="paymentpoint"
+										role="tabpanel" aria-labelledby="paymentpoint-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" paymentpoint");?>" height="60" alt="Visa
+												Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($paymentpointAccountNumber,"paymentpoint");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($paymentpointAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($paymentpoint);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $paymentpoint_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
 											</div>
 										</div>
-										
-			
 									</div>
-								</div>
-							</div>
-			
-						<?php }
+
+									<?php }
 						if(vp_getoption('enable_nomba') == "yes"  && vp_getoption("vtupress_custom_nomba") == "yes"){
 							$nomba = "Nomba";
 							$nombaAccountName = vp_getuser($id,"nomba_accountname");
@@ -372,41 +428,51 @@ function banksmodal(){
 							}
 		
 						?>
-		
-		
-						<div class="tab-pane fade   <?php echo banksmodal();?>" id="nomba" role="tabpanel" aria-labelledby="nomba-tab">
-							<div class="card card-dark bg-secondary-gradient">
-								<div class="card-body skew-shadow">
-									<img src="<?php banks_log("nomba");?>" height="60" alt="Visa Logo">
-		
-									
-									<h2 class="py-4 mb-0">
-										Account Number:<?php  accountNumber($nombaAccountNumber,"nomba");?>
-									</h2>
-		
-									<div class="row">
-										<div class="col-8 pr-0">
-											<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($nombaAccountName);?>
-											</h3>
-											<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($nomba);?></h3>
-											<br>
-											<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-												Transfer</div>
-											<p class="text-small ">Make transfer to this account to fund your wallet
-											</p>
-										</div>
-										<div class="col-4 pl-0 text-right">
-											<h3 class="fw-bold mb-1"><?php echo $nomba_chargef;?></h3>
-											<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+
+
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="nomba" role="tabpanel"
+										aria-labelledby="nomba-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" nomba");?>" height="60" alt="Visa Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($nombaAccountNumber,"nomba");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($nombaAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($nomba);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $nomba_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
+											</div>
 										</div>
 									</div>
-									
-		
-								</div>
-							</div>
-						</div>
-		
-					<?php }
+
+									<?php }
 			if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){
 								$vpay = "Vpay / Vfd";
 								$vpayAccountName = vp_getuser($id,"vpayAccountName");
@@ -422,39 +488,49 @@ function banksmodal(){
 								?>
 
 
-								<div class="tab-pane fade   <?php echo banksmodal();?>" id="vpay" role="tabpanel" aria-labelledby="vpay-tab">
-									<div class="card card-dark bg-secondary-gradient">
-										<div class="card-body skew-shadow">
-											<img src="<?php banks_log("vpay");?>" height="60" alt="Visa Logo">
-	
-											
-											<h2 class="py-4 mb-0">
-												Account Number:<?php accountNumber($vpayAccountNumber,"vpay");?>
-											</h2>
-	
-											<div class="row">
-												<div class="col-8 pr-0">
-													<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($vpayAccountName);?>
-													</h3>
-													<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($vpay);?></h3>
-													<br>
-													<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-														Transfer</div>
-													<p class="text-small ">Make transfer to this account to fund your wallet
-													</p>
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="vpay" role="tabpanel"
+										aria-labelledby="vpay-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" vpay");?>" height="60" alt="Visa Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php accountNumber($vpayAccountNumber,"vpay");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($vpayAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($vpay);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $vpay_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
 												</div>
-												<div class="col-4 pl-0 text-right">
-													<h3 class="fw-bold mb-1"><?php echo $vpay_chargef;?></h3>
-													<div class="text-small text-uppercase fw-bold op-8">Charge</div>
-												</div>
+
+
 											</div>
-											
-	
 										</div>
 									</div>
-								</div>
 
-							<?php }
+									<?php }
 
 							if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
 								$ncwallet = "Nomba";
@@ -471,39 +547,49 @@ function banksmodal(){
 							?>
 
 
-							<div class="tab-pane fade   <?php echo banksmodal();?>" id="ncwallet" role="tabpanel" aria-labelledby="ncwallet-tab">
-								<div class="card card-dark bg-secondary-gradient">
-									<div class="card-body skew-shadow">
-										<img src="<?php banks_log("ncwallet");?>" height="60" alt="Visa Logo">
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="ncwallet"
+										role="tabpanel" aria-labelledby="ncwallet-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" ncwallet");?>" height="60" alt="Visa Logo">
 
-										
-										<h2 class="py-4 mb-0">
-											Account Number:<?php  accountNumber($ncwalletAccountNumber,"ncwallet");?>
-										</h2>
 
-										<div class="row">
-											<div class="col-8 pr-0">
-												<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($ncwalletAccountName);?>
-												</h3>
-												<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($ncwallet);?></h3>
-												<br>
-												<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-													Transfer</div>
-												<p class="text-small ">Make transfer to this account to fund your wallet
-												</p>
-											</div>
-											<div class="col-4 pl-0 text-right">
-												<h3 class="fw-bold mb-1"><?php echo $ncwallet_chargef;?></h3>
-												<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($ncwalletAccountNumber,"ncwallet");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($ncwalletAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($ncwallet);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $ncwallet_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
 											</div>
 										</div>
-										
-
 									</div>
-								</div>
-							</div>
 
-						<?php }
+									<?php }
 						if(vp_getoption('enable_payvessel') == "yes"  && vp_getoption("vtupress_custom_payvessel") == "yes"){
 							$payvessel = "9Psb / 9 Payment Service Bank";
 							$payvesselAccountName = vp_getuser($id,"payvessel_accountname");
@@ -519,39 +605,49 @@ function banksmodal(){
 						?>
 
 
-						<div class="tab-pane fade   <?php echo banksmodal();?>" id="payvessel" role="tabpanel" aria-labelledby="payvessel-tab">
-							<div class="card card-dark bg-secondary-gradient">
-								<div class="card-body skew-shadow">
-									<img src="<?php banks_log("payvessel");?>" height="60" alt="Visa Logo">
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="payvessel"
+										role="tabpanel" aria-labelledby="payvessel-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" payvessel");?>" height="60" alt="Visa Logo">
 
-									
-									<h2 class="py-4 mb-0">
-										Account Number:<?php  accountNumber($payvesselAccountNumber,"payvessel");?>
-									</h2>
 
-									<div class="row">
-										<div class="col-8 pr-0">
-											<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($payvesselAccountName);?>
-											</h3>
-											<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($payvessel);?></h3>
-											<br>
-											<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-												Transfer</div>
-											<p class="text-small ">Make transfer to this account to fund your wallet
-											</p>
-										</div>
-										<div class="col-4 pl-0 text-right">
-											<h3 class="fw-bold mb-1"><?php echo $payvessel_chargef;?></h3>
-											<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($payvesselAccountNumber,"payvessel");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($payvesselAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($payvessel);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $payvessel_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
+											</div>
 										</div>
 									</div>
-									
 
-								</div>
-							</div>
-						</div>
-
-					<?php }
+									<?php }
 
 					
 					if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_billstack") == "yes"){
@@ -569,39 +665,49 @@ function banksmodal(){
 					?>
 
 
-					<div class="tab-pane fade   <?php echo banksmodal();?>" id="billstack" role="tabpanel" aria-labelledby="billstack-tab">
-						<div class="card card-dark bg-secondary-gradient">
-							<div class="card-body skew-shadow">
-								<img src="<?php banks_log("billstack");?>" height="60" alt="Visa Logo">
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="billstack"
+										role="tabpanel" aria-labelledby="billstack-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" billstack");?>" height="60" alt="Visa Logo">
 
-								
-								<h2 class="py-4 mb-0">
-									Account Number:<?php  accountNumber($billstackAccountNumber,"billstack");?>
-								</h2>
 
-								<div class="row">
-									<div class="col-8 pr-0">
-										<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($billstackAccountName);?>
-										</h3>
-										<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($billstack);?></h3>
-										<br>
-										<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-											Transfer</div>
-										<p class="text-small ">Make transfer to this account to fund your wallet
-										</p>
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($billstackAccountNumber,"billstack");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($billstackAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($billstack);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $billstack_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
+											</div>
+										</div>
 									</div>
-									<div class="col-4 pl-0 text-right">
-										<h3 class="fw-bold mb-1"><?php echo $billstack_chargef;?></h3>
-										<div class="text-small text-uppercase fw-bold op-8">Charge</div>
-									</div>
-								</div>
-								
 
-							</div>
-						</div>
-					</div>
-
-				<?php }
+									<?php }
 
 
 
@@ -620,39 +726,49 @@ function banksmodal(){
 								?>
 
 
-								<div class="tab-pane fade   <?php echo banksmodal();?>" id="squad" role="tabpanel" aria-labelledby="squad-tab">
-									<div class="card card-dark bg-secondary-gradient">
-										<div class="card-body skew-shadow">
-											<img src="<?php banks_log("gtbank");?>" height="60" alt="Visa Logo">
-	
-											
-											<h2 class="py-4 mb-0">
-												Account Number:<?php  accountNumber($squadAccountNumber,"gtb");?>
-											</h2>
-	
-											<div class="row">
-												<div class="col-8 pr-0">
-													<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($squadAccountName);?>
-													</h3>
-													<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($squad);?></h3>
-													<br>
-													<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-														Transfer</div>
-													<p class="text-small ">Make transfer to this account to fund your wallet
-													</p>
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="squad" role="tabpanel"
+										aria-labelledby="squad-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" gtbank");?>" height="60" alt="Visa Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($squadAccountNumber,"gtb");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($squadAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($squad);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $gtb_chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
 												</div>
-												<div class="col-4 pl-0 text-right">
-													<h3 class="fw-bold mb-1"><?php echo $gtb_chargef;?></h3>
-													<div class="text-small text-uppercase fw-bold op-8">Charge</div>
-												</div>
+
+
 											</div>
-											
-	
 										</div>
 									</div>
-								</div>
 
-							<?php }
+									<?php }
 							if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){
 								$kuda = "Kuda";
 								$kudaAccountName = vp_getuser($id,"kudaAccountName");
@@ -669,378 +785,441 @@ function banksmodal(){
 								?>
 
 
-								<div class="tab-pane fade   <?php echo banksmodal();?>" id="kuda" role="tabpanel" aria-labelledby="kuda-tab">
-									<div class="card card-dark bg-secondary-gradient">
-										<div class="card-body skew-shadow">
-											<img src="<?php banks_log("kuda");?>" height="60" alt="Visa Logo">
-	
-											
-											<h2 class="py-4 mb-0">
-												Account Number:<?php  accountNumber($kudaAccountNumber,"kuda");?>
-											</h2>
-	
-											<div class="row">
-												<div class="col-8 pr-0">
-													<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($kudaAccountName);?>
-													</h3>
-													<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($kuda);?></h3>
-													<br>
-													<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-														Transfer</div>
-													<p class="text-small ">Make transfer to this account to fund your wallet
-													</p>
+									<div class="tab-pane fade   <?php echo banksmodal();?>" id="kuda" role="tabpanel"
+										aria-labelledby="kuda-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log(" kuda");?>" height="60" alt="Visa Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($kudaAccountNumber,"kuda");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($kudaAccountName);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($kuda);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
 												</div>
-												<div class="col-4 pl-0 text-right">
-													<h3 class="fw-bold mb-1"><?php echo $chargef;?></h3>
-													<div class="text-small text-uppercase fw-bold op-8">Charge</div>
-												</div>
+
+
 											</div>
-											
-	
 										</div>
 									</div>
-								</div>
 
-							<?php }
+									<?php }
 							if($bank_mode == "live"){?>
-							<div class="tab-pane fade <?php echo (is_numeric($account_number2)) ? banksmodal():""; ?> " id="bank2" role="tabpanel" aria-labelledby="bank2-tab">
-								<div class="card card-dark bg-secondary-gradient">
-									<div class="card-body skew-shadow">
-										<img src="<?php banks_log($bank_name2);?>" height="60" alt="Visa Logo">
+									<div class="tab-pane fade <?php echo (is_numeric($account_number2)) ? banksmodal():""; ?> "
+										id="bank2" role="tabpanel" aria-labelledby="bank2-tab">
+										<div class="card card-dark bg-secondary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log($bank_name2);?>" height="60" alt="Visa Logo">
 
-										
-										<h2 class="py-4 mb-0">
-											Account Number:<?php  accountNumber($account_number2,"monnify");?>
-										</h2>
 
-										<div class="row">
-											<div class="col-8 pr-0">
-												<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($account_name2);?>
-												</h3>
-												<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($bank_name2);?></h3>
-												<br>
-												<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-													Transfer</div>
-												<p class="text-small ">Make transfer to this account to fund your wallet
-												</p>
-											</div>
-											<div class="col-4 pl-0 text-right">
-												<h3 class="fw-bold mb-1"><?php echo $chargef;?></h3>
-												<div class="text-small text-uppercase fw-bold op-8">Charge</div>
-											</div>
-										</div>
-										
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php  accountNumber($account_number2,"monnify");?>
+												</h2>
 
-									</div>
-								</div>
-							</div>
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($account_name2);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($bank_name2);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
 
-							<div class="tab-pane fade <?php echo (is_numeric($account_number1)) ? banksmodal():""; ?>" id="bank1" role="tabpanel" aria-labelledby="bank1-tab">
-								<div class="card card-dark bg-primary-gradient">
-									<div class="card-body skew-shadow">
-										<img src="<?php banks_log($bank_name1);?>" height="60" alt="<?php echo $bank_name1;?> Bank Logo">
 
-										
-										<h2 class="py-4 mb-0">
-											Account Number:<?php accountNumber($account_number1,"monnify");?>
-										</h2>
-
-										<div class="row">
-											<div class="col-8 pr-0">
-												<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($account_name1);?>
-												</h3>
-												<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($bank_name1);?></h3>
-												<br>
-												<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-													Transfer</div>
-												<p class="text-small ">Make transfer to this account to fund your wallet
-												</p>
-											</div>
-											<div class="col-4 pl-0 text-right">
-												<h3 class="fw-bold mb-1"><?php echo $chargef;?></h3>
-												<div class="text-small text-uppercase fw-bold op-8">Charge</div>
 											</div>
 										</div>
-										
-
 									</div>
-								</div>
-							</div>
 
-							<div class="tab-pane fade <?php echo (is_numeric($account_number)) ? banksmodal():""; ?>" id="bank" role="tabpanel" aria-labelledby="bank-tab">
-								<div class="card card-dark bg-primary-gradient">
-									<div class="card-body skew-shadow">
-										<img src="<?php banks_log($bank_name);?>" height="60" alt="<?php echo $bank_name;?> Bank Logo">
+									<div class="tab-pane fade <?php echo (is_numeric($account_number1)) ? banksmodal():""; ?>"
+										id="bank1" role="tabpanel" aria-labelledby="bank1-tab">
+										<div class="card card-dark bg-primary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log($bank_name1);?>" height="60"
+													alt="<?php echo $bank_name1;?> Bank Logo">
 
-										
-										<h2 class="py-4 mb-0">
-											Account Number:<?php accountNumber($account_number,"monnify");?>
-										</h2>
 
-										<div class="row">
-											<div class="col-8 pr-0">
-												<h3 class="fw-bold mb-1">Account Name: <?php echo get_bloginfo( 'name' );?> - <?php echo ucfirst($account_name);?>
-												</h3>
-												<h3 class="fw-bold mb-1">Bank Name: <?php echo ucfirst($bank_name);?></h3>
-												<br>
-												<div class="text-small text-uppercase fw-bold op-8">Automated Bank
-													Transfer</div>
-												<p class="text-small ">Make transfer to this account to fund your wallet
-												</p>
-											</div>
-											<div class="col-4 pl-0 text-right">
-												<h3 class="fw-bold mb-1"><?php echo $chargef;?></h3>
-												<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php accountNumber($account_number1,"monnify");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($account_name1);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($bank_name1);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
 											</div>
 										</div>
-										
-
 									</div>
-								</div>
-							</div>
 
-							<?php
+									<div class="tab-pane fade <?php echo (is_numeric($account_number)) ? banksmodal():""; ?>"
+										id="bank" role="tabpanel" aria-labelledby="bank-tab">
+										<div class="card card-dark bg-primary-gradient">
+											<div class="card-body skew-shadow">
+												<img src="<?php banks_log($bank_name);?>" height="60"
+													alt="<?php echo $bank_name;?> Bank Logo">
+
+
+												<h2 class="py-4 mb-0">
+													Account Number:
+													<?php accountNumber($account_number,"monnify");?>
+												</h2>
+
+												<div class="row">
+													<div class="col-8 pr-0">
+														<h3 class="fw-bold mb-1">Account Name:
+															<?php echo get_bloginfo( 'name' );?> -
+															<?php echo ucfirst($account_name);?>
+														</h3>
+														<h3 class="fw-bold mb-1">Bank Name:
+															<?php echo ucfirst($bank_name);?>
+														</h3>
+														<br>
+														<div class="text-small text-uppercase fw-bold op-8">Automated
+															Bank
+															Transfer</div>
+														<p class="text-small ">Make transfer to this account to fund
+															your wallet
+														</p>
+													</div>
+													<div class="col-4 pl-0 text-right">
+														<h3 class="fw-bold mb-1">
+															<?php echo $chargef;?>
+														</h3>
+														<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+													</div>
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+
+									<?php
 						}
 						?>
 
 
-						</div>
-					</div>
-				<?php
+								</div>
+							</div>
+							<?php
 				}
 				?>
-				
 
 
 
 
 
-				
-<?php 
+
+
+							<?php 
 if(strtolower(vp_option_array($option_array,"msorg_marquee_message_enable")) == "yes"){
-?>				
-<marquee style="background-color: white; color:#d1026d; padding: 10px; font-size: 25px;">
-	<?php echo vp_option_array($option_array,"msorg_marquee_message");?>
-</marquee>
-<?php
+?>
+							<marquee style="background-color: white; color:#d1026d; padding: 10px; font-size: 25px;">
+								<?php echo vp_option_array($option_array,"msorg_marquee_message");?>
+							</marquee>
+							<?php
 }
 ?>
-					
-				
 
-					<div class="row">
-						<div class="col-6 col-lg-3">
-							<div class="card p-3">
-								<div class="d-flex align-items-center">
-									<span class="stamp stamp-md bg-secondary mr-3">
-										<i class="fas fa-history"></i>
-									</span>
-									<div>
-										<h5 class="mb-1"><b><a href="?vend=history&for=transactions&type=airtime">Airtime Transactions</a></b></h5>
 
+
+							<div class="row">
+								<div class="col-6 col-lg-3">
+									<div class="card p-3">
+										<div class="d-flex align-items-center">
+											<span class="stamp stamp-md bg-secondary mr-3">
+												<i class="fas fa-history"></i>
+											</span>
+											<div>
+												<h5 class="mb-1"><b><a
+															href="?vend=history&for=transactions&type=airtime">Airtime
+															Transactions</a></b></h5>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-lg-3">
+									<div class="card p-3">
+										<div class="d-flex align-items-center">
+											<span class="stamp stamp-md bg-secondary mr-3">
+												<i class="fas fa-history"></i>
+											</span>
+											<div>
+												<h5 class="mb-1"><b><a href="?vend=history&for=transactions&type=data">
+															Data Transactions</a></b></h5>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-6 col-lg-3">
+									<div class="card p-3">
+										<div class="d-flex align-items-center">
+											<span class="stamp stamp-md bg-warning mr-3">
+												<i class="fas fa-history"></i>
+											</span>
+											<div>
+												<h5 class="mb-1"><b><a href="?vend=history&for=wallet"> Wallet
+															summary</a></b></h5>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+
+
+							</div>
+
+						</b></b>
+				</div><b><b>
+
+
+					</b></b>
+			</div><b><b>
+				</b></b>
+		</div><b><b>
+			</b></b>
+	</div><b><b>
+
+
+
+
+			<div class="container">
+				<div class="row mb-3 mt-3">
+					<div class="col-sm-6 col-md-4">
+						<div class="card card-stats card-round">
+							<div class="card-body ">
+								<div class="row align-items-center">
+									<div class="col-icon">
+										<div class="icon-big text-center icon-primary bubble-shadow-small">
+											<i class="fas fa-wallet"></i>
+										</div>
+									</div>
+									<div class="col col-stats ml-3 ml-sm-0">
+										<div class="numbers">
+											<p class="card-category">Wallet Balance</p>
+											<h4 class="card-title">
+												<?php echo  $symbol. do_shortcode("[vtupress get='balance']");?>
+											</h4>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-							<div class="col-6 col-lg-3">
-							<div class="card p-3">
-								<div class="d-flex align-items-center">
-									<span class="stamp stamp-md bg-secondary mr-3">
-										<i class="fas fa-history"></i>
-									</span>
-									<div>
-										<h5 class="mb-1"><b><a href="?vend=history&for=transactions&type=data"> Data Transactions</a></b></h5>
+					</div>
 
+
+					<div class="col-sm-6 col-md-4">
+						<div class="card card-stats card-round">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-icon">
+										<div class="icon-big text-center icon-info bubble-shadow-small">
+											<i class="flaticon-coins"></i>
+										</div>
+									</div>
+									<div class="col col-stats ml-3 ml-sm-0">
+										<div class="numbers">
+											<p class="card-category">Commissions</p>
+											<h4 class="card-title">
+												<?php echo  $symbol. do_shortcode("[vtupress get='total_withdrawal_balance']");?>
+											</h4>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<div class="col-6 col-lg-3">
-							<div class="card p-3">
-								<div class="d-flex align-items-center">
-									<span class="stamp stamp-md bg-warning mr-3">
-										<i class="fas fa-history"></i>
-									</span>
-									<div>
-										<h5 class="mb-1"><b><a href="?vend=history&for=wallet"> Wallet summary</a></b></h5>
-
+					</div>
+					<div class="col-sm-6 col-md-4">
+						<div class="card card-stats card-round">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-icon">
+										<div class="icon-big text-center icon-secondary bubble-shadow-small">
+											<i class="fas fa-users"></i>
+										</div>
+									</div>
+									<div class="col col-stats ml-3 ml-sm-0">
+										<div class="numbers">
+											<p class="card-category"> My Total Referral </p>
+											<h4 class="card-title">
+												<?php echo do_shortcode("[vtupress get='total_1st_downlines']");?>
+											</h4>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						
-
-						
-
-
 					</div>
 
-				</b></b></div><b><b>
+
+				</div>
 
 
-			</b></b></div><b><b>
-		</b></b></div><b><b>
-	</b></b></div><b><b>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card card-dark bg-info-gradient">
+							<div class="card-body bubble-shadow">
+								<h3>Notifications</h3>
+								<h5 class="op-9">
+									<?php echo $mess;?>
+								</h5>
 
-						
-					
-
-	<div class="container">
-		<div class="row mb-3 mt-3">
-			<div class="col-sm-6 col-md-4">
-				<div class="card card-stats card-round">
-					<div class="card-body ">
-						<div class="row align-items-center">
-							<div class="col-icon">
-								<div class="icon-big text-center icon-primary bubble-shadow-small">
-									<i class="fas fa-wallet"></i>
-								</div>
-							</div>
-							<div class="col col-stats ml-3 ml-sm-0">
-								<div class="numbers">
-									<p class="card-category">Wallet Balance</p>
-									<h4 class="card-title"> <?php echo  $symbol. do_shortcode("[vtupress get='balance']");?></h4>
-								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-
-			<div class="col-sm-6 col-md-4">
-				<div class="card card-stats card-round">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-icon">
-								<div class="icon-big text-center icon-info bubble-shadow-small">
-									<i class="flaticon-coins"></i>
-								</div>
-							</div>
-							<div class="col col-stats ml-3 ml-sm-0">
-								<div class="numbers">
-									<p class="card-category">Commissions</p>
-									<h4 class="card-title"> <?php echo  $symbol. do_shortcode("[vtupress get='total_withdrawal_balance']");?></h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-4">
-				<div class="card card-stats card-round">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-icon">
-								<div class="icon-big text-center icon-secondary bubble-shadow-small">
-									<i class="fas fa-users"></i>
-								</div>
-							</div>
-							<div class="col col-stats ml-3 ml-sm-0">
-								<div class="numbers">
-									<p class="card-category"> My Total Referral </p>
-									<h4 class="card-title"><?php echo do_shortcode("[vtupress get='total_1st_downlines']");?></h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="card card-dark bg-info-gradient">
-					<div class="card-body bubble-shadow">
-						<h3>Notifications</h3>
-						<h5 class="op-9">
-							<?php echo $mess;?>
-						</h5>
-						
-					</div>
-				</div>
-			</div>
-
-			<?php 
+					<?php 
 if(strtolower(vp_option_array($option_array,"msorg_faq_link_enable")) == "yes"){
-?>	
+?>
 
-			<div class="col-md-4">
-				<div class="card card-dark bg-info-gradient">
-					<div class="card-body bubble-shadow">
-						<h3>FAQs:</h3>
-						<h5 class="op-9">Please go through them to have a better knowledge of this platform</h5>
-						<a href="<?php echo vp_option_array($option_array,'msorg_faq_link');?>" class="btn btn-primary text-white">
-							<i class="fas fa-question"></i> FAQs
-						</a>
+					<div class="col-md-4">
+						<div class="card card-dark bg-info-gradient">
+							<div class="card-body bubble-shadow">
+								<h3>FAQs:</h3>
+								<h5 class="op-9">Please go through them to have a better knowledge of this platform</h5>
+								<a href="<?php echo vp_option_array($option_array,'msorg_faq_link');?>"
+									class="btn btn-primary text-white">
+									<i class="fas fa-question"></i> FAQs
+								</a>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-<?php
+					<?php
 }
 ?>
 
-			<div class="col-md-4">
-				<div class="card card-dark bg-info-gradient">
-					<div class="card-body bubble-shadow">
-						<h3>Support Team:</h3>
-						<h5 class="op-9">Have anything to say to us? Please contact our Support Team on Whatsapp </h5>
+					<div class="col-md-4">
+						<div class="card card-dark bg-info-gradient">
+							<div class="card-body bubble-shadow">
+								<h3>Support Team:</h3>
+								<h5 class="op-9">Have anything to say to us? Please contact our Support Team on Whatsapp
+								</h5>
 
-						<a href="whatsapp://send?phone=<?php echo $prefix.vp_option_array($option_array,"vp_whatsapp");?>&amp;text=Hi,+I+need+your+help+with" class="btn btn-success"> <i class="fab fa-whatsapp"></i> Whatsapp us</a>
-						<br>
-						<br>
-						<?php
+								<a href="whatsapp://send?phone=<?php echo $prefix.vp_option_array($option_array,"
+									vp_whatsapp");?>&amp;text=Hi,+I+need+your+help+with" class="btn btn-success"> <i
+										class="fab fa-whatsapp"></i> Whatsapp us</a>
+								<br>
+								<br>
+								<?php
 						if(vp_getoption("vp_whatsapp_group") != "link" && vp_getoption("vp_whatsapp_group") != "false" && !empty(vp_getoption("vp_whatsapp_group"))){
 							?>
-						<a href="<?php echo vp_getoption("vp_whatsapp_group");?>" class="btn btn-success"> <i class="fab fa-whatsapp"></i> Join Our Whatsapp group</a>
-						<?php
+								<a href="<?php echo vp_getoption(" vp_whatsapp_group");?>" class="btn btn-success"> <i
+										class="fab fa-whatsapp"></i> Join Our Whatsapp group</a>
+								<?php
 						}
 						?>
 
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<?php
-			if(vp_option_array($option_array,"setairtime") == "checked"){
-			?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=airtime">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/airtime.svg" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Airtime TopUp</div>
+							</div>
 						</div>
 					</div>
-				</a>
-			</div>
-		<?php
+				</div>
+
+
+				<div class="row">
+					<?php
+			if(vp_option_array($option_array,"setairtime") == "checked"){
+			?>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=airtime">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/airtime.svg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Airtime TopUp</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					<?php
 		}
 		if(vp_option_array($option_array,"setdata") == "checked"){
 			?>
-				<div class="col-6 col-sm-4 col-lg-3">
-					<a href="?vend=data">
-						<div class="card">
-							<div class="card-body p-3 text-center">
-								<span style="font-size: 30px;">
-									<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/data.jpg" height="100px">
-								</span>
-								<div class="h4 m-2 text-dark">Buy Data</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=data">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/data.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Buy Data</div>
+								</div>
 							</div>
-						</div>
-					</a>
-				</div>
-			<?php
+						</a>
+					</div>
+					<?php
 			}
 			if(vp_getoption("smilecontrol") == "checked" && vp_getoption("vtupress_custom_smile") == "yes"){
 				?>
@@ -1049,385 +1228,404 @@ if(strtolower(vp_option_array($option_array,"msorg_faq_link_enable")) == "yes"){
 							<div class="card">
 								<div class="card-body p-3 text-center">
 									<span style="font-size: 30px;">
-										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/smile.jpeg" height="100px">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/smile.jpeg"
+											height="100px">
 									</span>
 									<div class="h4 m-2 text-dark">Buy Smile</div>
 								</div>
 							</div>
 						</a>
 					</div>
-				<?php
+					<?php
 				}
 				if(vp_getoption("alphacontrol") == "checked" && vp_getoption("vtupress_custom_smile") == "yes"){
 					?>
-						<div class="col-6 col-sm-4 col-lg-3">
-							<a href="?vend=data&alpha">
-								<div class="card">
-									<div class="card-body p-3 text-center">
-										<span style="font-size: 30px;">
-											<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/alpha.jpeg" height="100px">
-										</span>
-										<div class="h4 m-2 text-dark">Buy Alpha Topup</div>
-									</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=data&alpha">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/alpha.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Buy Alpha Topup</div>
 								</div>
-							</a>
-						</div>
+							</div>
+						</a>
+					</div>
 					<?php
 				}
 				if(vp_getoption("setbvn") == "yes" && vp_getoption("vtupress_custom_bvn") == "yes"){
 					?>
-						<div class="col-6 col-sm-4 col-lg-3">
-							<a href="?vend=bvn&bvn">
-								<div class="card">
-									<div class="card-body p-3 text-center">
-										<span style="font-size: 30px;">
-											<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/bvn.jpg" height="100px">
-										</span>
-										<div class="h4 m-2 text-dark">Bvn Verification</div>
-									</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=bvn&bvn">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/bvn.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Bvn Verification</div>
 								</div>
-							</a>
-						</div>
+							</div>
+						</a>
+					</div>
 					<?php
 				}
 				if(vp_getoption("setbvn") == "yes" && vp_getoption("vtupress_custom_bvn") == "yes"){
 					?>
-						<div class="col-6 col-sm-4 col-lg-3">
-							<a href="?vend=bvn&nin">
-								<div class="card">
-									<div class="card-body p-3 text-center">
-										<span style="font-size: 30px;">
-											<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/nin.jpg" height="100px">
-										</span>
-										<div class="h4 m-2 text-dark">Nin Verification</div>
-									</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=bvn&nin">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/nin.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Nin Verification</div>
 								</div>
-							</a>
-						</div>
+							</div>
+						</a>
+					</div>
 					<?php
 				}
 		if(vp_option_array($option_array,"airtime_to_cash") == "yes" || vp_option_array($option_array,"airtime_to_wallet") == "yes" && vp_option_array($option_array,"resell") == "yes"){
 		?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=wallet">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/airtime2cash.jpg" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Airtime to cash</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=wallet">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/airtime2cash.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Airtime to cash</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-		<?php
+					<?php
 		}
 		if(vp_option_array($option_array,"setbill") == "checked"){
 		?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=bill">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/utility.jpg" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Electricity Bills</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=bill">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/utility.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Electricity Bills</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-		<?php
+					<?php
 		}
 		if(vp_option_array($option_array,"setcable") == "checked"){
 		?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=cable">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/cable.jpg" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Cable Subscription</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=cable">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/cable.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Cable Subscription</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-		<?php
+					<?php
 		}
 	if(strtolower(vp_option_array($option_array,"allow_withdrawal")) == "yes" && strtolower($myplan) != strtolower("customer")){
 	?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=withdraw">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 10px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/fundacc.JPG" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Withdraw</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=withdraw">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 10px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/fundacc.JPG"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Withdraw</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 if(is_plugin_active("vpsms/vpsms.php") && vp_option_array($option_array,"smscontrol") == "checked" && vp_option_array($option_array,"resell") == "yes"){
     ?>
-			
 
-			 <div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=sms">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/sms.png" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Bulk SMS</div>
-						</div>
+
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=sms">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/sms.png"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Bulk SMS</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 if(is_plugin_active("vpepin/vpepin.php") && vp_option_array($option_array,"epinscontrol") == "checked" && vp_option_array($option_array,"resell") == "yes"){ 
 ?>
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=epins">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/resultchecker.png" height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Result Checker</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=epins">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/resultchecker.png"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Result Checker</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 if(is_plugin_active("vpcards/vpcards.php") && vp_option_array($option_array,"cardscontrol") == "checked" && vp_option_array($option_array,"resell") == "yes"){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=cards">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/printer.jpg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Recharge card Printing</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=cards">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/printer.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Recharge card Printing</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 
 if(vp_getoption("betcontrol") == "checked"){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=bet">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/bet.jpeg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Bet Funding</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=bet">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/bet.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Bet Funding</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 
 if( vp_option_array($option_array,"allow_crypto") == "yes" ){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=crypto">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/crypto.jpeg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Trade Crypto</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=crypto">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/crypto.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Trade Crypto</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 
 if(vp_option_array($option_array,"allow_cards") == "yes"){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=gift-card">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/gift.jpeg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Redeem Gift Card</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=gift-card">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/gift.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Redeem Gift Card</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 
 
 if(vp_option_array($option_array,"vtupress_custom_isavings") == "yes"){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=savings">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/savings.jpeg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Savings</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=savings">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/savings.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Savings</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 
 
 if(vp_option_array($option_array,"allow_to_bank") == "yes" && vp_option_array($option_array,"resell") == "yes" && vp_getoption("vtupress_custom_transfer") == "yes"){ 
     ?>
 
-			<div class="col-6 col-sm-4 col-lg-3">
-				<a href="?vend=transfer2">
-					<div class="card">
-						<div class="card-body p-3 text-center">
-							<span style="font-size: 30px;">
-								<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/transfer.jpg"
-									height="100px">
-							</span>
-							<div class="h4 m-2 text-dark">Transfer</div>
-						</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=transfer2">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/transfer.jpg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Transfer</div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-<?php
+					<?php
 }
 ?>
 
 
-<div class="col-6 col-sm-4 col-lg-3">
-	<a href="?vend=stats">
-		<div class="card">
-			<div class="card-body p-3 text-center">
-				<span style="font-size: 30px;">
-					<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/stats.jpeg" height="100px">
-				</span>
-				<div class="h4 m-2 text-dark">Statistics</div>
-			</div>
-		</div>
-	</a>
-</div>
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=stats">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/stats.jpeg"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">Statistics</div>
+								</div>
+							</div>
+						</a>
+					</div>
 
 
-<?php
+					<?php
 
 if(is_plugin_active("vpmlm/vpmlm.php")  && vp_option_array($option_array,'mlm') == "yes"){
 	?>
-	
-				<div class="col-6 col-sm-4 col-lg-3">
-					<a href="?vend=referrals">
-						<div class="card">
-							<div class="card-body p-3 text-center">
-								<span style="font-size: 30px;">
-									<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/referral.png" height="100px">
-								</span>
-								<div class="h4 m-2 text-dark">My Referrals</div>
+
+					<div class="col-6 col-sm-4 col-lg-3">
+						<a href="?vend=referrals">
+							<div class="card">
+								<div class="card-body p-3 text-center">
+									<span style="font-size: 30px;">
+										<img src="<?php echo plugins_url('msorg_template');?>/msorg_template/referral.png"
+											height="100px">
+									</span>
+									<div class="h4 m-2 text-dark">My Referrals</div>
+								</div>
 							</div>
-						</div>
-					</a>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	<?php
+			<?php
 	}
 		?>
-		
 
 
-	<div class="m-3 row row-card-no-pd">
-    	<div class="col-12">
-    	    <div class="card-title fw-bold">TRANSACTION STATISTICS</div> <hr>
-        </div>
 
-		<div class="col-sm-6 col-md-4">
-			<div class="card card-stats card-round">
-				<div class="card-body ">
-					<div class="row">
-						<div class="col-5">
-							<div class="icon-big text-center">
-								<i class="flaticon-chart-pie text-warning"></i>
+			<div class="m-3 row row-card-no-pd">
+				<div class="col-12">
+					<div class="card-title fw-bold">TRANSACTION STATISTICS</div>
+					<hr>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-chart-pie text-warning"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">WALLET BALANCE</p>
+										<h4 class="card-title">
+											<?php echo  $symbol. do_shortcode("[vtupress get='balance']");?>
+										</h4>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-7 col-stats">
-							<div class="numbers">
-								<p class="card-category">WALLET BALANCE</p>
-								<h4 class="card-title"><?php echo  $symbol. do_shortcode("[vtupress get='balance']");?></h4>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-coins text-success"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">TRANSACTIONS</p>
+										<h4 class="card-title">
+											<?php echo  $symbol. do_shortcode("[vtupress get='total_successful_transactions']");?>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-error text-danger"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">TOTAL SPENT</p>
+										<h4 class="card-title">
+											<?php  if(vp_getoption("totcons") == "yes") { echo  $symbol. do_shortcode("[vtupress get='total_amount_of_successful_transactions']"); }else{echo "Hidden"; }?>
+										</h4>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="card card-stats card-round">
-				<div class="card-body ">
-					<div class="row">
-						<div class="col-5">
-							<div class="icon-big text-center">
-								<i class="flaticon-coins text-success"></i>
-							</div>
-						</div>
-						<div class="col-7 col-stats">
-							<div class="numbers">
-								<p class="card-category">TRANSACTIONS</p>
-								<h4 class="card-title"> <?php echo  $symbol. do_shortcode("[vtupress get='total_successful_transactions']");?> </h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="card card-stats card-round">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-5">
-							<div class="icon-big text-center">
-								<i class="flaticon-error text-danger"></i>
-							</div>
-						</div>
-						<div class="col-7 col-stats">
-							<div class="numbers">
-								<p class="card-category">TOTAL SPENT</p>
-								<h4 class="card-title"> <?php  if(vp_getoption("totcons") == "yes") { echo  $symbol. do_shortcode("[vtupress get='total_amount_of_successful_transactions']"); }else{echo "Hidden"; }?></h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="row mt-5 container-fluid">
+			<div class="row mt-5 container-fluid">
 
-		
-	</div>
-</b></b>
+
+			</div>
+		</b></b>
 </div>

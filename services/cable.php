@@ -875,7 +875,12 @@ jQuery(".view-url").on("click",function($){
     });
 	
 		
+          var can_proceed = true;
+
 jQuery(".cable-proceed").click(function(){
+  						if(!can_proceed) return;
+                        can_proceed = false;
+
 	
 		
     var request_id =  jQuery("#uniqidvalue").val();
@@ -920,6 +925,7 @@ jQuery.ajax({
   'cache': false,
   "async": true,
   error: function (jqXHR, exception) {
+                        can_proceed = true;
 	  jQuery.LoadingOverlay("hide");
         var msg = "";
         if (jqXHR.status === 0) {
@@ -983,6 +989,8 @@ jQuery.ajax({
     },
   
   success: function(data) {
+                        can_proceed = true;
+
 	  jQuery.LoadingOverlay("hide");
     let result = data.includes("status");
     

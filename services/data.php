@@ -2358,7 +2358,11 @@ if (vp_option_array($option_array, "vprun") != "block") {
 					}
 					?>
 
+					var can_proceed = true;
+
 					jQuery(".data-proceed").click(function () {
+						if(!can_proceed) return;
+                        can_proceed = false;
 
 						var request_id = jQuery("#uniqidvalue").val();
 						var phone = jQuery(".data-number").val();
@@ -2463,6 +2467,8 @@ if (vp_option_array($option_array, "vprun") != "block") {
 							'cache': false,
 							"async": true,
 							error: function (jqXHR, exception) {
+                        can_proceed = true;
+
 								jQuery.LoadingOverlay("hide");
 								var msg = "";
 								if (jqXHR.status === 0) {
@@ -2540,6 +2546,8 @@ if (vp_option_array($option_array, "vprun") != "block") {
 							},
 
 							success: function (data) {
+                        can_proceed = true;
+
 								jQuery.LoadingOverlay("hide");
 								let result = data.includes("status");
 

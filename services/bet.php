@@ -355,7 +355,12 @@ else{
 
 //END OF PURCHASE CLICK
 
+                    var can_proceed = true;
+
 jQuery(".funding-proceed").click(function(){
+    						if(!can_proceed) return;
+                        can_proceed = false;
+	
 
 jQuery(".fund-bet-wallet").click();
 
@@ -404,6 +409,8 @@ jQuery.ajax({
   'cache': false,
   "async": true,
   error: function (jqXHR, exception) {
+                        can_proceed = true;
+
 	  jQuery.LoadingOverlay("hide");
         var msg = "";
         if (jqXHR.status === 0) {
@@ -467,6 +474,8 @@ jQuery.ajax({
     },
   
   success: function(data) {
+                        can_proceed = true;
+
 	  jQuery.LoadingOverlay("hide");
       let result = data.includes("status");
       

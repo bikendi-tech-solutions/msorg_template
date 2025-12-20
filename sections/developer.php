@@ -966,7 +966,7 @@ if (isset($_GET["vend"]) && $_GET["vend"] == "developer" && is_plugin_active("vp
 					}
 
 					for ($i = 0; $i <= 10; $i++) {
-						$api = vp_option_array($option_array, "gapi2$i");
+						$api = vp_option_array($option_array, "2$i");
 						$disamount = vp_option_array($option_array, "rgcdatap$i");
 						$plan_network = $glo;
 						$plan_type = "DIRECT";
